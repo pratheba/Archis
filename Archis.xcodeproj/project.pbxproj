@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D60C679C1B8A41E500859F5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D60C679B1B8A41E500859F5D /* main.cpp */; };
+		D60C67A51B8AA30C00859F5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D60C67A41B8AA30C00859F5D /* main.cpp */; };
+		D60C67BF1B8C46C900859F5D /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,14 @@
 
 /* Begin PBXFileReference section */
 		D60C67981B8A41E500859F5D /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
-		D60C679B1B8A41E500859F5D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D60C67A41B8AA30C00859F5D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		D6C2B34D1B93721E008E60B9 /* Scene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scene; sourceTree = "<group>"; };
+		D6C2B34E1B93722B008E60B9 /* Algorithm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Algorithm; sourceTree = "<group>"; };
+		D6C2B34F1B937242008E60B9 /* Image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Image; sourceTree = "<group>"; };
+		D6C2B3501B937242008E60B9 /* LightParameters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LightParameters; sourceTree = "<group>"; };
+		D6C2B3511B937242008E60B9 /* Scene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scene; sourceTree = "<group>"; };
+		D6C2B3521B937291008E60B9 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utility; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D60C67BF1B8C46C900859F5D /* libstdc++.6.0.9.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,7 +50,8 @@
 		D60C678F1B8A41E500859F5D = {
 			isa = PBXGroup;
 			children = (
-				D60C679A1B8A41E500859F5D /* Archis */,
+				D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */,
+				D60C67A31B8AA2ED00859F5D /* Archis */,
 				D60C67991B8A41E500859F5D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,12 +64,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D60C679A1B8A41E500859F5D /* Archis */ = {
+		D60C67A31B8AA2ED00859F5D /* Archis */ = {
 			isa = PBXGroup;
 			children = (
-				D60C679B1B8A41E500859F5D /* main.cpp */,
+				D6C2B3521B937291008E60B9 /* Utility */,
+				D6C2B34F1B937242008E60B9 /* Image */,
+				D6C2B3501B937242008E60B9 /* LightParameters */,
+				D6C2B3511B937242008E60B9 /* Scene */,
+				D6C2B34E1B93722B008E60B9 /* Algorithm */,
+				D6C2B34D1B93721E008E60B9 /* Scene */,
+				D60C67A41B8AA30C00859F5D /* main.cpp */,
 			);
-			path = Archis;
+			name = Archis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D60C679C1B8A41E500859F5D /* main.cpp in Sources */,
+				D60C67A51B8AA30C00859F5D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +221,19 @@
 		D60C67A01B8A41E500859F5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lIlmImf",
+					"-lHalf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +241,19 @@
 		D60C67A11B8A41E500859F5D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lIlmImf",
+					"-lHalf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +277,7 @@
 				D60C67A11B8A41E500859F5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
