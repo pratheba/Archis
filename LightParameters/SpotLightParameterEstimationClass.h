@@ -10,8 +10,8 @@
 #define __Archis__SpotLightParameterEstimationClass__
 
 #include <iostream>
-#include "Parser.h"
-#include "ReprojectionClass.h"
+#include "../Utility/Parser.h"
+#include "../Algorithm/ReprojectionClass.h"
 
 
 struct INPUTPARAM {

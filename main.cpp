@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "SpotLightParameterEstimationClass.h"
+#include "LightParameters/SpotLightParameterEstimationClass.h"
 
 int main(int argc, const char * argv[]) {
 //    if (argc < 2) {

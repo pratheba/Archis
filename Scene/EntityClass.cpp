@@ -27,8 +27,8 @@ EntityClass::~EntityClass(){
 Eigen::Vector3d EntityClass::GetPosition() const {
     return _position;
 }
-void EntityClass::SetPosition(const Eigen::Vector3d& position) const{
-    &_position = position;
+void EntityClass::SetPosition(const Eigen::Vector3d& position) {
+    this->_position = position;
     _transformationCoord->_posVec = position;
     _entityLookAtVector->_eyeVector = position;
 }
@@ -84,7 +84,7 @@ void EntityClass::SetRotationMatrix(const Eigen::Matrix3d& rotationMatrix) {
     _rotationMatrix = rotationMatrix;
 }
 
-Eigen::Matrix4d EntityClass::GetLightTransformationMatrix() {
+Eigen::Matrix4d EntityClass::GetLightTransformationMatrix() const {
     return _transformationMatrix;
 }
 void EntityClass::SetLightTransformation(const Eigen::Matrix4d& lightTransformationMatrix) {
@@ -92,13 +92,13 @@ void EntityClass::SetLightTransformation(const Eigen::Matrix4d& lightTransformat
     DecomposeTransformationMatrix();
 }
 
-EntityClass::EntityLookAtVector EntityClass::GetEntityLookAtVector() {
+EntityClass::EntityLookAtVector EntityClass::GetEntityLookAtVector() const{
     return *_entityLookAtVector;
 }
 void EntityClass::SetEntityLookAtVector(const EntityLookAtVector& entityLookAtVector) {
     *_entityLookAtVector = entityLookAtVector;
-    _entityLookAtVector->_directionVector.normalize();
-    _entityLookAtVector->_upVector.normalize();
+    //_entityLookAtVector->_directionVector.normalize();
+    //_entityLookAtVector->_upVector.normalize();
     
     _position = entityLookAtVector._eyeVector;
     *_transformationCoord = GetEntityCoordinateAxesFromLookAtVector();

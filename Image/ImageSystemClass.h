@@ -10,7 +10,7 @@
 #define __Archis__ImageSystemClass__
 
 #include "Image2DClass.h"
-#include "UtilityClass.h"
+#include "../Utility/UtilityClass.h"
 
 class ImageSystemClass {
 public:

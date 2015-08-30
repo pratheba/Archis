@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "UtilityClass.h"
+#include "../Utility/UtilityClass.h"
 
 
 class EntityClass {
@@ -42,7 +42,7 @@ public:
     };
     
     Eigen::Vector3d GetPosition() const;
-    void SetPosition(const Eigen::Vector3d& position)const;
+    void SetPosition(const Eigen::Vector3d& position);
     
     Point3D<double> GetScale() const;
     void SetScale(const Point3D<double>& scale);
@@ -65,10 +65,10 @@ public:
     Eigen::Matrix3d GetRotationMatrix() const;
     void SetRotationMatrix(const Eigen::Matrix3d& rotationMatrix);
     
-    EntityLookAtVector GetEntityLookAtVector();
+    EntityLookAtVector GetEntityLookAtVector() const;
     void SetEntityLookAtVector(const EntityLookAtVector& entityLookAtVector);
     
-    Eigen::Matrix4d GetLightTransformationMatrix();
+    Eigen::Matrix4d GetLightTransformationMatrix() const;
     void SetLightTransformation(const Eigen::Matrix4d& lightTransformationMatrix);
     
     TransformationCOORD GetTransformationCoord() const;

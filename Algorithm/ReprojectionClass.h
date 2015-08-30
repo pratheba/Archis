@@ -10,10 +10,10 @@
 #define __Archis__ReprojectionClass__
 
 #include <iostream>
-#include "UtilityClass.h"
-#include "GeometrySystemClass.h"
-#include "CameraSystemClass.h"
-#include "ImageSystemClass.h"
+#include "../Utility/UtilityClass.h"
+#include "../Scene/GeometrySystemClass.h"
+#include "../Scene/CameraSystemClass.h"
+#include "../Image/ImageSystemClass.h"
 
 class ReprojectionClass {
 public:

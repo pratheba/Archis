@@ -42,6 +42,13 @@ const CameraEntityClass& CameraSystemClass::GetCurrentCamera() const{
 }
 
 void CameraSystemClass::SetCurrentCamera(const CameraEntityClass& currentCamera) const{
+    _currentCamera->SetPosition(currentCamera.GetPosition());
+    _currentCamera->SetScale(currentCamera.GetScale());
+    _currentCamera->SetRotation(currentCamera.GetRotation());
+    _currentCamera->SetRotationMatrix(currentCamera.GetRotationMatrix());
+    _currentCamera->SetEntityLookAtVector(currentCamera.GetEntityLookAtVector());
+    _currentCamera->SetTransformationCoord(currentCamera.GetTransformationCoord());
+
     *_currentCamera = currentCamera;
 }
 

@@ -27,12 +27,14 @@ CameraEntityClass& CameraEntityClass::operator=(const CameraEntityClass& cameraE
     _pixelHeight = cameraEntityClass._pixelHeight;
     _principalPoint = cameraEntityClass._principalPoint;
     
+    ConvertFocalLengthToPixels();
     return *this;
 }
 
 Point2D<double> CameraEntityClass::GetFocalLengthInPixels() const{
     return _focal_lengthInPixels;
 }
+
 
 Point2D<double> CameraEntityClass::GetFocalLength() const{
     return _focal_length;
@@ -70,10 +72,11 @@ Point2D<double> CameraEntityClass::GetPrincipalPoint()const {
 
 void CameraEntityClass::SetPrincipalPoint(const Point2D<double>& principalPoint) {
     _principalPoint = principalPoint;
+    ConvertFocalLengthToPixels();
 }
 
 
-void CameraEntityClass::ConvertFocalLengthToPixels() {
+void CameraEntityClass::ConvertFocalLengthToPixels()  {
     
     // tan(theta/2) = (d/2*f)
     // f = d*0.5/(tan(theta*0.5)

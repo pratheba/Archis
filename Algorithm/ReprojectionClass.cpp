@@ -38,8 +38,8 @@ ReprojectionClass::~ReprojectionClass() {
      Eigen::Vector3d centerPixelInImageInWorld = camTransCoord._posVec + (-1*camTransCoord._zVec) * focal_length.x;
      Eigen::Vector3d worldPointOfPixel00 =
         centerPixelInImageInWorld
-     - ((imageWidth * pixelWidth/2)* camTransCoord._xVec)
-     + ((imageHeight * pixelHeight/2)*camTransCoord._yVec);
+     - ((imageWidth/2 * pixelWidth)* camTransCoord._xVec)
+     + ((imageHeight/2 * pixelHeight)*camTransCoord._yVec);
      
      Eigen::Vector3d centerOfPixel00 =
      worldPointOfPixel00 + (pixelWidth/2)*camTransCoord._xVec - (pixelHeight/2)*camTransCoord._yVec;
@@ -83,6 +83,7 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
     /***** Implementation ****/
     double numerator = (Eigen::Vector3d(vertex.x,vertex.y,vertex.z) - camposition).dot(vnormal);
     double denom = 0;
+    
     for (int row = 0; row < imageHeight; ++row) {
         for (int col = 0; col < imageWidth; ++col) {
             Eigen::Vector3d pixel = centerOfPixel00 + col*camTransCoord._xVec - row*camTransCoord._yVec;
