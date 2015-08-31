@@ -43,7 +43,7 @@ SpotLightParameterEstimationClass::~SpotLightParameterEstimationClass() {
 
 void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPUTPARAM& inputParameters) {
     Initialize(inputParameters);
-    VecOf2dDoublePoints centroids = _imageSystem.GetCentroidsOfHighIntensityPixelsinCurrentImage();
+    //VecOf2dDoublePoints centroids = _imageSystem.GetCentroidsOfHighIntensityPixelsinCurrentImage();
     
     CalculateExponentParameter();
 }
@@ -72,6 +72,8 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     std::vector<MapOFImageAndWorldPoints>reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels());
     
     for (int index = 0; index < reprojectedPoints.size(); ++index) {
+        
+    
         Eigen::Vector3d directionVector =  reprojectedPoints[index]._worldPoint - lightPosition;
         directionVector.normalize();
         
@@ -85,14 +87,9 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
         if (pixelIntensity > 0) {
             
             double alpha =  log(pixelIntensity)/log(cosTheta);
-            //double alphaInDegree = alpha * 180 / M_PI;
-            //if (alpha > 0) {
-              //  outputImage.at<cv::Vec3b>(reprojectedPoints[index].pixel) = cv::Vec3b(0,0,alpha);
-           // }
             
             std::cout << "alpha for " << (reprojectedPoints[index]._worldPoint).x() << " ::" << reprojectedPoints[index]._imagepixel.x << " = " << alpha << std::endl;;//<< " :: " << alphaInDegree << std::endl;
             
-           // outputfile << reprojectedPoints[index].pixel << " :: " << alpha << std::endl;
             
         }
     }

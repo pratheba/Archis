@@ -22,16 +22,29 @@ void Parser::ParseLuxRenderScene(const std::string& luxRenderFileName, CameraSys
     CameraEntityClass* camEntity = new CameraEntityClass();
     
     EntityClass::EntityLookAtVector* lookAtVector = new EntityClass::EntityLookAtVector();
+    
     lookAtVector->_eyeVector = Eigen::Vector3d(1.460001, 1.980000, 5.657866);
     lookAtVector->_directionVector = Eigen::Vector3d(1.414863, 1.671967, 4.707562);
     lookAtVector->_upVector = Eigen::Vector3d(0.063852, 0.948439, -0.310461);
+    
+//    lookAtVector->_eyeVector = Eigen::Vector3d(0.000000, 0.000000, 5.000000);
+//    lookAtVector->_directionVector = Eigen::Vector3d(0.000000, 0.000000, 4.000000);
+//    lookAtVector->_upVector = Eigen::Vector3d(0.000000, 1.000000, 0.000000);
+    
     camEntity->SetEntityLookAtVector(*lookAtVector);
     
     camEntity->SetFieldOfView(49.134342077604479);
-    camEntity->SetPixelWidth(1);
-    camEntity->SetPixelHeight(1);
+    camEntity->SetFocalLength(Point2D<double>(0.035,0.035));
+//    //camEntity->SetPixelWidth(1);
+//    //camEntity->SetPixelHeight(1);
     camEntity->SetPosition(Eigen::Vector3d(1.460001, 1.980000, 5.657866));
     camEntity->SetRotation(Point3D<double>(-0.3157657980918884, 0.02314339205622673, -0.07478136569261551));
+    
+//    camEntity->SetFieldOfView(49.134342077604479);
+//   // camEntity->SetPixelWidth(1);
+//   // camEntity->SetPixelHeight(1);
+//    camEntity->SetPosition(Eigen::Vector3d(0.000000, 0.000000, 5.000000));
+//    camEntity->SetRotation(Point3D<double>(0.0, -0.0, 0.0));
     
     const ImageSystemClass& imageSystemClass = ImageSystemClass::GetInstance();
     long width = imageSystemClass.GetCurrentImageWidth();
@@ -63,10 +76,16 @@ void Parser::ParsePLYFile(const std::string& plyFileName, GeometrySystemClass& g
     geomEntity->SetGeometryType(PLANE);
     
     std::vector<Point3D<double>> vertices;
+    
     vertices.push_back(Point3D<double>(0,0,2));
     vertices.push_back(Point3D<double>(2,0,2));
     vertices.push_back(Point3D<double>(2,2,2));
     vertices.push_back(Point3D<double>(0,2,2));
+    
+//    vertices.push_back(Point3D<double>(-1,-1,0));
+//    vertices.push_back(Point3D<double>(1,-1,0));
+//    vertices.push_back(Point3D<double>(1,1,0));
+//    vertices.push_back(Point3D<double>(-1,1,0));
     
     std::vector<Eigen::Vector3d> vertexNormals;
     vertexNormals.push_back(Eigen::Vector3d(0,0,1));

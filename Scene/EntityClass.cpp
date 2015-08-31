@@ -97,10 +97,8 @@ EntityClass::EntityLookAtVector EntityClass::GetEntityLookAtVector() const{
 }
 void EntityClass::SetEntityLookAtVector(const EntityLookAtVector& entityLookAtVector) {
     *_entityLookAtVector = entityLookAtVector;
-    //_entityLookAtVector->_directionVector.normalize();
-    //_entityLookAtVector->_upVector.normalize();
-    
     _position = entityLookAtVector._eyeVector;
+    _entityLookAtVector->_upVector.normalize();
     *_transformationCoord = GetEntityCoordinateAxesFromLookAtVector();
 }
 

@@ -1,4 +1,4 @@
-//
+
 //  ReprojectionClass.cpp
 //  Archis
 //
@@ -7,6 +7,50 @@
 //
 
 #include "ReprojectionClass.h"
+
+class PixelToWorldCoord {
+    
+public:
+    PixelToWorldCoord():_SensorWidth(0),_SensorHeight(0),_PixelWidth(0),_PixelHeight(0){}
+
+    // Pixel Width :: Pixel Height
+    //     tan(FOV(degree)/2)  = Image Plane Width In world Units (Image sensor Width) / (2 * Field Of View In world Units);
+    //     Image Sensor Width  = tan(FOV(degree)/2) * (Focal Length In world Units) * 2;
+    //     Image Sensor Height = Image Sensor Width / Aspect ratio /* Image Sensor Width * ImagePixelHeight/ImagePixelWidth */
+    //     Pixel Width         = Image Sensor Width/ ImagePixelWidth;
+    //     Pixel Height        = Image Sensor Height / ImagePixelHeight;
+    
+    PixelToWorldCoord(const double& FOV, const double& focal_length, const double& imageWidth, const double& imageHeight) {
+         _SensorWidth = tan(FOV * 0.5 * M_PI/180) * focal_length * 2;
+         _SensorHeight = _SensorWidth * imageHeight / imageWidth;
+         _PixelWidth   = _SensorWidth / imageWidth;
+         _PixelHeight  = _SensorHeight / imageHeight;
+    }
+    
+    ~PixelToWorldCoord(){}
+    
+    double GetSensorWidth() { return _SensorWidth;}
+    double GetSensorHeight() { return _SensorHeight;}
+    double GetPixelWidth() { return _PixelWidth;}
+    double GetPixelHeight() { return _PixelHeight;}
+    
+    void SetSensorWidth(const double& sensorWidth) { _SensorWidth = sensorWidth;}
+    void SetSensorHeight(const double& sensorHeight) { _SensorHeight = sensorHeight;}
+    void SetPixelWidth(const double& pixelWidth) { _PixelWidth = pixelWidth;}
+    void SetPixelHeight(const double& pixelHeight) {  _PixelHeight = pixelHeight;}
+
+    
+private:
+    double _SensorWidth;
+    double _SensorHeight;
+    double _PixelWidth;
+    double _PixelHeight;
+    
+    };
+
+
+
+
 
 ReprojectionClass::ReprojectionClass():imageClass(ImageSystemClass::GetInstance()),geometryClass(GeometrySystemClass::GetInstance()),cameraClass(CameraSystemClass::GetInstance()),imageEntity(imageClass.GetCurrentImage()),geometryEntity(geometryClass.GetCurrentGeometry()),camEntity(cameraClass.GetCurrentCamera()) {}
 
@@ -18,10 +62,8 @@ ReprojectionClass::~ReprojectionClass() {
      int imageWidth = (int)(imageEntity.GetImage2DArrayPixels()).width();
      int imageHeight = (int)(imageEntity.GetImage2DArrayPixels()).height();
      
-     double pixelWidth              = camEntity.GetPixelWidth();
-     double pixelHeight             = camEntity.GetPixelHeight();
-     Point2D<double> focal_length   = camEntity.GetFocalLengthInPixels();
      EntityClass::TransformationCOORD camTransCoord = camEntity.GetTransformationCoord();
+     PixelToWorldCoord PixelToWorld(camEntity.GetFieldOfView(), (camEntity.GetFocalLength()).x, imageWidth, imageHeight);
      
      
      // For image pixel location to u,v,w pixel location.
@@ -35,17 +77,20 @@ ReprojectionClass::~ReprojectionClass() {
      
      // We assume focal_length.x == focal_length.y
      // Z = -Z , Since camera looks at -z axis;
-     Eigen::Vector3d centerPixelInImageInWorld = camTransCoord._posVec + (-1*camTransCoord._zVec) * focal_length.x;
+     
+     
+     camTransCoord._zVec.normalize();
+     Eigen::Vector3d centerPixelInImageInWorld = camTransCoord._posVec + (-1*camTransCoord._zVec) * (camEntity.GetFocalLength()).x;
+
      Eigen::Vector3d worldPointOfPixel00 =
-        centerPixelInImageInWorld
-     - ((imageWidth/2 * pixelWidth)* camTransCoord._xVec)
-     + ((imageHeight/2 * pixelHeight)*camTransCoord._yVec);
+     centerPixelInImageInWorld
+     - ((PixelToWorld.GetSensorWidth()/2)* camTransCoord._xVec)
+     + ((PixelToWorld.GetSensorHeight()/2)*camTransCoord._yVec);
      
      Eigen::Vector3d centerOfPixel00 =
-     worldPointOfPixel00 + (pixelWidth/2)*camTransCoord._xVec - (pixelHeight/2)*camTransCoord._yVec;
+     worldPointOfPixel00 + ((PixelToWorld.GetPixelWidth())/2)*camTransCoord._xVec - (PixelToWorld.GetPixelHeight()/2)*camTransCoord._yVec;
      
      return centerOfPixel00;
-     
 }
 
 // Refactor this
@@ -63,6 +108,7 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
     if (geometryType == PLANE) {
         vertex = (geometryEntity.GetVertices()).at(0);
         vnormal = (geometryEntity.GetVertexNormals()).at(0);
+        vnormal.normalize();
     }
     else {
         vertices       = geometryEntity.GetVertices();
@@ -71,30 +117,37 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
     MaxMinCoord maxminCoord = geometryEntity.GetMaxMinOfGeometry();
     
     /**** Camera Data ****/
-    Eigen::Vector3d camposition = camEntity.GetPosition();
     EntityClass::TransformationCOORD camTransCoord = camEntity.GetTransformationCoord();
     
-    /**** Image Data ****/
+       /**** Image Data ****/
     Eigen::Vector3d centerOfPixel00 = GetCenterOfStartOfDataImagePixelsInWorldCoord();
     int imageWidth = (int)(imageEntity.GetImage2DArrayPixels()).width();
     int imageHeight = (int)(imageEntity.GetImage2DArrayPixels()).height();
     
+    PixelToWorldCoord PixelToWorld(camEntity.GetFieldOfView(), (camEntity.GetFocalLength()).x, imageWidth, imageHeight);
+    double PixelWidth = PixelToWorld.GetPixelWidth();
+    double PixelHeight = PixelToWorld.GetPixelHeight();
     
     /***** Implementation ****/
-    double numerator = (Eigen::Vector3d(vertex.x,vertex.y,vertex.z) - camposition).dot(vnormal);
+//    double d = -(Eigen::Vector3d(vertex.x,vertex.y,vertex.z).dot(vnormal));
+//    double numerator =  -(d + camTransCoord._posVec.dot(vnormal));
+    double numerator = (Eigen::Vector3d(vertex.x,vertex.y,vertex.z) - camTransCoord._posVec).dot(vnormal);
     double denom = 0;
     
     for (int row = 0; row < imageHeight; ++row) {
         for (int col = 0; col < imageWidth; ++col) {
-            Eigen::Vector3d pixel = centerOfPixel00 + col*camTransCoord._xVec - row*camTransCoord._yVec;
-            denom = (pixel - camposition).dot(vnormal);
+            
+            Eigen::Vector3d pixel = centerOfPixel00 + col* PixelWidth* camTransCoord._xVec - row* PixelHeight*camTransCoord._yVec;
+            Eigen::Vector3d ray = pixel - camTransCoord._posVec;
+            ray.normalize();
+            denom = ray.dot(vnormal);
             
             if (denom != 0)
             {
                 double t = numerator/denom;
                 if (t > 0)
                 {
-                    Eigen::Vector3d intersectionPoint = camposition + t*(pixel - camposition);
+                    Eigen::Vector3d intersectionPoint = camTransCoord._posVec + t*(ray);
                     if ((intersectionPoint.x() >= maxminCoord._minX && intersectionPoint.x() <= maxminCoord._maxX)
                         &&(intersectionPoint.y() >= maxminCoord._minY && intersectionPoint.y() <= maxminCoord._maxY))
                     {
@@ -104,6 +157,7 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
             }
         }
     }
+    
     return reprojectedPoints;
 }
 
