@@ -57,7 +57,7 @@ void Parser::ParseLuxRenderScene(const std::string& luxRenderFileName, CameraSys
     //-----------------------
     
     LightEntityClass* lightEntity = new LightEntityClass();
-    lightEntity->SetLightGain(100);
+    lightEntity->SetLightGain(100*100*10);
     lightEntity->SetLightPower(100);
     Eigen::Matrix4d lightTransMatrix ;
     

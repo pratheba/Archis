@@ -98,7 +98,7 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
             continue;
         }
         // convert average pixel intensity to 0 to 255
-        averagePixelIntensityValue =  (averagePixelIntensityValue /(pow(2, 16)-1))*255;
+       // averagePixelIntensityValue =  (averagePixelIntensityValue /(pow(2, 16)-1));//*255;
         
         Eigen::Vector3d lightToPointDirectionVector =  reprojectedPoints[index]._worldPoint - lightPosition;
         lightToPointDirectionVector.normalize();
@@ -116,13 +116,15 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
                                                 pow(lightPosition.y() - reprojectedPoints[index]._worldPoint.y(),2) +
                                                 pow(lightPosition.z() - reprojectedPoints[index]._worldPoint.z(),2));
         double cosOfCurrAngle                   =   lightDirection.dot(lightToPointDirectionVector);
-        //double cosOfInner_minus_OuterConeAngle  =   cosOfInnerConeAngle - cosOfOuterConeAngle;
+        double cosOfInner_minus_OuterConeAngle  =   cosOfInnerConeAngle - cosOfOuterConeAngle;
         
         // Clamp the value of the curr between 0 and 1
         //double IntensityFactorWithoutExponent =  std::min(std::max((double)((cosOfCurrAngle - cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle),0.0),1.0);
-        double IntensityFactorWithoutExponent = cosOfCurrAngle;
+        double IntensityFactorWithoutExponent =  std::min(std::max((double)((cosOfCurrAngle - cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle),0.0),1.0);
+        //double IntensityFactorWithoutExponent =  (cosOfCurrAngle - cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle;
+        //double IntensityFactorWithoutExponent = cosOfCurrAngle;
         
-        if (cosOfCurrAngle > cosOfOuterConeAngle ) {
+        if ((cosOfCurrAngle > cosOfOuterConeAngle) ) {
            double IntensityFactorWithExponent = averagePixelIntensityValue / (lightIntensity * materialAlbedo * lambertTerm);
             
             double spotLightExponent = log(IntensityFactorWithExponent)/log(IntensityFactorWithoutExponent);
@@ -134,14 +136,14 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
             outputPixels[i].b = 1.0;
         }
             
-            std::cout << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << std::endl;
+            std::cout << reprojectedPoints[index]._imagepixel.x << "," << reprojectedPoints[index]._imagepixel.y << " = " << spotLightExponent << std::endl;
         
         outputfile << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << "\n";
         }
 
     }
     
-    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("output-withcondition.exr", outputPixels, imageWidth, imageHeight);
+    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("output-withcondition-new.exr", outputPixels, imageWidth, imageHeight);
     outputfile.close();
 }
 
