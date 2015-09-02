@@ -111,6 +111,9 @@ public:
     
     double GetAveragePixelIntensityAroundaPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowSize);
     Eigen::Matrix3d GetRotationMatrixByEulerAngle(const Point3D<double>& eulerAngles);
+    
+    Rgba* GetImagePixelsToWrite(const int& width,const int& height);
+    
 private:
     Eigen::Matrix3d GetClockwiseRotationMatrixGivenEulerAngles(const Point3D<double>& eulerRotationAngles);
     Eigen::Matrix3d GetAntiClockwiseRotationMatrixGivenEulerAngles(const Point3D<double>& eulerRotationAngles);

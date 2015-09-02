@@ -35,5 +35,13 @@ const Array2D<Rgba>& Image2DClass::GetImage2DArrayPixels()const {
 }
 
 
+void Image2DClass::WriteImage2DArrayPixels(const std::string& fileName, const Rgba* pixels, const int width, const int height)const {
+   
+    Header header(width, height);
+    RgbaOutputFile file(fileName.c_str(), header, WRITE_RGBA);
+    file.setFrameBuffer(pixels, 1, width);
+    file.writePixels(height);
+}
+
 
 

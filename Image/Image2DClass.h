@@ -24,6 +24,7 @@ public:
     Image2DClass(const std::string& inputFileName);
     
     const Array2D<Rgba>& GetImage2DArrayPixels()const;
+    void WriteImage2DArrayPixels(const std::string& fileName, const Rgba* pixels, const int width, const int height) const;
     
 private:
     Array2D<Rgba> imagePixels;

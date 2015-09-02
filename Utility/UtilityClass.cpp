@@ -92,5 +92,18 @@ Eigen::Matrix3d UtilityClass::GetAntiClockwiseRotationMatrixGivenEulerAngles(con
     
     Eigen::Matrix3d rotationMatrix = RotZ * RotY * RotX;
     return rotationMatrix;
+}
+
+Rgba* UtilityClass::GetImagePixelsToWrite(const int& width, const int& height) {
+    Rgba* pixels = new Rgba[width * height];
     
+    for (int row = 0; row < height; ++row) {
+        for (int col = 0; col < width; ++col) {
+            pixels[row* width + col].r = 0.0;
+            pixels[row* width + col].g = 0.0;
+            pixels[row* width + col].b = 0.0;
+            pixels[row* width + col].a = 0.0;
+        }
+    }
+    return pixels;
 }

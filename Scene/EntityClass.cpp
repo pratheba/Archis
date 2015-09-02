@@ -70,7 +70,7 @@ void EntityClass::SetUpVector(const Eigen::Vector3d& upVector) {
 }
 
 Eigen::Vector3d EntityClass::GetDirectionVector() const{
-    return -_transformationCoord->_zVec;
+    return _transformationCoord->_zVec;
 }
 
 void EntityClass::SetDirectionVector(const Eigen::Vector3d& directionVector) {

@@ -1,4 +1,4 @@
-//
+
 //  SpotLightParameterEstimationClass.cpp
 //  Archis
 //
@@ -31,6 +31,7 @@ void SpotLightParameterEstimationClass::Initialize(const INPUTPARAM& inputParame
     parser->ParseImageFile(inputParameters._inputImageFileName,_imageSystem );
     parser->ParseLuxRenderScene(inputParameters._inputLuxFileName,_cameraSystem,_lightSystem);
     parser->ParsePLYFile(inputParameters._inputPLYFileName,_geometrySystem);
+    delete parser;
 }
 
 SpotLightParameterEstimationClass::~SpotLightParameterEstimationClass() {
@@ -51,6 +52,7 @@ void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPU
 
 // Refactor 
 void SpotLightParameterEstimationClass::CalculateExponentParameter() {
+    Rgba pixelIntensityValue;
     std::ofstream outputfile;
     outputfile.open("AlphaTest1.txt");
     
@@ -67,31 +69,79 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     const GeometryEntityClass& geometryEntity = _geometrySystem.GetCurrentGeometry();
     std::vector<Eigen::Vector3d> vertexNormals = geometryEntity.GetVertexNormals();
     Eigen::Vector3d vnormal = vertexNormals[0];
+    vnormal.normalize();
     
     ReprojectionClass* reprojectionClass = new ReprojectionClass();
-    std::vector<MapOFImageAndWorldPoints>reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels());
+    std::vector<MapOFImageAndWorldPoints>reprojectedPoints;
+    reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels());
+    
+    // Image
+    int imageWidth = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().width();
+    int imageHeight = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().height();
+    
+    double innerconeangle = 0.00 * M_PI/180; // // with assumption that lightDirection == coneangle
+    double outerconeangle = 22.50 * M_PI/180;
+    
+    double cosOfInnerConeAngle = cos(innerconeangle);
+    double cosOfOuterConeAngle = cos(outerconeangle);
+    UtilityClass* util = new UtilityClass();
+    Rgba* outputPixels = util->GetImagePixelsToWrite(imageWidth, imageHeight);
+    
     
     for (int index = 0; index < reprojectedPoints.size(); ++index) {
+
+        pixelIntensityValue =   (_imageSystem.GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.y][reprojectedPoints[index]._imagepixel.x];
+        double averagePixelIntensityValue   =   (pixelIntensityValue.r + pixelIntensityValue.g + pixelIntensityValue.b)/3;
         
-    
-        Eigen::Vector3d directionVector =  reprojectedPoints[index]._worldPoint - lightPosition;
-        directionVector.normalize();
-        
-        double cosTheta =  lightDirection.dot(directionVector);
-        std::cout << reprojectedPoints[index]._imagepixel.x << "::" << reprojectedPoints[index]._imagepixel.y << std::endl;
-        
-        Rgba pixelValue = (_imageSystem.GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.x][reprojectedPoints[index]._imagepixel.y];
-        
-        double averagePixelValue = (pixelValue.r + pixelValue.g + pixelValue.b)/3;
-        double pixelIntensity = std::abs(averagePixelValue/(vnormal.dot(-directionVector)* lightIntensity * materialAlbedo));
-        if (pixelIntensity > 0) {
-            
-            double alpha =  log(pixelIntensity)/log(cosTheta);
-            
-            std::cout << "alpha for " << (reprojectedPoints[index]._worldPoint).x() << " ::" << reprojectedPoints[index]._imagepixel.x << " = " << alpha << std::endl;;//<< " :: " << alphaInDegree << std::endl;
-            
-            
+        if (averagePixelIntensityValue <=  0) {
+            // light does not reach that pixel;
+            continue;
         }
+        // convert average pixel intensity to 0 to 255
+        averagePixelIntensityValue =  (averagePixelIntensityValue /(pow(2, 16)-1))*255;
+        
+        Eigen::Vector3d lightToPointDirectionVector =  reprojectedPoints[index]._worldPoint - lightPosition;
+        lightToPointDirectionVector.normalize();
+
+        float lambertTerm = (-lightToPointDirectionVector).dot(vnormal);
+
+        if (lambertTerm <= 0 ) {
+            // No light gets reflected from the surface at the particular point
+            continue;
+        }
+        
+        
+        // Use it for attentuation factor
+        double distancePointAndLight    =  sqrt(pow(lightPosition.x() - reprojectedPoints[index]._worldPoint.x(),2) +
+                                                pow(lightPosition.y() - reprojectedPoints[index]._worldPoint.y(),2) +
+                                                pow(lightPosition.z() - reprojectedPoints[index]._worldPoint.z(),2));
+        double cosOfCurrAngle                   =   lightDirection.dot(lightToPointDirectionVector);
+        //double cosOfInner_minus_OuterConeAngle  =   cosOfInnerConeAngle - cosOfOuterConeAngle;
+        
+        // Clamp the value of the curr between 0 and 1
+        //double IntensityFactorWithoutExponent =  std::min(std::max((double)((cosOfCurrAngle - cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle),0.0),1.0);
+        double IntensityFactorWithoutExponent = cosOfCurrAngle;
+        
+        if (cosOfCurrAngle > cosOfOuterConeAngle ) {
+           double IntensityFactorWithExponent = averagePixelIntensityValue / (lightIntensity * materialAlbedo * lambertTerm);
+            
+            double spotLightExponent = log(IntensityFactorWithExponent)/log(IntensityFactorWithoutExponent);
+        
+        int i = reprojectedPoints[index]._imagepixel.y * imageWidth + reprojectedPoints[index]._imagepixel.x;
+        if (spotLightExponent < 0) {
+            outputPixels[i].r = 1.0;
+        } else {
+            outputPixels[i].b = 1.0;
+        }
+            
+            std::cout << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << std::endl;
+        
+        outputfile << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << "\n";
+        }
+
     }
+    
+    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("output-withcondition.exr", outputPixels, imageWidth, imageHeight);
+    outputfile.close();
 }
 
