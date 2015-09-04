@@ -44,3 +44,13 @@ const LightEntityClass& LightSystemClass::GetCurrentLight() {
 void LightSystemClass::SetCurrentLight(const LightEntityClass& currentLight) {
     *_currentLight = currentLight;
 }
+
+double LightSystemClass::GetCurrentLightIntensity() {
+    if (_currentLight != nullptr ) {
+        if (_currentLight->GetLightPower() == 0 || _currentLight->GetLightEfficacy() == 0) {
+            return _currentLight->GetLightgain();
+        }
+        return (_currentLight->GetLightgain() * _currentLight->GetLightPower() * _currentLight->GetLightEfficacy());
+    }
+    return 0;
+}

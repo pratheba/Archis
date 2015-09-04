@@ -57,8 +57,11 @@ void Parser::ParseLuxRenderScene(const std::string& luxRenderFileName, CameraSys
     //-----------------------
     
     LightEntityClass* lightEntity = new LightEntityClass();
-    lightEntity->SetLightGain(100*100*10);
-    lightEntity->SetLightPower(100);
+    lightEntity->SetLightGain(100);
+    lightEntity->SetLightPower(0);
+    lightEntity->SetLightEfficacy(0);
+    lightEntity->SetSpotLightInnerConeAngle(0);
+    lightEntity->SetSpotLightOuterConeAngle(22.5);
     Eigen::Matrix4d lightTransMatrix ;
     
     lightTransMatrix.col(0) = Eigen::Vector4d(0.006568121723831, 0.002261585788801, -0.007193399593234, 0.000000000000000);
@@ -100,7 +103,8 @@ void Parser::ParsePLYFile(const std::string& plyFileName, GeometrySystemClass& g
 }
 
 void Parser::ParseImageFile(const std::string& imageFileName, ImageSystemClass& imageSystemClass) {
-    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
+    //std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
+    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray-intensity-100/light-xyz-gray-intensity-100.exr";
     imageSystemClass = ImageSystemClass::GetInstance(fileName);
 }
 

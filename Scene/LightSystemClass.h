@@ -21,6 +21,8 @@ public:
     const LightEntityClass& GetCurrentLight();
     void SetCurrentLight(const LightEntityClass& currentCamera);
     
+    double GetCurrentLightIntensity();
+    
 private:
     LightSystemClass();
     ~LightSystemClass(){}

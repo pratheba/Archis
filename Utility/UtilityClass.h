@@ -73,6 +73,13 @@ struct Point2D {
         y = inPoint.y;
         return *this;
     }
+    
+    Point2D& operator+(const Point2D<Type>& inPoint) {
+        Point2D<Type> outputPoint;
+        outputPoint.x = this->x + inPoint.x;
+        outputPoint.y = this->y + inPoint.y;
+        return outputPoint;
+    }
 };
 
 template <class Type>
@@ -104,6 +111,14 @@ struct MapOFImageAndWorldPoints {
     MapOFImageAndWorldPoints(){}
     MapOFImageAndWorldPoints(const Point2D<int>& imagepixel, const Eigen::Vector3d& worldPoint):_imagepixel(imagepixel), _worldPoint(worldPoint){}
 };
+
+double rad2deg(const double& radian) {
+    return (radian * M_PI / 180);
+}
+
+double deg2rad(const double& degree) {
+    return (degree * 180 / M_PI);
+}
 
 class UtilityClass {
 public:

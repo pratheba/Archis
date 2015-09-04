@@ -26,6 +26,8 @@ private:
     void GetLightFallOffPointsfromCorePoints_UsingConeSector(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
     void GetLightFallOffPointsfromCorePoints_UsingTableMapOfSectorsAndSegment(const Array2D<Rgba>& inputImage_, const Point2D<int>&corePoint_);
     void GetLightFallOffPointsfromCorePoints_UsingGradientEstimation(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
+    
+    UtilityClass* utilityClass;
 };
 
 #endif /* defined(__Archis__SpotLightFallOFFIntensityCalculator__) */

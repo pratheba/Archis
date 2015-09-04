@@ -17,8 +17,8 @@ int main(int argc, const char * argv[]) {
 //    }
     
     INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
-    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
-    
+    //std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
+    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray-intensity-100/light-xyz-gray-intensity-100.exr";
    // std::string fileName = "/Users/prathebaselvaraju/Desktop/untitled.exr";
     
     SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);

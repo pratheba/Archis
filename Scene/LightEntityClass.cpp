@@ -36,12 +36,28 @@ void LightEntityClass::SetLightPower(const double& lightPower) {
     _lightPower = lightPower;
 }
 
-double LightEntityClass::GetSpotLightConeAngle() const{
-    return _coneAngle;
+double LightEntityClass::GetSpotLightInnerConeAngle() const{
+    return _innerconeAngle;
 }
 
-void LightEntityClass::SetSpotLightConeAngle(const double& coneAngle) {
-    _coneAngle = coneAngle;
+void LightEntityClass::SetSpotLightInnerConeAngle(const double& innerconeAngle) {
+    _innerconeAngle = innerconeAngle;
+}
+
+double LightEntityClass::GetSpotLightOuterConeAngle() const{
+    return _outerconeAngle;
+}
+
+void LightEntityClass::SetSpotLightOuterConeAngle(const double& outerconeAngle) {
+    _outerconeAngle = outerconeAngle;
+}
+
+double LightEntityClass::GetLightEfficacy() const{
+    return _lightEfficacy;
+}
+
+void LightEntityClass::SetLightEfficacy(const double& lightEfficacy) {
+    _lightEfficacy = lightEfficacy;
 }
 
 

@@ -26,20 +26,31 @@ public:
     LIGHTTYPE GetLightType();
     void SetLightType(const LIGHTTYPE& lightType);
     
+    double GetLightIntensity() const;
+    void SetLightIntensity(const double& lightIntensity);
+    
     double GetLightgain()const;
     void SetLightGain(const double& lightGain);
     
     double GetLightPower()const;
     void SetLightPower(const double& lightPower);
     
-    double GetSpotLightConeAngle()const;
-    void SetSpotLightConeAngle(const double& coneAngle);
+    double GetLightEfficacy() const;
+    void SetLightEfficacy(const double& lightEfficacy);
+    
+    double GetSpotLightInnerConeAngle()const;
+    void SetSpotLightInnerConeAngle(const double& innerconeAngle);
+    
+    double GetSpotLightOuterConeAngle()const;
+    void SetSpotLightOuterConeAngle(const double& outerconeAngle);
     
 private:
     LIGHTTYPE _lightType;
     double _lightGain;
     double _lightPower;
-    double _coneAngle;
+    double _lightEfficacy;
+    double _innerconeAngle;
+    double _outerconeAngle;
 };
 
 

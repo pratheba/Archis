@@ -52,6 +52,10 @@ void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPU
 
 // Refactor 
 void SpotLightParameterEstimationClass::CalculateExponentParameter() {
+    
+    double averagealphaValue = 0.0;
+    int count = 0;
+    
     Rgba pixelIntensityValue;
     std::ofstream outputfile;
     outputfile.open("AlphaTest1.txt");
@@ -60,10 +64,15 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     double materialAlbedo = 0.5;
     
     // Light
-    double lightIntensity           = light.GetLightgain();
+    double lightIntensity           = _lightSystem.GetCurrentLightIntensity();
     Eigen::Vector3d lightDirection  = -light.GetDirectionVector();
     lightDirection.normalize();
-    Eigen::Vector3d lightPosition   = light.GetPosition();
+    Eigen::Vector3d lightPosition   =  light.GetPosition();
+    double innerconeangle           =  light.GetSpotLightInnerConeAngle() * M_PI / 180;
+    double outerconeangle           =  light.GetSpotLightOuterConeAngle() * M_PI / 180;
+    double cosOfInnerConeAngle      = cos(innerconeangle);
+    double cosOfOuterConeAngle      = cos(outerconeangle);
+    
     
     // Geometry
     const GeometryEntityClass& geometryEntity = _geometrySystem.GetCurrentGeometry();
@@ -79,14 +88,9 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     int imageWidth = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().width();
     int imageHeight = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().height();
     
-    double innerconeangle = 0.00 * M_PI/180; // // with assumption that lightDirection == coneangle
-    double outerconeangle = 22.50 * M_PI/180;
     
-    double cosOfInnerConeAngle = cos(innerconeangle);
-    double cosOfOuterConeAngle = cos(outerconeangle);
     UtilityClass* util = new UtilityClass();
     Rgba* outputPixels = util->GetImagePixelsToWrite(imageWidth, imageHeight);
-    
     
     for (int index = 0; index < reprojectedPoints.size(); ++index) {
 
@@ -128,6 +132,11 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
            double IntensityFactorWithExponent = averagePixelIntensityValue / (lightIntensity * materialAlbedo * lambertTerm);
             
             double spotLightExponent = log(IntensityFactorWithExponent)/log(IntensityFactorWithoutExponent);
+            
+            if (spotLightExponent < 10) {
+                averagealphaValue += spotLightExponent;
+                count += 1;
+            }
         
         int i = reprojectedPoints[index]._imagepixel.y * imageWidth + reprojectedPoints[index]._imagepixel.x;
         if (spotLightExponent < 0) {
@@ -143,7 +152,8 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
 
     }
     
-    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("output-withcondition-new.exr", outputPixels, imageWidth, imageHeight);
+    std::cout << "average expoenent value is = " << averagealphaValue/count << std::endl;
+    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("output-intensity-100.exr", outputPixels, imageWidth, imageHeight);
     outputfile.close();
 }
 
