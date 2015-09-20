@@ -13,6 +13,11 @@
 #include <set>
 #include "../Utility/UtilityClass.h"
 
+typedef std::vector<std::vector<std::vector<Point2D<int>>>> SectorsInImage;
+typedef std::vector<std::vector<Point2D<int>>> SegmentInEachSector;
+typedef std::vector<std::vector<std::vector<Rgba>>> IntensityInImageSectors;
+typedef std::vector<std::vector<Rgba>> IntensitySegmentInEachSector;
+
 class SpotLightFallOFFIntensityCalculator {
 public:
     SpotLightFallOFFIntensityCalculator();
@@ -30,13 +35,15 @@ private:
     // From 3D information applied on 2D
     void GetLightFallOffPointsfromCorePoints_UsingAngleEstimationFromLightPosition(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
     int GetNumberOfRadiusSegments(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
+    void InitializeSectorsOfImage(const Array2D<Rgba>& inputImage_, const Point2D<int>&corePoint_);
+    void GetGradientDifferenceForEachSectorSegments(const int& maxNumberOfRadiusSegment);
     
     UtilityClass* utilityClass;
+    
+    SectorsInImage Sector;
+    IntensityInImageSectors SectorIntensity;
 };
 
-typedef std::vector<std::vector<std::vector<Point2D<int>>>> SectorsInImage;
-typedef std::vector<std::vector<Point2D<int>>> SegmentInEachSector;
-typedef std::vector<std::vector<std::vector<Rgba>>> IntensityInImageSectors;
-typedef std::vector<std::vector<Rgba>> IntensitySegmentInEachSector;
+
 
 #endif /* defined(__Archis__SpotLightFallOFFIntensityCalculator__) */

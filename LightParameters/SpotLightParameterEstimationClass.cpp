@@ -46,12 +46,12 @@ SpotLightParameterEstimationClass::~SpotLightParameterEstimationClass() {
 
 void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPUTPARAM& inputParameters) {
     Initialize(inputParameters);
-//    VecOf2dDoublePoints centroids = _imageSystem.GetCentroidsOfHighIntensityPixelsinCurrentImage();
-//    
-//    SpotLightFallOFFIntensityCalculator* spotLightFallOffCalc = new SpotLightFallOFFIntensityCalculator();
-//    for (int index = 0; index < centroids.size(); ++index) {
-//        spotLightFallOffCalc->GetLightFallOffPointsfromCorePoints((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels(), Point2D<int>(centroids[index].y,centroids[index].x));
-//    }
+    VecOf2dDoublePoints centroids = _imageSystem.GetCentroidsOfHighIntensityPixelsinCurrentImage();
+    
+    SpotLightFallOFFIntensityCalculator* spotLightFallOffCalc = new SpotLightFallOFFIntensityCalculator();
+    for (int index = 0; index < centroids.size(); ++index) {
+        spotLightFallOffCalc->GetLightFallOffPointsfromCorePoints((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels(), Point2D<int>(centroids[index].y,centroids[index].x));
+    }
     
     CalculateExponentParameter();
 }
@@ -94,7 +94,7 @@ SpotLightParameterEstimationClass::InputForExponentCalculation* SpotLightParamet
 void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     
     std::ofstream outputExponentValue;
-    outputExponentValue.open("outputExponentValue-intensity100-gamma1.txt");
+    outputExponentValue.open("../../Output/outputExponentValue-intensity100-gamma1.txt");
  
     InputForExponentCalculation* input =  SpotLightExponentInputParameters();
     std::vector<MapOFImageAndWorldPoints>reprojectedPoints = input->reprojectedPoints;
@@ -191,7 +191,7 @@ void SpotLightParameterEstimationClass::WriteExponentValueToImage(double maxExpV
         outputPixels[exponentOfCoreRegion[index].first].r = 1.0;
     }
 
-    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("imagePixelValueExponent-intensity100-gamma1.exr", outputPixels, imageWidth, imageHeight);
+    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("../../Output/imagePixelValueExponent-intensity100-gamma1.exr", outputPixels, imageWidth, imageHeight);
    
 
     delete [] outputPixels;

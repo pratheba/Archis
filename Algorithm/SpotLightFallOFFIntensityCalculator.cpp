@@ -138,18 +138,24 @@ struct value_equal {
     }
 };
 
+void SpotLightFallOFFIntensityCalculator::InitializeSectorsOfImage(const Array2D<Rgba>& inputImage_, const Point2D<int>&corePoint_) {
+    int maxNumberOfRadiusSegment =  GetNumberOfRadiusSegments(inputImage_, corePoint_);
+    
+    Sector = SectorsInImage(360, SegmentInEachSector(maxNumberOfRadiusSegment,std::vector<Point2D<int>>()));
+    //SegmentInEachSector Segment(maxNumberOfRadiusSegment,std::vector<Point2D<int>>());
+    
+    SectorIntensity = IntensityInImageSectors(360, IntensitySegmentInEachSector(maxNumberOfRadiusSegment, std::vector<Rgba>()));
+    //IntensitySegmentInEachSector SegmentIntensity(maxNumberOfRadiusSegment, std::vector<Rgba>());
+    
+}
+
 void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_UsingTableMapOfSectorsAndSegment(const Array2D<Rgba>& inputImage_, const Point2D<int>&corePoint_) {
     
     // Create a Table with Degree and radius
     //  PixelInSegment[degree][radius] -> vector of pixels.
     
     int maxNumberOfRadiusSegment =  GetNumberOfRadiusSegments(inputImage_, corePoint_);
-    
-    SectorsInImage Sector(360, SegmentInEachSector(maxNumberOfRadiusSegment,std::vector<Point2D<int>>()));
-    SegmentInEachSector Segment(maxNumberOfRadiusSegment,std::vector<Point2D<int>>());
-    
-    IntensityInImageSectors SectorIntensity(360, IntensitySegmentInEachSector(maxNumberOfRadiusSegment, std::vector<Rgba>()));
-    IntensitySegmentInEachSector SegmentIntensity(maxNumberOfRadiusSegment, std::vector<Rgba>());
+    InitializeSectorsOfImage(inputImage_, corePoint_);
     
     int numOfRows = (int)inputImage_.height();
     int numOfCols = (int)inputImage_.width();
@@ -180,45 +186,25 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
     UtilityClass* util = new UtilityClass();
     Rgba* outputPixels = util->GetImagePixelsToWrite(numOfCols, numOfRows);
     
+    std::vector<double>diffInIntensity = std::vector<double>(360,0);
+    
     for (int index = 0; index < 360; ++index) {
         for (int block = 1; block < (maxNumberOfRadiusSegment); ++block) {
             
-            //int numberOfZeroIntensityVectorBlock1 = 0, numberOfZeroIntensityVectorBlock2 = 0;
-            
-                int count1 = 0;
-                for (int i = 0; i < SectorIntensity[index][block].size(); ++i) {
-                    if ((SectorIntensity[index][block][i].r == 0) && (SectorIntensity[index][block][i].g == 0) && (SectorIntensity[index][block][i].b == 0)) {
-                        count1++;
-                    }
-                }
-
-                int count2 = 0;
-                for (int i = 0; i < SectorIntensity[index][block-1].size(); ++i) {
-                    if ((SectorIntensity[index][block-1][i].r == 0) && (SectorIntensity[index][block-1][i].g == 0) && (SectorIntensity[index][block-1][i].b == 0)) {
-                        count2++;
-                    }
-                }
-            
+            int numberOfZeroIntensityVectorBlock1 = 0, numberOfZeroIntensityVectorBlock2 = 0;
+  
             if (Sector[index][block].size() > 0) {
-            std::cout << index << "-" << block << " = " << count1 << " total = " << SectorIntensity[index][block].size() << "  normalized = " << (double)((double)count1/ (double)SectorIntensity[index][block].size()) << " -- " << Sector[index][block][0].y << "," << Sector[index][block][0].x <<  std::endl;
+
+                numberOfZeroIntensityVectorBlock1 = (int)std::count_if(SectorIntensity[index][block].begin(), SectorIntensity[index][block].end(), value_equal(Rgba(0, 0, 0)));
+                
+                std::cout << index << "-" << block << " = " << numberOfZeroIntensityVectorBlock1 << " total = " << SectorIntensity[index][block].size() << "  normalized = " << (double)((double)numberOfZeroIntensityVectorBlock1/ (double)SectorIntensity[index][block].size()) << " -- " << Sector[index][block][0].y << "," << Sector[index][block][0].x <<  std::endl;
             }
             
-            if (Sector[index][block-1].size() > 0) {
+            else if (Sector[index][block-1].size() > 0) {
+                numberOfZeroIntensityVectorBlock2 = (int)std::count_if(SectorIntensity[index][block-1].begin(), SectorIntensity[index][block-1].end(), value_equal(Rgba(0, 0, 0)));
                 
-            std::cout << index << "-" << block-1 << " = " << count2 << "  .total = " << SectorIntensity[index][block-1].size() << " normalized = " << (double)((double)count2/ (double)SectorIntensity[index][block-1].size()) << " -- " << Sector[index][block-1][0].y << "," << Sector[index][block-1][0].x << std::endl;
+                 std::cout << index << "-" << block-1 << " = " << numberOfZeroIntensityVectorBlock2 << " total = " << SectorIntensity[index][block-1].size() << "  normalized = " << (double)((double)numberOfZeroIntensityVectorBlock2/ (double)SectorIntensity[index][block-1].size()) << " -- " << Sector[index][block-1][0].y << "," << Sector[index][block-1][0].x <<  std::endl;
             }
-
-//            if (Sector[index][block].size() > 0) {
-//
-//                numberOfZeroIntensityVectorBlock1 = (int)std::count_if(SectorIntensity[index][block].begin(), SectorIntensity[index][block].end(), value_equal(Rgba(0, 0, 0)));
-//                std::cout << "block1 = " << (numberOfZeroIntensityVectorBlock1 / SectorIntensity[index][block].size()) << std::endl;
-//            }
-//            
-//            if (Sector[index][block-1].size() > 0) {
-//                numberOfZeroIntensityVectorBlock2 = (int)std::count_if(SectorIntensity[index][block-1].begin(), SectorIntensity[index][block-1].end(), value_equal(Rgba(0, 0, 0)));
-//                std::cout << "block2 = " << (numberOfZeroIntensityVectorBlock2 / SectorIntensity[index][block-1].size()) << std::endl;
-//            }
-//            
             
             if (std::abs((int)Sector[index][block].size() - (int)Sector[index][block-1].size()) > 0) {
   
@@ -233,19 +219,19 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
                 }
                 else {
                     std::cout << index << "::" << block-1 << "::" << Sector[index][block-1][0].y << ","<< Sector[index][block-1][0].x << " = " << averagePixelIntensityDifference << std::endl;
-
                 }
                 
-//                if (averagePixelIntensityDifference > diffInIntensity[index]) {
-//                    diffInIntensity[index] = averagePixelIntensityDifference;
-//                    if (Sector[index][block].size() > 0) {
-//                    
-//                    std::cout << index << "::" << block << "::" << Sector[index][block][0].y << ","<< Sector[index][block][0].x << " = " << diffInIntensity[index] << std::endl;
-//                    }
-//                    else {
-//                    std::cout << index << "::" << block << "::" << Sector[index][block-1][0].y << ","<< Sector[index][block-1][0].x << " = " << diffInIntensity[index] << std::endl;
-//                    }
-//                }
+                if (averagePixelIntensityDifference > diffInIntensity[index]) {
+                    diffInIntensity[index] = averagePixelIntensityDifference;
+                    std::cout << "Overall difference in intensity = " ;
+                    if (Sector[index][block].size() > 0) {
+                    
+                    std::cout << index << "::" << block << "::" << Sector[index][block][0].y << ","<< Sector[index][block][0].x << " = " << diffInIntensity[index] << std::endl;
+                    }
+                    else {
+                    std::cout << index << "::" << block << "::" << Sector[index][block-1][0].y << ","<< Sector[index][block-1][0].x << " = " << diffInIntensity[index] << std::endl;
+                    }
+                }
             }
         }
     }
@@ -264,6 +250,69 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
     delete[] outputPixels;
     delete util;
     
+}
+
+void SpotLightFallOFFIntensityCalculator::GetGradientDifferenceForEachSectorSegments(const int& maxNumberOfRadiusSegment) {
+    
+    std::vector<double>diffInIntensity = std::vector<double>(360,0);
+    
+    for (int index = 0; index < 360; ++index) {
+        for (int block = 1; block < (maxNumberOfRadiusSegment); ++block) {
+            
+            //int numberOfZeroIntensityVectorBlock1 = 0, numberOfZeroIntensityVectorBlock2 = 0;
+            
+            int count1 = 0;
+            for (int i = 0; i < SectorIntensity[index][block].size(); ++i) {
+                if ((SectorIntensity[index][block][i].r == 0) && (SectorIntensity[index][block][i].g == 0) && (SectorIntensity[index][block][i].b == 0)) {
+                    count1++;
+                }
+            }
+            
+            int count2 = 0;
+            for (int i = 0; i < SectorIntensity[index][block-1].size(); ++i) {
+                if ((SectorIntensity[index][block-1][i].r == 0) && (SectorIntensity[index][block-1][i].g == 0) && (SectorIntensity[index][block-1][i].b == 0)) {
+                    count2++;
+                }
+            }
+            
+            if (Sector[index][block].size() > 0) {
+                std::cout << index << "-" << block << " = " << count1 << " total = " << SectorIntensity[index][block].size() << "  normalized = " << (double)((double)count1/ (double)SectorIntensity[index][block].size()) << " -- " << Sector[index][block][0].y << "," << Sector[index][block][0].x <<  std::endl;
+            }
+            
+            if (Sector[index][block-1].size() > 0) {
+                
+                std::cout << index << "-" << block-1 << " = " << count2 << "  .total = " << SectorIntensity[index][block-1].size() << " normalized = " << (double)((double)count2/ (double)SectorIntensity[index][block-1].size()) << " -- " << Sector[index][block-1][0].y << "," << Sector[index][block-1][0].x << std::endl;
+            }
+            
+            if (std::abs((int)Sector[index][block].size() - (int)Sector[index][block-1].size()) > 0) {
+                
+                // Sum of all pixel intensities in each block.
+                int avgSumOfElementsInFirstBlock   =   (std::accumulate(SectorIntensity[index][block].begin(),SectorIntensity[index][block].end(),0, Vector_acc))/((int)SectorIntensity[index][block].size() + EPSILON);
+                int avgSumOfElementsInSecondBlock  =   std::accumulate(SectorIntensity[index][block-1].begin(),SectorIntensity[index][block-1].end(),0, Vector_acc)/((int)SectorIntensity[index][block-1].size() + EPSILON);
+                
+                int averagePixelIntensityDifference = std::abs( avgSumOfElementsInFirstBlock - avgSumOfElementsInSecondBlock);
+                
+                if (Sector[index][block].size() > 0) {
+                    std::cout << index << "::" << block << "::" << Sector[index][block][0].y << ","<< Sector[index][block][0].x << " = " << averagePixelIntensityDifference << std::endl;
+                }
+                else {
+                    std::cout << index << "::" << block-1 << "::" << Sector[index][block-1][0].y << ","<< Sector[index][block-1][0].x << " = " << averagePixelIntensityDifference << std::endl;
+                }
+                
+                if (averagePixelIntensityDifference > diffInIntensity[index]) {
+                    diffInIntensity[index] = averagePixelIntensityDifference;
+                    std::cout << "Overall difference in intensity = " ;
+                    if (Sector[index][block].size() > 0) {
+                        
+                        std::cout << index << "::" << block << "::" << Sector[index][block][0].y << ","<< Sector[index][block][0].x << " = " << diffInIntensity[index] << std::endl;
+                    }
+                    else {
+                        std::cout << index << "::" << block << "::" << Sector[index][block-1][0].y << ","<< Sector[index][block-1][0].x << " = " << diffInIntensity[index] << std::endl;
+                    }
+                }
+            }
+        }
+    }
 }
 
 void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_UsingAngleEstimationFromLightPosition(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_) {

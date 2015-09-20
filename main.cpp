@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     //    }
     
     INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
-    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Archis/Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
+    std::string fileName = "../../Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
     
     SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);
     spotLightParamEstClass.GetSpotLightExponentFromImage(inputParameters);
