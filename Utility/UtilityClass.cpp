@@ -36,8 +36,8 @@ VecOf2dIntPoints UtilityClass::GetWindowAroundPoint(const Array2D<Rgba>& inputIm
         for (int col = -windowRadius; col <= windowRadius; ++col) {
             
             Point2D<int> currPoint = Point2D<int>(corePoint.y + row, corePoint.x + col);
-            if ((currPoint.y < 0) || (currPoint.y > imageWidth)
-                || (currPoint.x < 0) || (currPoint.x > imageHeight)
+            if ((currPoint.y < 0) || (currPoint.y > imageHeight)
+                || (currPoint.x < 0) || (currPoint.x > imageWidth)
                 || (row == 0 && col == 0)){
                 continue;
             }
@@ -94,6 +94,14 @@ Eigen::Matrix3d UtilityClass::GetAntiClockwiseRotationMatrixGivenEulerAngles(con
     return rotationMatrix;
 }
 
+double rad2deg(const double& radian) {
+    return (radian * 180 / M_PI);
+}
+
+double deg2rad(const double& degree) {
+    return (degree * M_PI / 180);
+}
+
 Rgba* UtilityClass::GetImagePixelsToWrite(const int& width, const int& height) {
     Rgba* pixels = new Rgba[width * height];
     
@@ -106,4 +114,12 @@ Rgba* UtilityClass::GetImagePixelsToWrite(const int& width, const int& height) {
         }
     }
     return pixels;
+}
+
+void UtilityClass::WriteImage2DArrayPixels(const std::string& fileName, const Rgba* pixels, const int width, const int height) {
+    
+    Header header(width, height);
+    RgbaOutputFile file(fileName.c_str(), header, WRITE_RGBA);
+    file.setFrameBuffer(pixels, 1, width);
+    file.writePixels(height);
 }

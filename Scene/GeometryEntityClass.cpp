@@ -16,7 +16,6 @@ GeometryEntityClass::GeometryEntityClass() {
 }
 
 GeometryEntityClass::~GeometryEntityClass() {
-    
 }
 
 GEOMETRYTYPE GeometryEntityClass::GetGeometryType() const {
@@ -58,7 +57,5 @@ MaxMinCoord GeometryEntityClass::GetMaxMinOfGeometry() const{
         if (_vertices[index].z < maxminCoord._maxZ)
             maxminCoord._maxZ = _vertices[index].z;
     }
-    
     return maxminCoord;
-    
 }

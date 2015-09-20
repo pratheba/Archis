@@ -49,7 +49,7 @@ void Parser::ParseLuxRenderScene(const std::string& luxRenderFileName, CameraSys
     const ImageSystemClass& imageSystemClass = ImageSystemClass::GetInstance();
     long width = imageSystemClass.GetCurrentImageWidth();
     long height = imageSystemClass.GetCurrentImageHeight();
-    camEntity->SetPrincipalPoint(Point2D<double>(width/2,height/2));
+    camEntity->SetPrincipalPoint(Point2D<double>(height/2,width/2));
     
     cameraSystemClass.SetCurrentCamera(*camEntity);
     
@@ -104,7 +104,7 @@ void Parser::ParsePLYFile(const std::string& plyFileName, GeometrySystemClass& g
 
 void Parser::ParseImageFile(const std::string& imageFileName, ImageSystemClass& imageSystemClass) {
     //std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
-    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray-intensity-100/light-xyz-gray-intensity-100.exr";
-    imageSystemClass = ImageSystemClass::GetInstance(fileName);
+    //std::string fileName = "Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
+    imageSystemClass = ImageSystemClass::GetInstance(imageFileName);
 }
 

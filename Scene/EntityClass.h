@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Pratheba Selvaraju. All rights reserved.
 //
 
-#ifndef __Archis__EntityClass__
-#define __Archis__EntityClass__
+#ifndef __Test__EntityClass__
+#define __Test__EntityClass__
 
 #include <iostream>
 #include <vector>
-#include "../Utility/UtilityClass.h"
+#include "UtilityClass.h"
 
 
 class EntityClass {

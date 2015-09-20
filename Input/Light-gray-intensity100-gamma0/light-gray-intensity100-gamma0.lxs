@@ -76,7 +76,7 @@ LightGroup "default"
 
 LightSource "spot"
 	"float gain" [100.000000000000000]
-	"float importance" [10.000000000000000]
+	"float importance" [1.000000000000000]
 	"color L" [1.00000000 1.00000000 1.00000000]
 	"float power" [0.000000000000000]
 	"float efficacy" [0.000000000000000]

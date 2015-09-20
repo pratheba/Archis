@@ -48,10 +48,6 @@ private:
     
     };
 
-
-
-
-
 ReprojectionClass::ReprojectionClass():imageClass(ImageSystemClass::GetInstance()),geometryClass(GeometrySystemClass::GetInstance()),cameraClass(CameraSystemClass::GetInstance()),imageEntity(imageClass.GetCurrentImage()),geometryEntity(geometryClass.GetCurrentGeometry()),camEntity(cameraClass.GetCurrentCamera()) {}
 
 ReprojectionClass::~ReprojectionClass() {
@@ -151,7 +147,7 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
                     if ((intersectionPoint.x() >= maxminCoord._minX && intersectionPoint.x() <= maxminCoord._maxX)
                         &&(intersectionPoint.y() >= maxminCoord._minY && intersectionPoint.y() <= maxminCoord._maxY))
                     {
-                        reprojectedPoints.push_back(MapOFImageAndWorldPoints(Point2D<int>(col,row),intersectionPoint));
+                        reprojectedPoints.push_back(MapOFImageAndWorldPoints(Point2D<int>(row,col),intersectionPoint));
                     }
                 }
             }

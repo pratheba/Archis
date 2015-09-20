@@ -2,7 +2,7 @@
 //  main.cpp
 //  Archis
 //
-//  Created by Pratheba Selvaraju on 8/23/15.
+//  Created by Pratheba Selvaraju on 9/15/15.
 //  Copyright (c) 2015 Pratheba Selvaraju. All rights reserved.
 //
 
@@ -11,15 +11,13 @@
 #include "LightParameters/SpotLightParameterEstimationClass.h"
 
 int main(int argc, const char * argv[]) {
-//    if (argc < 2) {
-//        std::cout << "No input arguments. Returning ... " << std::endl;
-//        return -1;
-//    }
+    //    if (argc < 2) {
+    //        std::cout << "No input arguments. Returning ... " << std::endl;
+    //        return -1;
+    //    }
     
     INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
-    //std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray/light-xyz-gray.exr";
-    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/light-xyz-gray-intensity-100/light-xyz-gray-intensity-100.exr";
-   // std::string fileName = "/Users/prathebaselvaraju/Desktop/untitled.exr";
+    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Archis/Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
     
     SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);
     spotLightParamEstClass.GetSpotLightExponentFromImage(inputParameters);

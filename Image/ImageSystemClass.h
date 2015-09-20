@@ -24,8 +24,6 @@ public:
     const long GetCurrentImageWidth() const;
     const long GetCurrentImageHeight() const;
     
-    
-    
     VecOf2dDoublePoints GetCentroidsOfHighIntensityPixelsinCurrentImage();
     
 private:

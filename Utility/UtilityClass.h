@@ -9,6 +9,7 @@
 #ifndef __Archis__UtilityClass__
 #define __Archis__UtilityClass__
 
+#pragma once
 #include <iostream>
 #include <vector>
 #include <eigen3/Eigen/Dense>
@@ -63,7 +64,7 @@ struct Point2D {
     Type y; // row
     
     Point2D() { x=0.0; y=0.0;}
-    Point2D(const Type& x_, const Type& y_):x(x_), y(y_){}
+    Point2D(const Type& y_, const Type& x_):y(y_), x(x_){}
     Point2D(const Point2D<Type>& point_):x(point_.x),y(point_.y){}
     
     Point2D& operator=(const Point2D<Type>& inPoint){
@@ -74,7 +75,7 @@ struct Point2D {
         return *this;
     }
     
-    Point2D& operator+(const Point2D<Type>& inPoint) {
+    Point2D operator+(const Point2D<Type>& inPoint) {
         Point2D<Type> outputPoint;
         outputPoint.x = this->x + inPoint.x;
         outputPoint.y = this->y + inPoint.y;
@@ -112,13 +113,8 @@ struct MapOFImageAndWorldPoints {
     MapOFImageAndWorldPoints(const Point2D<int>& imagepixel, const Eigen::Vector3d& worldPoint):_imagepixel(imagepixel), _worldPoint(worldPoint){}
 };
 
-double rad2deg(const double& radian) {
-    return (radian * M_PI / 180);
-}
-
-double deg2rad(const double& degree) {
-    return (degree * 180 / M_PI);
-}
+double rad2deg(const double& radian);
+double deg2rad(const double& degree);
 
 class UtilityClass {
 public:
@@ -126,8 +122,9 @@ public:
     
     double GetAveragePixelIntensityAroundaPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowSize);
     Eigen::Matrix3d GetRotationMatrixByEulerAngle(const Point3D<double>& eulerAngles);
-    
     Rgba* GetImagePixelsToWrite(const int& width,const int& height);
+    void WriteImage2DArrayPixels(const std::string& fileName, const Rgba* pixels, const int width, const int height);
+
     
 private:
     Eigen::Matrix3d GetClockwiseRotationMatrixGivenEulerAngles(const Point3D<double>& eulerRotationAngles);

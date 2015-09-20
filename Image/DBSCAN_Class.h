@@ -50,27 +50,6 @@ private:
     void ClusterDataPoints();
     void ExpandCluster(const int clusterIndex);
  
-    
-//    VecOf2dPoints data;
-//    //std::vector< std::vector <cv::Point2d>> neighbourPoints;
-//    std::vector<VecOfInt> neighbourPoints;
-//    VecOfBool isVisited;
-//    VecOfBool isMemberOfCluster;
-//    std::vector<POINT_TYPE> dataPointType;
-//    
-//    cv::Point2d corePoint;
-//    //std::vector<cv::Point2d> corePointNeighbours;
-//    VecOfInt corePointNeighbours;
-//    std::vector<VecOf2dPoints> clusterPoints;
-//    double epsilon;
-//    int minPoints;
-//    
-//    
-//    void Initialize(VecOf2dPoints _data, double _epsilon, int _minPoints);
-//    void ClusterDataPoints();
-//    void GetAllNeighbouringPointsWithinRadius();
-//    VecOf2dPoints GetNeighbouringPoints(cv::Point2d corePoint);
-//    void ExpandCluster(const int clusterIndex);
 };
 
 #endif /* defined(__Archis__DBSCAN_Class__) */

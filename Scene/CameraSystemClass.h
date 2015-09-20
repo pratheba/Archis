@@ -10,7 +10,6 @@
 #define __Archis__CameraSystemClass__
 
 #include "CameraEntityClass.h"
-#include <vector>
 
 class CameraSystemClass {
 public:

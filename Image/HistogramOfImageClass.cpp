@@ -172,11 +172,17 @@ VecOfInt HistogramOfImageClass::GetHistogramOfImageWithMaxAndMinIntensity(const 
         return _histogram;
     }
     
+    std::ofstream outputfile;
+    outputfile.open("imagePixelValue-Histogram.txt");
+
     std::set<int> rangeOfPixelIntensity = std::set<int>();
     for (int row = 0; row < numRows; ++row) {
         for (int col=0; col < numCols; ++col) {
             Rgba pixel = imagePixels[row][col];
-            int intensityValue = (int)(pixel.r + pixel.g + pixel.b)/3;
+            double averagePixelIntensityValue   =   (pixel.r + pixel.g + pixel.b)/3;
+            int intensityValue = (int)((pixel.r + pixel.g + pixel.b)/3);
+            
+            outputfile << row << "," << col << " = " << averagePixelIntensityValue << std::endl;
             rangeOfPixelIntensity.insert(intensityValue);
             _pixelCountsForIntensityRange[intensityValue]++;
             
@@ -187,17 +193,18 @@ VecOfInt HistogramOfImageClass::GetHistogramOfImageWithMaxAndMinIntensity(const 
         }
     }
     
+    outputfile.close();
     // Doubt : Should I use Map or Vector?
     // With map i allocate only requires pixels.
     // With vector i have empty resources which carry no pixel values.
     // Which to use when?
     
-    _pixelsOfHistogramBin = std::vector<VecOf2dIntPoints>(_maxIntensity,VecOf2dIntPoints());
+    _pixelsOfHistogramBin = std::vector<VecOf2dIntPoints>(_maxIntensity+1,VecOf2dIntPoints());
     
     for (int row = 0; row < numRows; ++row) {
         for (int col=0; col < numCols; ++col) {
             Rgba pixel = imagePixels[row][col];
-            int intensityValue = (int)(pixel.r + pixel.g + pixel.b)/3;
+            int intensityValue = (int)((pixel.r + pixel.g + pixel.b)/3);
        
             _pixelsOfHistogramBin[intensityValue].push_back(Point2D<int>(row, col));
           

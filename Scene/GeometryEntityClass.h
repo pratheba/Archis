@@ -55,4 +55,4 @@ private:
 
 };
 
-#endif /* defined(__Archis__GeometryEntityClass__) */
+#endif /* defined(__Archis__GeometryEntityClass__)*/
