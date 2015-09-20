@@ -7,9 +7,21 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include "LightParameters/SpotLightParameterEstimationClass.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    //    if (argc < 2) {
+    //        std::cout << "No input arguments. Returning ... " << std::endl;
+    //        return -1;
+    //    }
+    
+    INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
+    std::string fileName = "/Users/prathebaselvaraju/4-Projects/Archis/Archis/Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
+    
+    SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);
+    spotLightParamEstClass.GetSpotLightExponentFromImage(inputParameters);
+    
     return 0;
-}
+    
+};

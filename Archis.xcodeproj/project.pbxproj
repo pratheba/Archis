@@ -3,11 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6D15C7C1BA77ABD00E97165 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C7B1BA77ABD00E97165 /* main.cpp */; };
+		D6CE81431BA90A5700B53E7B /* SpotLightParameterEstimationClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CB41BA77B8400E97165 /* SpotLightParameterEstimationClass.cpp */; };
+		D6CE81441BA90A6B00B53E7B /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CAD1BA77B7100E97165 /* Parser.cpp */; };
+		D6CE81451BA90A6B00B53E7B /* UtilityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CAF1BA77B7100E97165 /* UtilityClass.cpp */; };
+		D6CE81461BA90A6B00B53E7B /* CameraEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C971BA77B6000E97165 /* CameraEntityClass.cpp */; };
+		D6CE81471BA90A6B00B53E7B /* CameraSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C991BA77B6000E97165 /* CameraSystemClass.cpp */; };
+		D6CE81481BA90A6B00B53E7B /* LightEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CA11BA77B6000E97165 /* LightEntityClass.cpp */; };
+		D6CE81491BA90A6B00B53E7B /* LightSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CA31BA77B6000E97165 /* LightSystemClass.cpp */; };
+		D6CE814A1BA90A6B00B53E7B /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C8A1BA77B5000E97165 /* DBSCAN_Class.cpp */; };
+		D6CE814B1BA90A6B00B53E7B /* HistogramOfImageClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C8C1BA77B5000E97165 /* HistogramOfImageClass.cpp */; };
+		D6CE814C1BA90A6B00B53E7B /* Image2DClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C8E1BA77B5000E97165 /* Image2DClass.cpp */; };
+		D6CE814D1BA90A6B00B53E7B /* ImageSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C901BA77B5000E97165 /* ImageSystemClass.cpp */; };
+		D6CE814E1BA90A6B00B53E7B /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C831BA77B2E00E97165 /* ReprojectionClass.cpp */; };
+		D6CE814F1BA90A6B00B53E7B /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C851BA77B2E00E97165 /* SpotLightFallOFFIntensityCalculator.cpp */; };
+		D6D15CDB1BA77FFE00E97165 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15C7B1BA77ABD00E97165 /* main.cpp */; };
+		D6D15CE21BA7815C00E97165 /* EntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CDC1BA7815C00E97165 /* EntityClass.cpp */; };
+		D6D15CE31BA7815C00E97165 /* GeometryEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CDE1BA7815C00E97165 /* GeometryEntityClass.cpp */; };
+		D6D15CE41BA7815C00E97165 /* GeometrySystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D15CE01BA7815C00E97165 /* GeometrySystemClass.cpp */; };
+		D6D5BD901BAE38AE00173F6A /* SpotLightExponentClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6D5BD8E1BAE38AE00173F6A /* SpotLightExponentClass.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +42,70 @@
 /* Begin PBXFileReference section */
 		D6D15C781BA77ABD00E97165 /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D15C7B1BA77ABD00E97165 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D6D15C831BA77B2E00E97165 /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
+		D6D15C841BA77B2E00E97165 /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReprojectionClass.h; sourceTree = "<group>"; };
+		D6D15C851BA77B2E00E97165 /* SpotLightFallOFFIntensityCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLightFallOFFIntensityCalculator.cpp; sourceTree = "<group>"; };
+		D6D15C861BA77B2E00E97165 /* SpotLightFallOFFIntensityCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLightFallOFFIntensityCalculator.h; sourceTree = "<group>"; };
+		D6D15C8A1BA77B5000E97165 /* DBSCAN_Class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBSCAN_Class.cpp; sourceTree = "<group>"; };
+		D6D15C8B1BA77B5000E97165 /* DBSCAN_Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSCAN_Class.h; sourceTree = "<group>"; };
+		D6D15C8C1BA77B5000E97165 /* HistogramOfImageClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HistogramOfImageClass.cpp; sourceTree = "<group>"; };
+		D6D15C8D1BA77B5000E97165 /* HistogramOfImageClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistogramOfImageClass.h; sourceTree = "<group>"; };
+		D6D15C8E1BA77B5000E97165 /* Image2DClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image2DClass.cpp; sourceTree = "<group>"; };
+		D6D15C8F1BA77B5000E97165 /* Image2DClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image2DClass.h; sourceTree = "<group>"; };
+		D6D15C901BA77B5000E97165 /* ImageSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageSystemClass.cpp; sourceTree = "<group>"; };
+		D6D15C911BA77B5000E97165 /* ImageSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSystemClass.h; sourceTree = "<group>"; };
+		D6D15C971BA77B6000E97165 /* CameraEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraEntityClass.cpp; sourceTree = "<group>"; };
+		D6D15C981BA77B6000E97165 /* CameraEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraEntityClass.h; sourceTree = "<group>"; };
+		D6D15C991BA77B6000E97165 /* CameraSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraSystemClass.cpp; sourceTree = "<group>"; };
+		D6D15C9A1BA77B6000E97165 /* CameraSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSystemClass.h; sourceTree = "<group>"; };
+		D6D15CA11BA77B6000E97165 /* LightEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightEntityClass.cpp; sourceTree = "<group>"; };
+		D6D15CA21BA77B6000E97165 /* LightEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightEntityClass.h; sourceTree = "<group>"; };
+		D6D15CA31BA77B6000E97165 /* LightSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightSystemClass.cpp; sourceTree = "<group>"; };
+		D6D15CA41BA77B6000E97165 /* LightSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightSystemClass.h; sourceTree = "<group>"; };
+		D6D15CAD1BA77B7100E97165 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		D6D15CAE1BA77B7100E97165 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		D6D15CAF1BA77B7100E97165 /* UtilityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UtilityClass.cpp; sourceTree = "<group>"; };
+		D6D15CB01BA77B7100E97165 /* UtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
+		D6D15CB41BA77B8400E97165 /* SpotLightParameterEstimationClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLightParameterEstimationClass.cpp; sourceTree = "<group>"; };
+		D6D15CB51BA77B8400E97165 /* SpotLightParameterEstimationClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLightParameterEstimationClass.h; sourceTree = "<group>"; };
+		D6D15CBC1BA77B9100E97165 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6D15CBD1BA77B9100E97165 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6D15CBE1BA77B9100E97165 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6D15CBF1BA77B9100E97165 /* light-xyz-gray.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-xyz-gray.blend"; sourceTree = "<group>"; };
+		D6D15CC01BA77B9100E97165 /* light-xyz-gray.blend1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-xyz-gray.blend1"; sourceTree = "<group>"; };
+		D6D15CC11BA77B9100E97165 /* light-xyz-gray.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-xyz-gray.exr"; sourceTree = "<group>"; };
+		D6D15CC21BA77B9100E97165 /* light-xyz-gray.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-xyz-gray.lxs"; sourceTree = "<group>"; };
+		D6D15CC31BA77B9100E97165 /* light-xyz-gray.ply */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-xyz-gray.ply"; sourceTree = "<group>"; };
+		D6D15CC41BA77B9100E97165 /* light-xyz-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-xyz-gray.png"; sourceTree = "<group>"; };
+		D6D15CC51BA77B9100E97165 /* light-xyz-gray.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "light-xyz-gray.py"; sourceTree = "<group>"; };
+		D6D15CC81BA77B9100E97165 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6D15CC91BA77B9100E97165 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6D15CCA1BA77B9100E97165 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6D15CCF1BA77B9100E97165 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6D15CD01BA77B9100E97165 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6D15CD11BA77B9100E97165 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6D15CD21BA77B9100E97165 /* light-xyz-gray-intensity-100.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-xyz-gray-intensity-100.blend"; sourceTree = "<group>"; };
+		D6D15CD31BA77B9100E97165 /* light-xyz-gray-intensity-100.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-xyz-gray-intensity-100.exr"; sourceTree = "<group>"; };
+		D6D15CD41BA77B9100E97165 /* light-xyz-gray-intensity-100.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-xyz-gray-intensity-100.lxs"; sourceTree = "<group>"; };
+		D6D15CD51BA77B9100E97165 /* light-xyz-gray-intensity-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-xyz-gray-intensity-100.png"; sourceTree = "<group>"; };
+		D6D15CD61BA77B9100E97165 /* light-xyz-gray-intensity-100.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "light-xyz-gray-intensity-100.py"; sourceTree = "<group>"; };
+		D6D15CDC1BA7815C00E97165 /* EntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityClass.cpp; sourceTree = "<group>"; };
+		D6D15CDD1BA7815C00E97165 /* EntityClass.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = EntityClass.h; sourceTree = "<group>"; };
+		D6D15CDE1BA7815C00E97165 /* GeometryEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryEntityClass.cpp; sourceTree = "<group>"; };
+		D6D15CDF1BA7815C00E97165 /* GeometryEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryEntityClass.h; sourceTree = "<group>"; };
+		D6D15CE01BA7815C00E97165 /* GeometrySystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometrySystemClass.cpp; sourceTree = "<group>"; };
+		D6D15CE11BA7815C00E97165 /* GeometrySystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometrySystemClass.h; sourceTree = "<group>"; };
+		D6D5BD821BAA4E8000173F6A /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6D5BD831BAA4E8000173F6A /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6D5BD841BAA4E8000173F6A /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6D5BD851BAA4E8000173F6A /* light-gray-intensity100-gamma1.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.blend"; sourceTree = "<group>"; };
+		D6D5BD861BAA4E8000173F6A /* light-gray-intensity100-gamma1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.exr"; sourceTree = "<group>"; };
+		D6D5BD871BAA4E8000173F6A /* light-gray-intensity100-gamma1.flm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.flm"; sourceTree = "<group>"; };
+		D6D5BD881BAA4E8000173F6A /* light-gray-intensity100-gamma1.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-gray-intensity100-gamma1.lxs"; sourceTree = "<group>"; };
+		D6D5BD891BAA4E8000173F6A /* light-gray-intensity100-gamma1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-gray-intensity100-gamma1.png"; sourceTree = "<group>"; };
+		D6D5BD8A1BAA4E8000173F6A /* light-gray-intensity100-gamma1.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "light-gray-intensity100-gamma1.py"; sourceTree = "<group>"; };
+		D6D5BD8E1BAE38AE00173F6A /* SpotLightExponentClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLightExponentClass.cpp; sourceTree = "<group>"; };
+		D6D5BD8F1BAE38AE00173F6A /* SpotLightExponentClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotLightExponentClass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +138,233 @@
 		D6D15C7A1BA77ABD00E97165 /* Archis */ = {
 			isa = PBXGroup;
 			children = (
+				D6D15CB71BA77B9100E97165 /* Input */,
+				D6D15CB31BA77B8400E97165 /* LightParameters */,
+				D6D15CAC1BA77B7100E97165 /* Utility */,
+				D6D15C961BA77B6000E97165 /* Scene */,
+				D6D15C891BA77B5000E97165 /* Image */,
+				D6D15C821BA77B2E00E97165 /* Algorithm */,
 				D6D15C7B1BA77ABD00E97165 /* main.cpp */,
 			);
 			path = Archis;
+			sourceTree = "<group>";
+		};
+		D6D15C821BA77B2E00E97165 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15C831BA77B2E00E97165 /* ReprojectionClass.cpp */,
+				D6D15C841BA77B2E00E97165 /* ReprojectionClass.h */,
+				D6D15C851BA77B2E00E97165 /* SpotLightFallOFFIntensityCalculator.cpp */,
+				D6D15C861BA77B2E00E97165 /* SpotLightFallOFFIntensityCalculator.h */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		D6D15C891BA77B5000E97165 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15C8A1BA77B5000E97165 /* DBSCAN_Class.cpp */,
+				D6D15C8B1BA77B5000E97165 /* DBSCAN_Class.h */,
+				D6D15C8C1BA77B5000E97165 /* HistogramOfImageClass.cpp */,
+				D6D15C8D1BA77B5000E97165 /* HistogramOfImageClass.h */,
+				D6D15C8E1BA77B5000E97165 /* Image2DClass.cpp */,
+				D6D15C8F1BA77B5000E97165 /* Image2DClass.h */,
+				D6D15C901BA77B5000E97165 /* ImageSystemClass.cpp */,
+				D6D15C911BA77B5000E97165 /* ImageSystemClass.h */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		D6D15C961BA77B6000E97165 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CDC1BA7815C00E97165 /* EntityClass.cpp */,
+				D6D15CDD1BA7815C00E97165 /* EntityClass.h */,
+				D6D15CDE1BA7815C00E97165 /* GeometryEntityClass.cpp */,
+				D6D15CDF1BA7815C00E97165 /* GeometryEntityClass.h */,
+				D6D15CE01BA7815C00E97165 /* GeometrySystemClass.cpp */,
+				D6D15CE11BA7815C00E97165 /* GeometrySystemClass.h */,
+				D6D15C971BA77B6000E97165 /* CameraEntityClass.cpp */,
+				D6D15C981BA77B6000E97165 /* CameraEntityClass.h */,
+				D6D15C991BA77B6000E97165 /* CameraSystemClass.cpp */,
+				D6D15C9A1BA77B6000E97165 /* CameraSystemClass.h */,
+				D6D15CA11BA77B6000E97165 /* LightEntityClass.cpp */,
+				D6D15CA21BA77B6000E97165 /* LightEntityClass.h */,
+				D6D15CA31BA77B6000E97165 /* LightSystemClass.cpp */,
+				D6D15CA41BA77B6000E97165 /* LightSystemClass.h */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6D15CAC1BA77B7100E97165 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CAD1BA77B7100E97165 /* Parser.cpp */,
+				D6D15CAE1BA77B7100E97165 /* Parser.h */,
+				D6D15CAF1BA77B7100E97165 /* UtilityClass.cpp */,
+				D6D15CB01BA77B7100E97165 /* UtilityClass.h */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		D6D15CB31BA77B8400E97165 /* LightParameters */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CB41BA77B8400E97165 /* SpotLightParameterEstimationClass.cpp */,
+				D6D15CB51BA77B8400E97165 /* SpotLightParameterEstimationClass.h */,
+				D6D5BD8E1BAE38AE00173F6A /* SpotLightExponentClass.cpp */,
+				D6D5BD8F1BAE38AE00173F6A /* SpotLightExponentClass.h */,
+			);
+			path = LightParameters;
+			sourceTree = "<group>";
+		};
+		D6D15CB71BA77B9100E97165 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5BD7E1BAA4E8000173F6A /* Light-gray-intensity100-gamma1 */,
+				D6D15CB81BA77B9100E97165 /* light-xyz-gray */,
+				D6D15CCB1BA77B9100E97165 /* light-xyz-gray-intensity-100 */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		D6D15CB81BA77B9100E97165 /* light-xyz-gray */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CB91BA77B9100E97165 /* light-xyz-gray */,
+				D6D15CBF1BA77B9100E97165 /* light-xyz-gray.blend */,
+				D6D15CC01BA77B9100E97165 /* light-xyz-gray.blend1 */,
+				D6D15CC11BA77B9100E97165 /* light-xyz-gray.exr */,
+				D6D15CC21BA77B9100E97165 /* light-xyz-gray.lxs */,
+				D6D15CC31BA77B9100E97165 /* light-xyz-gray.ply */,
+				D6D15CC41BA77B9100E97165 /* light-xyz-gray.png */,
+				D6D15CC51BA77B9100E97165 /* light-xyz-gray.py */,
+				D6D15CC61BA77B9100E97165 /* Scene */,
+			);
+			path = "light-xyz-gray";
+			sourceTree = "<group>";
+		};
+		D6D15CB91BA77B9100E97165 /* light-xyz-gray */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CBA1BA77B9100E97165 /* Scene */,
+			);
+			path = "light-xyz-gray";
+			sourceTree = "<group>";
+		};
+		D6D15CBA1BA77B9100E97165 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CBB1BA77B9100E97165 /* 00001 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6D15CBB1BA77B9100E97165 /* 00001 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CBC1BA77B9100E97165 /* LuxRender-Geometry.lxo */,
+				D6D15CBD1BA77B9100E97165 /* LuxRender-Materials.lxm */,
+				D6D15CBE1BA77B9100E97165 /* Plane_0000_m000.ply */,
+			);
+			path = 00001;
+			sourceTree = "<group>";
+		};
+		D6D15CC61BA77B9100E97165 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CC71BA77B9100E97165 /* 00001 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6D15CC71BA77B9100E97165 /* 00001 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CC81BA77B9100E97165 /* LuxRender-Geometry.lxo */,
+				D6D15CC91BA77B9100E97165 /* LuxRender-Materials.lxm */,
+				D6D15CCA1BA77B9100E97165 /* Plane_0000_m000.ply */,
+			);
+			path = 00001;
+			sourceTree = "<group>";
+		};
+		D6D15CCB1BA77B9100E97165 /* light-xyz-gray-intensity-100 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CCC1BA77B9100E97165 /* light-xyz-gray-intensity-100 */,
+				D6D15CD21BA77B9100E97165 /* light-xyz-gray-intensity-100.blend */,
+				D6D15CD31BA77B9100E97165 /* light-xyz-gray-intensity-100.exr */,
+				D6D15CD41BA77B9100E97165 /* light-xyz-gray-intensity-100.lxs */,
+				D6D15CD51BA77B9100E97165 /* light-xyz-gray-intensity-100.png */,
+				D6D15CD61BA77B9100E97165 /* light-xyz-gray-intensity-100.py */,
+			);
+			path = "light-xyz-gray-intensity-100";
+			sourceTree = "<group>";
+		};
+		D6D15CCC1BA77B9100E97165 /* light-xyz-gray-intensity-100 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CCD1BA77B9100E97165 /* Scene */,
+			);
+			path = "light-xyz-gray-intensity-100";
+			sourceTree = "<group>";
+		};
+		D6D15CCD1BA77B9100E97165 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CCE1BA77B9100E97165 /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6D15CCE1BA77B9100E97165 /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D15CCF1BA77B9100E97165 /* LuxRender-Geometry.lxo */,
+				D6D15CD01BA77B9100E97165 /* LuxRender-Materials.lxm */,
+				D6D15CD11BA77B9100E97165 /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
+			sourceTree = "<group>";
+		};
+		D6D5BD7E1BAA4E8000173F6A /* Light-gray-intensity100-gamma1 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5BD7F1BAA4E8000173F6A /* light-gray-intensity100-gamma1 */,
+				D6D5BD851BAA4E8000173F6A /* light-gray-intensity100-gamma1.blend */,
+				D6D5BD861BAA4E8000173F6A /* light-gray-intensity100-gamma1.exr */,
+				D6D5BD871BAA4E8000173F6A /* light-gray-intensity100-gamma1.flm */,
+				D6D5BD881BAA4E8000173F6A /* light-gray-intensity100-gamma1.lxs */,
+				D6D5BD891BAA4E8000173F6A /* light-gray-intensity100-gamma1.png */,
+				D6D5BD8A1BAA4E8000173F6A /* light-gray-intensity100-gamma1.py */,
+			);
+			path = "Light-gray-intensity100-gamma1";
+			sourceTree = "<group>";
+		};
+		D6D5BD7F1BAA4E8000173F6A /* light-gray-intensity100-gamma1 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5BD801BAA4E8000173F6A /* Scene */,
+			);
+			path = "light-gray-intensity100-gamma1";
+			sourceTree = "<group>";
+		};
+		D6D5BD801BAA4E8000173F6A /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5BD811BAA4E8000173F6A /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6D5BD811BAA4E8000173F6A /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6D5BD821BAA4E8000173F6A /* LuxRender-Geometry.lxo */,
+				D6D5BD831BAA4E8000173F6A /* LuxRender-Materials.lxm */,
+				D6D5BD841BAA4E8000173F6A /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,7 +402,7 @@
 				};
 			};
 			buildConfigurationList = D6D15C731BA77ABD00E97165 /* Build configuration list for PBXProject "Archis" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -118,7 +423,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D15C7C1BA77ABD00E97165 /* main.cpp in Sources */,
+				D6CE81441BA90A6B00B53E7B /* Parser.cpp in Sources */,
+				D6CE81451BA90A6B00B53E7B /* UtilityClass.cpp in Sources */,
+				D6CE81461BA90A6B00B53E7B /* CameraEntityClass.cpp in Sources */,
+				D6CE81471BA90A6B00B53E7B /* CameraSystemClass.cpp in Sources */,
+				D6CE81481BA90A6B00B53E7B /* LightEntityClass.cpp in Sources */,
+				D6CE81491BA90A6B00B53E7B /* LightSystemClass.cpp in Sources */,
+				D6CE814A1BA90A6B00B53E7B /* DBSCAN_Class.cpp in Sources */,
+				D6CE814B1BA90A6B00B53E7B /* HistogramOfImageClass.cpp in Sources */,
+				D6D5BD901BAE38AE00173F6A /* SpotLightExponentClass.cpp in Sources */,
+				D6CE814C1BA90A6B00B53E7B /* Image2DClass.cpp in Sources */,
+				D6CE814D1BA90A6B00B53E7B /* ImageSystemClass.cpp in Sources */,
+				D6CE814E1BA90A6B00B53E7B /* ReprojectionClass.cpp in Sources */,
+				D6CE814F1BA90A6B00B53E7B /* SpotLightFallOFFIntensityCalculator.cpp in Sources */,
+				D6CE81431BA90A5700B53E7B /* SpotLightParameterEstimationClass.cpp in Sources */,
+				D6D15CE31BA7815C00E97165 /* GeometryEntityClass.cpp in Sources */,
+				D6D15CDB1BA77FFE00E97165 /* main.cpp in Sources */,
+				D6D15CE21BA7815C00E97165 /* EntityClass.cpp in Sources */,
+				D6D15CE41BA7815C00E97165 /* GeometrySystemClass.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +527,16 @@
 		D6D15C801BA77ABD00E97165 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lIlmImf",
+					"-lHalf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +544,16 @@
 		D6D15C811BA77ABD00E97165 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-lIlmImf",
+					"-lHalf",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +577,7 @@
 				D6D15C811BA77ABD00E97165 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
