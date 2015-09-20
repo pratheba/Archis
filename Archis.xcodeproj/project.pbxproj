@@ -3,6 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
+<<<<<<< HEAD
 	objectVersion = 47;
 	objects = {
 
@@ -29,6 +30,34 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D6D15C761BA77ABD00E97165 /* CopyFiles */ = {
+=======
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D60C67A51B8AA30C00859F5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D60C67A41B8AA30C00859F5D /* main.cpp */; };
+		D60C67BF1B8C46C900859F5D /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */; };
+		D6C2B36B1B937949008E60B9 /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3631B937949008E60B9 /* DBSCAN_Class.cpp */; };
+		D6C2B36C1B937949008E60B9 /* HistogramOfImageClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3651B937949008E60B9 /* HistogramOfImageClass.cpp */; };
+		D6C2B36D1B937949008E60B9 /* Image2DClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3671B937949008E60B9 /* Image2DClass.cpp */; };
+		D6C2B36E1B937949008E60B9 /* ImageSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3691B937949008E60B9 /* ImageSystemClass.cpp */; };
+		D6C2B3731B93795D008E60B9 /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B36F1B93795D008E60B9 /* ReprojectionClass.cpp */; };
+		D6C2B3741B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3711B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.cpp */; };
+		D6C2B3791B937966008E60B9 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3751B937966008E60B9 /* Parser.cpp */; };
+		D6C2B37A1B937966008E60B9 /* UtilityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3771B937966008E60B9 /* UtilityClass.cpp */; };
+		D6C2B3891B93796E008E60B9 /* CameraEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B37B1B93796E008E60B9 /* CameraEntityClass.cpp */; };
+		D6C2B38A1B93796E008E60B9 /* CameraSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B37D1B93796E008E60B9 /* CameraSystemClass.cpp */; };
+		D6C2B38B1B93796E008E60B9 /* EntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B37F1B93796E008E60B9 /* EntityClass.cpp */; };
+		D6C2B38C1B93796E008E60B9 /* GeometryEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3811B93796E008E60B9 /* GeometryEntityClass.cpp */; };
+		D6C2B38D1B93796E008E60B9 /* GeometrySystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3831B93796E008E60B9 /* GeometrySystemClass.cpp */; };
+		D6C2B38E1B93796E008E60B9 /* LightEntityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3851B93796E008E60B9 /* LightEntityClass.cpp */; };
+		D6C2B38F1B93796E008E60B9 /* LightSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3871B93796E008E60B9 /* LightSystemClass.cpp */; };
+		D6C2B3921B937978008E60B9 /* SpotLightParameterEstimationClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6C2B3901B937978008E60B9 /* SpotLightParameterEstimationClass.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D60C67961B8A41E500859F5D /* CopyFiles */ = {
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -40,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		D6D15C781BA77ABD00E97165 /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D15C7B1BA77ABD00E97165 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D6D15C831BA77B2E00E97165 /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
@@ -113,12 +143,63 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+=======
+		D60C67981B8A41E500859F5D /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
+		D60C67A41B8AA30C00859F5D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		D6C2B35E1B937852008E60B9 /* LightParameters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LightParameters; sourceTree = "<group>"; };
+		D6C2B35F1B93785B008E60B9 /* Scene */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scene; sourceTree = "<group>"; };
+		D6C2B3601B937864008E60B9 /* Utility */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Utility; sourceTree = "<group>"; };
+		D6C2B3611B937876008E60B9 /* Algorithm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Algorithm; sourceTree = "<group>"; };
+		D6C2B3621B937886008E60B9 /* Image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Image; sourceTree = "<group>"; };
+		D6C2B3631B937949008E60B9 /* DBSCAN_Class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DBSCAN_Class.cpp; path = Image/DBSCAN_Class.cpp; sourceTree = "<group>"; };
+		D6C2B3641B937949008E60B9 /* DBSCAN_Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBSCAN_Class.h; path = Image/DBSCAN_Class.h; sourceTree = "<group>"; };
+		D6C2B3651B937949008E60B9 /* HistogramOfImageClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HistogramOfImageClass.cpp; path = Image/HistogramOfImageClass.cpp; sourceTree = "<group>"; };
+		D6C2B3661B937949008E60B9 /* HistogramOfImageClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistogramOfImageClass.h; path = Image/HistogramOfImageClass.h; sourceTree = "<group>"; };
+		D6C2B3671B937949008E60B9 /* Image2DClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Image2DClass.cpp; path = Image/Image2DClass.cpp; sourceTree = "<group>"; };
+		D6C2B3681B937949008E60B9 /* Image2DClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Image2DClass.h; path = Image/Image2DClass.h; sourceTree = "<group>"; };
+		D6C2B3691B937949008E60B9 /* ImageSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageSystemClass.cpp; path = Image/ImageSystemClass.cpp; sourceTree = "<group>"; };
+		D6C2B36A1B937949008E60B9 /* ImageSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageSystemClass.h; path = Image/ImageSystemClass.h; sourceTree = "<group>"; };
+		D6C2B36F1B93795D008E60B9 /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReprojectionClass.cpp; path = Algorithm/ReprojectionClass.cpp; sourceTree = "<group>"; };
+		D6C2B3701B93795D008E60B9 /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReprojectionClass.h; path = Algorithm/ReprojectionClass.h; sourceTree = "<group>"; };
+		D6C2B3711B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpotLightFallOFFIntensityCalculator.cpp; path = Algorithm/SpotLightFallOFFIntensityCalculator.cpp; sourceTree = "<group>"; };
+		D6C2B3721B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotLightFallOFFIntensityCalculator.h; path = Algorithm/SpotLightFallOFFIntensityCalculator.h; sourceTree = "<group>"; };
+		D6C2B3751B937966008E60B9 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = Utility/Parser.cpp; sourceTree = "<group>"; };
+		D6C2B3761B937966008E60B9 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = Utility/Parser.h; sourceTree = "<group>"; };
+		D6C2B3771B937966008E60B9 /* UtilityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UtilityClass.cpp; path = Utility/UtilityClass.cpp; sourceTree = "<group>"; };
+		D6C2B3781B937966008E60B9 /* UtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UtilityClass.h; path = Utility/UtilityClass.h; sourceTree = "<group>"; };
+		D6C2B37B1B93796E008E60B9 /* CameraEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CameraEntityClass.cpp; path = Scene/CameraEntityClass.cpp; sourceTree = "<group>"; };
+		D6C2B37C1B93796E008E60B9 /* CameraEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraEntityClass.h; path = Scene/CameraEntityClass.h; sourceTree = "<group>"; };
+		D6C2B37D1B93796E008E60B9 /* CameraSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CameraSystemClass.cpp; path = Scene/CameraSystemClass.cpp; sourceTree = "<group>"; };
+		D6C2B37E1B93796E008E60B9 /* CameraSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CameraSystemClass.h; path = Scene/CameraSystemClass.h; sourceTree = "<group>"; };
+		D6C2B37F1B93796E008E60B9 /* EntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EntityClass.cpp; path = Scene/EntityClass.cpp; sourceTree = "<group>"; };
+		D6C2B3801B93796E008E60B9 /* EntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityClass.h; path = Scene/EntityClass.h; sourceTree = "<group>"; };
+		D6C2B3811B93796E008E60B9 /* GeometryEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryEntityClass.cpp; path = Scene/GeometryEntityClass.cpp; sourceTree = "<group>"; };
+		D6C2B3821B93796E008E60B9 /* GeometryEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeometryEntityClass.h; path = Scene/GeometryEntityClass.h; sourceTree = "<group>"; };
+		D6C2B3831B93796E008E60B9 /* GeometrySystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometrySystemClass.cpp; path = Scene/GeometrySystemClass.cpp; sourceTree = "<group>"; };
+		D6C2B3841B93796E008E60B9 /* GeometrySystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeometrySystemClass.h; path = Scene/GeometrySystemClass.h; sourceTree = "<group>"; };
+		D6C2B3851B93796E008E60B9 /* LightEntityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightEntityClass.cpp; path = Scene/LightEntityClass.cpp; sourceTree = "<group>"; };
+		D6C2B3861B93796E008E60B9 /* LightEntityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightEntityClass.h; path = Scene/LightEntityClass.h; sourceTree = "<group>"; };
+		D6C2B3871B93796E008E60B9 /* LightSystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightSystemClass.cpp; path = Scene/LightSystemClass.cpp; sourceTree = "<group>"; };
+		D6C2B3881B93796E008E60B9 /* LightSystemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightSystemClass.h; path = Scene/LightSystemClass.h; sourceTree = "<group>"; };
+		D6C2B3901B937978008E60B9 /* SpotLightParameterEstimationClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpotLightParameterEstimationClass.cpp; path = LightParameters/SpotLightParameterEstimationClass.cpp; sourceTree = "<group>"; };
+		D6C2B3911B937978008E60B9 /* SpotLightParameterEstimationClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotLightParameterEstimationClass.h; path = LightParameters/SpotLightParameterEstimationClass.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D60C67951B8A41E500859F5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D60C67BF1B8C46C900859F5D /* libstdc++.6.0.9.dylib in Frameworks */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+<<<<<<< HEAD
 		D6D15C6F1BA77ABD00E97165 = {
 			isa = PBXGroup;
 			children = (
@@ -131,10 +212,26 @@
 			isa = PBXGroup;
 			children = (
 				D6D15C781BA77ABD00E97165 /* Archis */,
+=======
+		D60C678F1B8A41E500859F5D = {
+			isa = PBXGroup;
+			children = (
+				D60C67BE1B8C46C900859F5D /* libstdc++.6.0.9.dylib */,
+				D60C67A31B8AA2ED00859F5D /* Archis */,
+				D60C67991B8A41E500859F5D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D60C67991B8A41E500859F5D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D60C67981B8A41E500859F5D /* Archis */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		D6D15C7A1BA77ABD00E97165 /* Archis */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,11 +462,97 @@
 				D6D5BD841BAA4E8000173F6A /* Plane_0000_m000.ply */,
 			);
 			path = 00250;
+=======
+		D60C67A31B8AA2ED00859F5D /* Archis */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B3971B937A09008E60B9 /* Utility */,
+				D6C2B3961B9379CB008E60B9 /* Algorithm */,
+				D6C2B3941B937995008E60B9 /* Scene */,
+				D6C2B3931B937984008E60B9 /* LightParameters */,
+				D6C2B3951B9379B2008E60B9 /* Image */,
+				D6C2B3621B937886008E60B9 /* Image */,
+				D6C2B3611B937876008E60B9 /* Algorithm */,
+				D6C2B3601B937864008E60B9 /* Utility */,
+				D6C2B35F1B93785B008E60B9 /* Scene */,
+				D6C2B35E1B937852008E60B9 /* LightParameters */,
+				D60C67A41B8AA30C00859F5D /* main.cpp */,
+			);
+			name = Archis;
+			sourceTree = "<group>";
+		};
+		D6C2B3931B937984008E60B9 /* LightParameters */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B3911B937978008E60B9 /* SpotLightParameterEstimationClass.h */,
+				D6C2B3901B937978008E60B9 /* SpotLightParameterEstimationClass.cpp */,
+			);
+			name = LightParameters;
+			sourceTree = "<group>";
+		};
+		D6C2B3941B937995008E60B9 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B37F1B93796E008E60B9 /* EntityClass.cpp */,
+				D6C2B3801B93796E008E60B9 /* EntityClass.h */,
+				D6C2B37B1B93796E008E60B9 /* CameraEntityClass.cpp */,
+				D6C2B37C1B93796E008E60B9 /* CameraEntityClass.h */,
+				D6C2B37D1B93796E008E60B9 /* CameraSystemClass.cpp */,
+				D6C2B37E1B93796E008E60B9 /* CameraSystemClass.h */,
+				D6C2B3811B93796E008E60B9 /* GeometryEntityClass.cpp */,
+				D6C2B3821B93796E008E60B9 /* GeometryEntityClass.h */,
+				D6C2B3831B93796E008E60B9 /* GeometrySystemClass.cpp */,
+				D6C2B3841B93796E008E60B9 /* GeometrySystemClass.h */,
+				D6C2B3851B93796E008E60B9 /* LightEntityClass.cpp */,
+				D6C2B3861B93796E008E60B9 /* LightEntityClass.h */,
+				D6C2B3871B93796E008E60B9 /* LightSystemClass.cpp */,
+				D6C2B3881B93796E008E60B9 /* LightSystemClass.h */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		D6C2B3951B9379B2008E60B9 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B3631B937949008E60B9 /* DBSCAN_Class.cpp */,
+				D6C2B3641B937949008E60B9 /* DBSCAN_Class.h */,
+				D6C2B3651B937949008E60B9 /* HistogramOfImageClass.cpp */,
+				D6C2B3661B937949008E60B9 /* HistogramOfImageClass.h */,
+				D6C2B3681B937949008E60B9 /* Image2DClass.h */,
+				D6C2B3671B937949008E60B9 /* Image2DClass.cpp */,
+				D6C2B3691B937949008E60B9 /* ImageSystemClass.cpp */,
+				D6C2B36A1B937949008E60B9 /* ImageSystemClass.h */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		D6C2B3961B9379CB008E60B9 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B36F1B93795D008E60B9 /* ReprojectionClass.cpp */,
+				D6C2B3701B93795D008E60B9 /* ReprojectionClass.h */,
+				D6C2B3711B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.cpp */,
+				D6C2B3721B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.h */,
+			);
+			name = Algorithm;
+			sourceTree = "<group>";
+		};
+		D6C2B3971B937A09008E60B9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D6C2B3751B937966008E60B9 /* Parser.cpp */,
+				D6C2B3761B937966008E60B9 /* Parser.h */,
+				D6C2B3771B937966008E60B9 /* UtilityClass.cpp */,
+				D6C2B3781B937966008E60B9 /* UtilityClass.h */,
+			);
+			name = Utility;
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+<<<<<<< HEAD
 		D6D15C771BA77ABD00E97165 /* Archis */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D6D15C7F1BA77ABD00E97165 /* Build configuration list for PBXNativeTarget "Archis" */;
@@ -377,6 +560,15 @@
 				D6D15C741BA77ABD00E97165 /* Sources */,
 				D6D15C751BA77ABD00E97165 /* Frameworks */,
 				D6D15C761BA77ABD00E97165 /* CopyFiles */,
+=======
+		D60C67971B8A41E500859F5D /* Archis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D60C679F1B8A41E500859F5D /* Build configuration list for PBXNativeTarget "Archis" */;
+			buildPhases = (
+				D60C67941B8A41E500859F5D /* Sources */,
+				D60C67951B8A41E500859F5D /* Frameworks */,
+				D60C67961B8A41E500859F5D /* CopyFiles */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			buildRules = (
 			);
@@ -384,41 +576,68 @@
 			);
 			name = Archis;
 			productName = Archis;
+<<<<<<< HEAD
 			productReference = D6D15C781BA77ABD00E97165 /* Archis */;
+=======
+			productReference = D60C67981B8A41E500859F5D /* Archis */;
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
+<<<<<<< HEAD
 		D6D15C701BA77ABD00E97165 /* Project object */ = {
+=======
+		D60C67901B8A41E500859F5D /* Project object */ = {
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Pratheba Selvaraju";
 				TargetAttributes = {
+<<<<<<< HEAD
 					D6D15C771BA77ABD00E97165 = {
+=======
+					D60C67971B8A41E500859F5D = {
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
 			};
+<<<<<<< HEAD
 			buildConfigurationList = D6D15C731BA77ABD00E97165 /* Build configuration list for PBXProject "Archis" */;
 			compatibilityVersion = "Xcode 6.3";
+=======
+			buildConfigurationList = D60C67931B8A41E500859F5D /* Build configuration list for PBXProject "Archis" */;
+			compatibilityVersion = "Xcode 3.2";
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
+<<<<<<< HEAD
 			mainGroup = D6D15C6F1BA77ABD00E97165;
 			productRefGroup = D6D15C791BA77ABD00E97165 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				D6D15C771BA77ABD00E97165 /* Archis */,
+=======
+			mainGroup = D60C678F1B8A41E500859F5D;
+			productRefGroup = D60C67991B8A41E500859F5D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D60C67971B8A41E500859F5D /* Archis */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+<<<<<<< HEAD
 		D6D15C741BA77ABD00E97165 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,13 +660,40 @@
 				D6D15CDB1BA77FFE00E97165 /* main.cpp in Sources */,
 				D6D15CE21BA7815C00E97165 /* EntityClass.cpp in Sources */,
 				D6D15CE41BA7815C00E97165 /* GeometrySystemClass.cpp in Sources */,
+=======
+		D60C67941B8A41E500859F5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6C2B3891B93796E008E60B9 /* CameraEntityClass.cpp in Sources */,
+				D6C2B3791B937966008E60B9 /* Parser.cpp in Sources */,
+				D6C2B3731B93795D008E60B9 /* ReprojectionClass.cpp in Sources */,
+				D6C2B3921B937978008E60B9 /* SpotLightParameterEstimationClass.cpp in Sources */,
+				D6C2B37A1B937966008E60B9 /* UtilityClass.cpp in Sources */,
+				D6C2B3741B93795D008E60B9 /* SpotLightFallOFFIntensityCalculator.cpp in Sources */,
+				D6C2B36D1B937949008E60B9 /* Image2DClass.cpp in Sources */,
+				D6C2B38A1B93796E008E60B9 /* CameraSystemClass.cpp in Sources */,
+				D6C2B36C1B937949008E60B9 /* HistogramOfImageClass.cpp in Sources */,
+				D6C2B38F1B93796E008E60B9 /* LightSystemClass.cpp in Sources */,
+				D6C2B36E1B937949008E60B9 /* ImageSystemClass.cpp in Sources */,
+				D60C67A51B8AA30C00859F5D /* main.cpp in Sources */,
+				D6C2B38E1B93796E008E60B9 /* LightEntityClass.cpp in Sources */,
+				D6C2B36B1B937949008E60B9 /* DBSCAN_Class.cpp in Sources */,
+				D6C2B38D1B93796E008E60B9 /* GeometrySystemClass.cpp in Sources */,
+				D6C2B38B1B93796E008E60B9 /* EntityClass.cpp in Sources */,
+				D6C2B38C1B93796E008E60B9 /* GeometryEntityClass.cpp in Sources */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+<<<<<<< HEAD
 		D6D15C7D1BA77ABD00E97165 /* Debug */ = {
+=======
+		D60C679D1B8A41E500859F5D /* Debug */ = {
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -489,7 +735,11 @@
 			};
 			name = Debug;
 		};
+<<<<<<< HEAD
 		D6D15C7E1BA77ABD00E97165 /* Release */ = {
+=======
+		D60C679E1B8A41E500859F5D /* Release */ = {
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -524,9 +774,18 @@
 			};
 			name = Release;
 		};
+<<<<<<< HEAD
 		D6D15C801BA77ABD00E97165 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+=======
+		D60C67A01B8A41E500859F5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -541,9 +800,18 @@
 			};
 			name = Debug;
 		};
+<<<<<<< HEAD
 		D6D15C811BA77ABD00E97165 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+=======
+		D60C67A11B8A41E500859F5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -561,25 +829,45 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+<<<<<<< HEAD
 		D6D15C731BA77ABD00E97165 /* Build configuration list for PBXProject "Archis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6D15C7D1BA77ABD00E97165 /* Debug */,
 				D6D15C7E1BA77ABD00E97165 /* Release */,
+=======
+		D60C67931B8A41E500859F5D /* Build configuration list for PBXProject "Archis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D60C679D1B8A41E500859F5D /* Debug */,
+				D60C679E1B8A41E500859F5D /* Release */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+<<<<<<< HEAD
 		D6D15C7F1BA77ABD00E97165 /* Build configuration list for PBXNativeTarget "Archis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6D15C801BA77ABD00E97165 /* Debug */,
 				D6D15C811BA77ABD00E97165 /* Release */,
+=======
+		D60C679F1B8A41E500859F5D /* Build configuration list for PBXNativeTarget "Archis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D60C67A01B8A41E500859F5D /* Debug */,
+				D60C67A11B8A41E500859F5D /* Release */,
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
+<<<<<<< HEAD
 	rootObject = D6D15C701BA77ABD00E97165 /* Project object */;
+=======
+	rootObject = D60C67901B8A41E500859F5D /* Project object */;
+>>>>>>> a2387c24957da7ba2167ff3dfbe42322118f0512
 }
