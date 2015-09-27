@@ -81,8 +81,8 @@ private:
     void CalculateExponentFromReprojectedPoints(InputForExponentCalculation* input, double averagePixelIntensityValue);
     void WriteExponentValueToImage(double maxExpValue, double minExpValue);
     
-    
-    
+    // Test
+    void CalculatePixelValue();
 };
 
 #endif /* defined(__Archis__SpotLightParameterEstimationClass__) */

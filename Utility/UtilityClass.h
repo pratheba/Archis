@@ -30,31 +30,6 @@ using namespace Imf_2_2;
 
 #define MINPIXELINBIN 50
 
-/*
-template <class Type>
-struct Vec3D {
-    
-    Type data[3];
-    
-    Vec3D(){ data[0] = 0; data[1] = 0; data[2] = 0;}
-    Vec3D(Type x_, Type y_, Type z_){data[0] = x_; data[1] = y_; data[2] = z_;}
-    
-    void operator=(const Vec3D<Type>& inVector){ *this =  inVector;}
-    double dot(const Vec3D<Type>& inVector){
-        double value = this->data[0]*inVector.data[0] + this->data[1]*inVector.data[1] + this->data[2]*inVector.data[2];
-        return value;
-    }
-    
-    Vec3D<Type> cross(const Vec3D<Type>& inVector) {
-        Vec3D<Type> crossProduct;
-        crossProduct.data[0] = this->data[1]*inVector.data[2] - this->data[2]*inVector.data[1];
-        crossProduct.data[1] = this->data[0]*inVector.data[2] - this->data[2]*inVector.data[0];
-        crossProduct.data[2] = this->data[0]*inVector.data[1] - this->data[1]*inVector.data[0];
-        return crossProduct;
-    }
-};
- */
-
 
 
 template <class Type>
@@ -124,7 +99,6 @@ public:
     Eigen::Matrix3d GetRotationMatrixByEulerAngle(const Point3D<double>& eulerAngles);
     Rgba* GetImagePixelsToWrite(const int& width,const int& height);
     void WriteImage2DArrayPixels(const std::string& fileName, const Rgba* pixels, const int width, const int height);
-
     
 private:
     Eigen::Matrix3d GetClockwiseRotationMatrixGivenEulerAngles(const Point3D<double>& eulerRotationAngles);

@@ -14,10 +14,10 @@ int main(int argc, const char * argv[]) {
     //    if (argc < 2) {
     //        std::cout << "No input arguments. Returning ... " << std::endl;
     //        return -1;
-    //    }
+    // }
     
     INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
-    std::string fileName = "../../Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
+    std::string fileName = "../../Input/images/spotlight1.exr";
     
     SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);
     spotLightParamEstClass.GetSpotLightExponentFromImage(inputParameters);

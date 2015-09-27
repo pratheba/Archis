@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
 		D6F178FB1BAE76AD000A1F5E /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */; };
 		D6F178FC1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789D1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp */; };
 		D6F178FD1BAE76AD000A1F5E /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178A01BAE76AD000A1F5E /* DBSCAN_Class.cpp */; };
@@ -25,6 +26,9 @@
 		D6F1790A1BAE76AD000A1F5E /* LightSystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178F41BAE76AD000A1F5E /* LightSystemClass.cpp */; };
 		D6F1790B1BAE76AD000A1F5E /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178F71BAE76AD000A1F5E /* Parser.cpp */; };
 		D6F1790C1BAE76AD000A1F5E /* UtilityClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178F91BAE76AD000A1F5E /* UtilityClass.cpp */; };
+		D6F1791B1BB76AA9000A1F5E /* GaussianFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F179191BB76AA9000A1F5E /* GaussianFilterClass.cpp */; };
+		D6F179211BB7ACA9000A1F5E /* ImageFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1791F1BB7ACA9000A1F5E /* ImageFilterClass.cpp */; };
+		D6F179241BB7AFEC000A1F5E /* ImageFilterFactoryClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F179221BB7AFEC000A1F5E /* ImageFilterFactoryClass.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFilterClass.cpp; sourceTree = "<group>"; };
+		D6B03E8E1BB893A30059B286 /* CannyFilterClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFilterClass.hpp; sourceTree = "<group>"; };
 		D6F178901BAE7663000A1F5E /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
 		D6F1789C1BAE76AD000A1F5E /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReprojectionClass.h; sourceTree = "<group>"; };
@@ -114,6 +120,16 @@
 		D6F178F81BAE76AD000A1F5E /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		D6F178F91BAE76AD000A1F5E /* UtilityClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UtilityClass.cpp; sourceTree = "<group>"; };
 		D6F178FA1BAE76AD000A1F5E /* UtilityClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityClass.h; sourceTree = "<group>"; };
+		D6F1790E1BB0F470000A1F5E /* living-room-tv-spotlights-the-wall-pictures.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "living-room-tv-spotlights-the-wall-pictures.jpg"; sourceTree = "<group>"; };
+		D6F1790F1BB0F470000A1F5E /* spotlight1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = spotlight1.exr; sourceTree = "<group>"; };
+		D6F179101BB0F470000A1F5E /* spotlight1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spotlight1.jpg; sourceTree = "<group>"; };
+		D6F179141BB25EAB000A1F5E /* light.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = light.exr; sourceTree = "<group>"; };
+		D6F179191BB76AA9000A1F5E /* GaussianFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GaussianFilterClass.cpp; sourceTree = "<group>"; };
+		D6F1791A1BB76AA9000A1F5E /* GaussianFilterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaussianFilterClass.h; sourceTree = "<group>"; };
+		D6F1791F1BB7ACA9000A1F5E /* ImageFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFilterClass.cpp; sourceTree = "<group>"; };
+		D6F179201BB7ACA9000A1F5E /* ImageFilterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilterClass.h; sourceTree = "<group>"; };
+		D6F179221BB7AFEC000A1F5E /* ImageFilterFactoryClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageFilterFactoryClass.cpp; sourceTree = "<group>"; };
+		D6F179231BB7AFEC000A1F5E /* ImageFilterFactoryClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilterFactoryClass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +146,7 @@
 		D6F178871BAE7663000A1F5E = {
 			isa = PBXGroup;
 			children = (
+				D6F179181BB76AA9000A1F5E /* ImageFilter */,
 				D6F178E61BAE76AD000A1F5E /* main.cpp */,
 				D6F1789A1BAE76AD000A1F5E /* Algorithm */,
 				D6F1789F1BAE76AD000A1F5E /* Image */,
@@ -178,6 +195,8 @@
 		D6F178A81BAE76AD000A1F5E /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				D6F179141BB25EAB000A1F5E /* light.exr */,
+				D6F1790D1BB0F470000A1F5E /* images */,
 				D6F178A91BAE76AD000A1F5E /* Light-gray-intensity100-gamma0 */,
 				D6F178B51BAE76AD000A1F5E /* Light-gray-intensity100-gamma1 */,
 				D6F178C21BAE76AD000A1F5E /* light-xyz-gray */,
@@ -407,6 +426,31 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		D6F1790D1BB0F470000A1F5E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D6F1790E1BB0F470000A1F5E /* living-room-tv-spotlights-the-wall-pictures.jpg */,
+				D6F1790F1BB0F470000A1F5E /* spotlight1.exr */,
+				D6F179101BB0F470000A1F5E /* spotlight1.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		D6F179181BB76AA9000A1F5E /* ImageFilter */ = {
+			isa = PBXGroup;
+			children = (
+				D6F179191BB76AA9000A1F5E /* GaussianFilterClass.cpp */,
+				D6F1791A1BB76AA9000A1F5E /* GaussianFilterClass.h */,
+				D6F1791F1BB7ACA9000A1F5E /* ImageFilterClass.cpp */,
+				D6F179201BB7ACA9000A1F5E /* ImageFilterClass.h */,
+				D6F179221BB7AFEC000A1F5E /* ImageFilterFactoryClass.cpp */,
+				D6F179231BB7AFEC000A1F5E /* ImageFilterFactoryClass.h */,
+				D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */,
+				D6B03E8E1BB893A30059B286 /* CannyFilterClass.hpp */,
+			);
+			path = ImageFilter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -463,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6F1791B1BB76AA9000A1F5E /* GaussianFilterClass.cpp in Sources */,
 				D6F179041BAE76AD000A1F5E /* CameraEntityClass.cpp in Sources */,
 				D6F179021BAE76AD000A1F5E /* SpotLightParameterEstimationClass.cpp in Sources */,
 				D6F178FB1BAE76AD000A1F5E /* ReprojectionClass.cpp in Sources */,
@@ -473,10 +518,13 @@
 				D6F179051BAE76AD000A1F5E /* CameraSystemClass.cpp in Sources */,
 				D6F179001BAE76AD000A1F5E /* ImageSystemClass.cpp in Sources */,
 				D6F1790A1BAE76AD000A1F5E /* LightSystemClass.cpp in Sources */,
+				D6F179211BB7ACA9000A1F5E /* ImageFilterClass.cpp in Sources */,
+				D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */,
 				D6F179011BAE76AD000A1F5E /* SpotLightExponentClass.cpp in Sources */,
 				D6F1790C1BAE76AD000A1F5E /* UtilityClass.cpp in Sources */,
 				D6F178FF1BAE76AD000A1F5E /* Image2DClass.cpp in Sources */,
 				D6F179091BAE76AD000A1F5E /* LightEntityClass.cpp in Sources */,
+				D6F179241BB7AFEC000A1F5E /* ImageFilterFactoryClass.cpp in Sources */,
 				D6F178FD1BAE76AD000A1F5E /* DBSCAN_Class.cpp in Sources */,
 				D6F179081BAE76AD000A1F5E /* GeometrySystemClass.cpp in Sources */,
 				D6F179061BAE76AD000A1F5E /* EntityClass.cpp in Sources */,
@@ -618,6 +666,7 @@
 				D6F178991BAE7663000A1F5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

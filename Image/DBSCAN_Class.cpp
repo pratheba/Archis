@@ -123,6 +123,8 @@ VecOf2dDoublePoints DBSCAN_Class::GetCentroidOfClusteredPoints(std::vector<VecOf
     
     int sumx = 0, sumy = 0;
     for (int cluster = 0; cluster < clusterPoints.size(); ++cluster) {
+        sumx = 0;
+        sumy = 0;
         for (int index = 0; index < clusterPoints[cluster].size(); index++) {
             sumx += clusterPoints[cluster][index].x;
             sumy += clusterPoints[cluster][index].y;

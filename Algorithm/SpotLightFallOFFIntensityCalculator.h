@@ -12,6 +12,7 @@
 #include <iostream>
 #include <set>
 #include "../Utility/UtilityClass.h"
+#include "../ImageFilter/ImageFilterFactoryClass.h"
 
 typedef std::vector<std::vector<std::vector<Point2D<int>>>> SectorsInImage;
 typedef std::vector<std::vector<Point2D<int>>> SegmentInEachSector;
@@ -36,7 +37,8 @@ private:
     void GetLightFallOffPointsfromCorePoints_UsingAngleEstimationFromLightPosition(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
     int GetNumberOfRadiusSegments(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_);
     void InitializeSectorsOfImage(const Array2D<Rgba>& inputImage_, const Point2D<int>&corePoint_);
-    void GetGradientDifferenceForEachSectorSegments(const int& maxNumberOfRadiusSegment);
+    void GetIntensityDifferenceForEachSectorSegments(const int& maxNumberOfRadiusSegment);
+    void GetFallOffRegionForNoAmbientLightBackground(const int& maxNumberOfRadiusSegment);
     
     UtilityClass* utilityClass;
     

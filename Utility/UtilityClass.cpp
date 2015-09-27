@@ -8,9 +8,9 @@
 
 #include "UtilityClass.h"
 
-double UtilityClass::GetAveragePixelIntensityAroundaPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowSize) {
+double UtilityClass::GetAveragePixelIntensityAroundaPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowRadius) {
     double pixelIntensity = 0.0;
-    VecOf2dIntPoints pixelsAroundCorePoint = GetWindowAroundPoint(inputImage, corePoint, windowSize);
+    VecOf2dIntPoints pixelsAroundCorePoint = GetWindowAroundPoint(inputImage, corePoint, windowRadius);
     
     if (pixelsAroundCorePoint.size() > 0) {
         for (int index = 0; index < pixelsAroundCorePoint.size(); ++index) {
@@ -20,13 +20,12 @@ double UtilityClass::GetAveragePixelIntensityAroundaPoint(const Array2D<Rgba>& i
     }
     Rgba Value = inputImage[corePoint.y][corePoint.x];
     pixelIntensity += ((Value.r + Value.g + Value.b)/3);
-    pixelIntensity /= (windowSize * windowSize);
+    pixelIntensity /= ((2*windowRadius+1) * (2*windowRadius+1));
     
     return pixelIntensity;
 }
 
-VecOf2dIntPoints UtilityClass::GetWindowAroundPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowSize) {
-    int windowRadius = int(windowSize/2);
+VecOf2dIntPoints UtilityClass::GetWindowAroundPoint(const Array2D<Rgba>& inputImage, const Point2D<int>& corePoint, const int& windowRadius) {
     double imageWidth = inputImage.width();
     double imageHeight = inputImage.height();
     VecOf2dIntPoints pixelsAroundCorePoint;
@@ -93,6 +92,10 @@ Eigen::Matrix3d UtilityClass::GetAntiClockwiseRotationMatrixGivenEulerAngles(con
     Eigen::Matrix3d rotationMatrix = RotZ * RotY * RotX;
     return rotationMatrix;
 }
+
+// Normalized gaussian Filter
+
+
 
 double rad2deg(const double& radian) {
     return (radian * 180 / M_PI);

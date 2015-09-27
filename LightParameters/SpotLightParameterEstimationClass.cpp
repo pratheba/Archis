@@ -52,8 +52,8 @@ void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPU
     for (int index = 0; index < centroids.size(); ++index) {
         spotLightFallOffCalc->GetLightFallOffPointsfromCorePoints((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels(), Point2D<int>(centroids[index].y,centroids[index].x));
     }
-    
-    CalculateExponentParameter();
+   // CalculatePixelValue();
+    //CalculateExponentParameter();
 }
 
 SpotLightParameterEstimationClass::InputForExponentCalculation* SpotLightParameterEstimationClass::SpotLightExponentInputParameters() {
@@ -144,11 +144,11 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
             
             outputExponentValue << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << std::endl;
             
-            if (spotLightExponent > 10) {
-                spotLightCoreExponentVectorPosition.push_back(Point2D<int>(reprojectedPoints[index]._imagepixel.y, reprojectedPoints[index]._imagepixel.x));
-                exponentOfCoreRegion.push_back(std::make_pair(i,spotLightExponent));
-                continue;
-            }
+//            if (spotLightExponent > 10) {
+//                spotLightCoreExponentVectorPosition.push_back(Point2D<int>(reprojectedPoints[index]._imagepixel.y, reprojectedPoints[index]._imagepixel.x));
+//                exponentOfCoreRegion.push_back(std::make_pair(i,spotLightExponent));
+//                continue;
+//            }
             if ((maxExponentValue < spotLightExponent)&&(spotLightExponent <= 10)) {
                 maxExponentValue = spotLightExponent;
             }
@@ -165,6 +165,88 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     delete input;
 }
 
+void SpotLightParameterEstimationClass::CalculatePixelValue() {
+    
+    int imageWidth = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().width();
+    int imageHeight = (int)_imageSystem.GetCurrentImage().GetImage2DArrayPixels().height();
+    
+    UtilityClass* util = new UtilityClass();
+    Rgba* outputPixels = util->GetImagePixelsToWrite(imageWidth, imageHeight);
+    
+    std::ofstream outputPixelValue;
+    outputPixelValue.open("../../Output/outputPixel.txt");
+    
+    std::ofstream outputOriginalPixelValue;
+    outputOriginalPixelValue.open("../../Output/originalPixel.txt");
+    
+    for(int row = 0; row < imageHeight; ++row) {
+        for (int col = 0; col < imageWidth; ++col) {
+            Rgba p = (_imageSystem.GetCurrentImage().GetImage2DArrayPixels())[row][col];
+            double averagePixelIntensityValue   =   (p.r + p.g + p.b)/3;
+            
+            outputOriginalPixelValue << row << "," << col << " = " << averagePixelIntensityValue << std::endl;
+        }
+    }
+    
+    InputForExponentCalculation* input =  SpotLightExponentInputParameters();
+    std::vector<MapOFImageAndWorldPoints>reprojectedPoints = input->reprojectedPoints;
+    
+    // Reprojected 3D points
+    
+    
+    std::vector<Point2D<int>> spotLightCoreExponentVectorPosition;
+    for (int index = 0; index < reprojectedPoints.size(); ++index) {
+        
+        // convert average pixel intensity to 0 to 255
+        // averagePixelIntensityValue =  (averagePixelIntensityValue /(pow(2, 16)-1));//*255;
+        
+        Eigen::Vector3d lightToPointDirectionVector =  reprojectedPoints[index]._worldPoint - input->lightPosition;
+        lightToPointDirectionVector.normalize();
+        
+        float lambertTerm = (-lightToPointDirectionVector).dot(input->vnormal);
+        // No light gets reflected from the surface at the particular point
+        
+        // Use it for attentuation factor
+        double cosOfCurrAngle                   =   input->lightDirection.dot(lightToPointDirectionVector);
+        double cosOfInner_minus_OuterConeAngle  =   input->cosOfInnerConeAngle - input->cosOfOuterConeAngle;
+        
+        // Clamp the value of the curr between 0 and 1
+//        double IntensityFactorExponent = std::pow(std::min(std::max((double)((cosOfCurrAngle - input->cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle),0.0),1.0), 6);
+         double IntensityFactorExponent = std::pow((double)((cosOfCurrAngle - input->cosOfOuterConeAngle) / cosOfInner_minus_OuterConeAngle), 4);
+        
+        Rgba pixelValue;
+        if ((cosOfCurrAngle > input->cosOfOuterConeAngle) )
+        {
+            if (lambertTerm > 0) {
+                double v = lambertTerm * input->lightIntensity * input->materialAlbedo *IntensityFactorExponent;
+                pixelValue = Rgba(v,v,v,1.0);
+            }
+            /*
+             double IntensityFactorWithExponent = averagePixelIntensityValue / (input->lightIntensity * input->materialAlbedo *
+             lambertTerm);
+             double spotLightExponent = log(IntensityFactorWithExponent)/log(IntensityFactorWithoutExponent);
+             
+             int i = reprojectedPoints[index]._imagepixel.y * input->imageWidth + reprojectedPoints[index]._imagepixel.x;
+             
+             outputExponentValue << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << spotLightExponent << std::endl;
+             */
+        }
+        else
+            pixelValue = Rgba(0,0,0,1);
+        
+        int i = reprojectedPoints[index]._imagepixel.y * input->imageWidth + reprojectedPoints[index]._imagepixel.x;
+        outputPixelValue << reprojectedPoints[index]._imagepixel.y << "," << reprojectedPoints[index]._imagepixel.x << " = " << pixelValue.r << std::endl;
+        outputPixels[i] = pixelValue;
+    }
+
+    
+   util->WriteImage2DArrayPixels("../../Output/imagepixel.exr", outputPixels, imageWidth, imageHeight);
+    
+    
+    delete [] outputPixels;
+
+    delete input;
+}
 
 
 void SpotLightParameterEstimationClass::WriteExponentValueToImage(double maxExpValue, double minExpValue) {
@@ -181,24 +263,22 @@ void SpotLightParameterEstimationClass::WriteExponentValueToImage(double maxExpV
     for (int index = 0; index < exponentOfFallOffRegion.size(); ++index) {
         spotLightFallOffExponentVector[index] = ((exponentOfFallOffRegion[index].second) - minExpValue)/(maxExpValue - minExpValue);
         
-        if (spotLightFallOffExponentVector[index] > 0.5)
-            outputPixels[exponentOfFallOffRegion[index].first].b = spotLightFallOffExponentVector[index];
-        else
+//        if (spotLightFallOffExponentVector[index] > 0.5)
+//            outputPixels[exponentOfFallOffRegion[index].first].b = spotLightFallOffExponentVector[index];
+//        else
             outputPixels[exponentOfFallOffRegion[index].first].g = spotLightFallOffExponentVector[index];
     }
     
-    for (int index = 0; index < exponentOfCoreRegion.size(); ++index) {
-        outputPixels[exponentOfCoreRegion[index].first].r = 1.0;
-    }
+//    for (int index = 0; index < exponentOfCoreRegion.size(); ++index) {
+//        outputPixels[exponentOfCoreRegion[index].first].r = 1.0;
+//    }
 
-    _imageSystem.GetCurrentImage().WriteImage2DArrayPixels("../../Output/imagePixelValueExponent-intensity100-gamma1.exr", outputPixels, imageWidth, imageHeight);
+    util->WriteImage2DArrayPixels("../../Output/imagePixelValueExponent-intensity100-gamma1.exr", outputPixels, imageWidth, imageHeight);
    
 
     delete [] outputPixels;
     delete util;
 
 }
-
-
 
 
