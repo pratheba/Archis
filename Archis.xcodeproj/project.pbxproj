@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
+		D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
 		D6F178FB1BAE76AD000A1F5E /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */; };
 		D6F178FC1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789D1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp */; };
 		D6F178FD1BAE76AD000A1F5E /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178A01BAE76AD000A1F5E /* DBSCAN_Class.cpp */; };
@@ -46,6 +47,11 @@
 /* Begin PBXFileReference section */
 		D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFilterClass.cpp; sourceTree = "<group>"; };
 		D6B03E8E1BB893A30059B286 /* CannyFilterClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFilterClass.hpp; sourceTree = "<group>"; };
+		D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SobelFilterClass.cpp; sourceTree = "<group>"; };
+		D6B03E911BB89AFE0059B286 /* SobelFilterClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SobelFilterClass.hpp; sourceTree = "<group>"; };
+		D6B03E931BB8DB830059B286 /* lena.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = lena.exr; sourceTree = "<group>"; };
+		D6B03E941BB8F40E0059B286 /* bedroomLight.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = bedroomLight.exr; sourceTree = "<group>"; };
+		D6B03E951BB8F40E0059B286 /* extendedWall.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = extendedWall.exr; sourceTree = "<group>"; };
 		D6F178901BAE7663000A1F5E /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
 		D6F1789C1BAE76AD000A1F5E /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReprojectionClass.h; sourceTree = "<group>"; };
@@ -146,8 +152,8 @@
 		D6F178871BAE7663000A1F5E = {
 			isa = PBXGroup;
 			children = (
-				D6F179181BB76AA9000A1F5E /* ImageFilter */,
 				D6F178E61BAE76AD000A1F5E /* main.cpp */,
+				D6F179181BB76AA9000A1F5E /* ImageFilter */,
 				D6F1789A1BAE76AD000A1F5E /* Algorithm */,
 				D6F1789F1BAE76AD000A1F5E /* Image */,
 				D6F178A81BAE76AD000A1F5E /* Input */,
@@ -429,6 +435,9 @@
 		D6F1790D1BB0F470000A1F5E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D6B03E941BB8F40E0059B286 /* bedroomLight.exr */,
+				D6B03E951BB8F40E0059B286 /* extendedWall.exr */,
+				D6B03E931BB8DB830059B286 /* lena.exr */,
 				D6F1790E1BB0F470000A1F5E /* living-room-tv-spotlights-the-wall-pictures.jpg */,
 				D6F1790F1BB0F470000A1F5E /* spotlight1.exr */,
 				D6F179101BB0F470000A1F5E /* spotlight1.jpg */,
@@ -447,6 +456,8 @@
 				D6F179231BB7AFEC000A1F5E /* ImageFilterFactoryClass.h */,
 				D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */,
 				D6B03E8E1BB893A30059B286 /* CannyFilterClass.hpp */,
+				D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */,
+				D6B03E911BB89AFE0059B286 /* SobelFilterClass.hpp */,
 			);
 			path = ImageFilter;
 			sourceTree = "<group>";
@@ -516,6 +527,7 @@
 				D6F178FE1BAE76AD000A1F5E /* HistogramOfImageClass.cpp in Sources */,
 				D6F1790B1BAE76AD000A1F5E /* Parser.cpp in Sources */,
 				D6F179051BAE76AD000A1F5E /* CameraSystemClass.cpp in Sources */,
+				D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */,
 				D6F179001BAE76AD000A1F5E /* ImageSystemClass.cpp in Sources */,
 				D6F1790A1BAE76AD000A1F5E /* LightSystemClass.cpp in Sources */,
 				D6F179211BB7ACA9000A1F5E /* ImageFilterClass.cpp in Sources */,

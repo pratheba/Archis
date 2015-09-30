@@ -7,7 +7,6 @@
 //
 
 #include "SpotLightFallOFFIntensityCalculator.h"
-#include "ImageFiltersUtilityClass.h"
 #include <numeric>
 
 #define BLOCKSIZE 5
@@ -317,7 +316,6 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
     
 }
 
-/* This will implement LOG Gradient Estimation Detector */
 void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_UsingGradientEstimation(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_) {
  
     int imageHeight = (int)inputImage_.height();
@@ -326,27 +324,25 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
     UtilityClass* util = new UtilityClass();
     Rgba* outputPixels = util->GetImagePixelsToWrite(imageWidth, imageHeight);
     Array2D<Rgba> outputImage(imageHeight,imageWidth);
-    
-    // Steps for LOG
-    for (int row = 0; row < (imageHeight); ++row) {
-        for (int col = 0; col < (imageWidth); ++col) {
-            outputImage[row][col] = Rgba(0, 0, 0);
-        }
-    }
+    Array2D<Rgba> outputImage1(imageHeight,imageWidth);
     
     ImageFilterFactoryClass* imageFilterFactoryClass = new ImageFilterFactoryClass();
-    ImageFilterClass* imageFilterClass = imageFilterFactoryClass->GetImageFilterClass(inputImage_, 2, FILTERTYPE::GAUSSIAN,1.4);
+    ImageFilterClass* imageFilterClass = imageFilterFactoryClass->GetImageFilterClass(inputImage_, 5, FILTERTYPE::GAUSSIAN);
     imageFilterClass->ProcessImage(inputImage_, outputImage);
     
+    imageFilterClass = imageFilterFactoryClass->GetImageFilterClass(outputImage, 1, FILTERTYPE::SOBEL);
+    imageFilterClass->ProcessImage(outputImage,outputImage1);
+    
+//    imageFilterClass = imageFilterFactoryClass->GetImageFilterClass(inputImage_, 2, FILTERTYPE::GAUSSIAN);
+//    imageFilterClass->ProcessImage(outputImage1, outputImage);
+//    
+//    imageFilterClass = imageFilterFactoryClass->GetImageFilterClass(outputImage, 1, FILTERTYPE::SOBEL);
+//    imageFilterClass->ProcessImage(outputImage,outputImage1);
     
     for (int row = 0; row < (imageHeight); ++row) {
         for (int col = 0; col < (imageWidth); ++col) {
             int i = row * imageWidth + col;
-            if ((row < 2)||(row>(imageHeight-2)) || (col < 2) || (col > (imageWidth-2))) {
-                outputPixels[i] = Rgba(0,0,0);
-            }
-            else
-                outputPixels[i] = outputImage[row][col];
+            outputPixels[i] = outputImage1[row][col];
         }
     }
     

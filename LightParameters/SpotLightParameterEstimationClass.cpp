@@ -48,6 +48,8 @@ void SpotLightParameterEstimationClass::GetSpotLightExponentFromImage(const INPU
     Initialize(inputParameters);
     VecOf2dDoublePoints centroids = _imageSystem.GetCentroidsOfHighIntensityPixelsinCurrentImage();
     
+    //centroids.push_back(Point2D<double>(0,0));
+    
     SpotLightFallOFFIntensityCalculator* spotLightFallOffCalc = new SpotLightFallOFFIntensityCalculator();
     for (int index = 0; index < centroids.size(); ++index) {
         spotLightFallOffCalc->GetLightFallOffPointsfromCorePoints((_imageSystem.GetCurrentImage()).GetImage2DArrayPixels(), Point2D<int>(centroids[index].y,centroids[index].x));

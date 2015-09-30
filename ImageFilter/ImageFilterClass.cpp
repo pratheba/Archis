@@ -18,15 +18,6 @@ ImageFilterClass::~ImageFilterClass() {
     }
 }
 
-int ImageFilterClass::GetPixelPositionForEdges(int currentPixel, int edgesize) {
-    if(currentPixel < 0)
-        return abs(currentPixel);
-    else if(currentPixel > (edgesize))
-        return abs(edgesize-(currentPixel - edgesize));
-    else
-        return edgesize;
-}
-
 void ImageFilterClass::SetImageMetaData(const ImageMetaData& imageMetaData) {
     *metaData = imageMetaData;
 }

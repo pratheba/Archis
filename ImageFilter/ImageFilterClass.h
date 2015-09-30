@@ -32,7 +32,14 @@ public:
     void SetImageMetaData(const ImageMetaData& metaData);
 protected:
 
-    int GetPixelPositionForEdges(int currentPixel, int edgesize);
+    inline int GetPixelPositionForEdges(int currentPixel, int edgesize) {
+        if(currentPixel < 0)
+            return abs(currentPixel);
+        else if(currentPixel > (edgesize))
+            return abs(edgesize-(currentPixel - edgesize));
+        else
+            return edgesize;
+    }
     ImageMetaData* metaData;
 
 };

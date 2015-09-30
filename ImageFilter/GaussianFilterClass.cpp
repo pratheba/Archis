@@ -104,8 +104,8 @@ void GaussianFilterClass::ApplyVerticalFilterToPixel(const Array2D<Rgba>& inputI
             sum = Rgba(0, 0, 0);
             for(int row = -radius; row <= radius; ++row) {
                 
-                if((rowPixel+row) < 0 || (rowPixel+row)> (metaData->Height-1)) {
-                    edgePixel = GetPixelPositionForEdges(rowPixel+row,metaData->Height-1);
+                if((rowPixel+row) < 0 || (rowPixel+row)> (metaData->Height-radius)) {
+                    edgePixel = GetPixelPositionForEdges(rowPixel+row,metaData->Height-radius);
                     pixel = inputImage_[edgePixel][colPixel];
                 }
                 else
@@ -132,8 +132,8 @@ void GaussianFilterClass::ApplyHorizontalFilterToPixel(const Array2D<Rgba>& inpu
             sum = Rgba(0, 0, 0);
             for(int col = -radius; col <= radius; ++col) {
                 
-                if((colPixel+col) < 0 || (colPixel+col)> (metaData->Width-1)) {
-                    edgePixel = GetPixelPositionForEdges(colPixel+col,metaData->Width-1);
+                if((colPixel+col) < 0 || (colPixel+col)> (metaData->Width-radius)) {
+                    edgePixel = GetPixelPositionForEdges(colPixel+col,metaData->Width-radius);
                     pixel = inputImage_[rowPixel][edgePixel];
                 }
                 else

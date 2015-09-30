@@ -27,6 +27,9 @@ ImageFilterClass* ImageFilterFactoryClass::GetImageFilterClass(const Array2D<Rgb
             imageFilterClass = new GaussianFilterClass();
             imageFilterClass->SetImageMetaData(imageMetaData);
             break;
+        case SOBEL:
+            imageFilterClass = new SobelFilterClass();
+            imageFilterClass->SetImageMetaData(imageMetaData);
             
         default:
             break;

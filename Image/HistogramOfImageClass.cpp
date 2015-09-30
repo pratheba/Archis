@@ -173,7 +173,7 @@ VecOfInt HistogramOfImageClass::GetHistogramOfImageWithMaxAndMinIntensity(const 
     }
     
     std::ofstream outputfile;
-    outputfile.open("imagePixelValue-Histogram.txt");
+    outputfile.open("../../Output/imagePixelValue-Histogram.txt");
 
     std::set<int> rangeOfPixelIntensity = std::set<int>();
     for (int row = 0; row < numRows; ++row) {
@@ -192,6 +192,7 @@ VecOfInt HistogramOfImageClass::GetHistogramOfImageWithMaxAndMinIntensity(const 
                 _minIntensity = intensityValue;
         }
     }
+    std::cout << "maxIntensity = " << _maxIntensity << std::endl;
     
     outputfile.close();
     // Doubt : Should I use Map or Vector?

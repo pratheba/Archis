@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "GaussianFilterClass.h"
+#include "SobelFilterClass.hpp"
 
 enum FILTERTYPE {
     GAUSSIAN = 0,

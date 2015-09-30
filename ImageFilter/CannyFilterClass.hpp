@@ -17,6 +17,8 @@ public:
     CannyFilterClass();
     ~CannyFilterClass();
     
+    void ProcessImage(const Array2D<Rgba>& inputImage_,Array2D<Rgba>& outputImage);
+
 private:
     
 };

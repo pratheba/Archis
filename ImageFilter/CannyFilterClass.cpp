@@ -7,3 +7,16 @@
 //
 
 #include "CannyFilterClass.hpp"
+
+CannyFilterClass::CannyFilterClass() {
+    
+}
+
+CannyFilterClass::~CannyFilterClass() {
+    
+}
+
+void CannyFilterClass::ProcessImage(const Array2D<Rgba>& inputImage_,Array2D<Rgba>& outputImage) {
+    // Smooth image
+    // SObel Filter for 
+}
