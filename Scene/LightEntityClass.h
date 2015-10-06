@@ -38,6 +38,9 @@ public:
     double GetLightEfficacy() const;
     void SetLightEfficacy(const double& lightEfficacy);
     
+    double GetGammaCorrection() const;
+    void SetGammaCorrection(const double& gammaCorrection);
+    
     double GetSpotLightInnerConeAngle()const;
     void SetSpotLightInnerConeAngle(const double& innerconeAngle);
     
@@ -49,6 +52,7 @@ private:
     double _lightGain;
     double _lightPower;
     double _lightEfficacy;
+    double _gammaCorrection;
     double _innerconeAngle;
     double _outerconeAngle;
 };

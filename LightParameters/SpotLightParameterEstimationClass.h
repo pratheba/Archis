@@ -42,6 +42,7 @@ private:
         int imageHeight;
         
         double lightIntensity;
+        double gammaCorrection;
         Eigen::Vector3d lightDirection;
         Eigen::Vector3d lightPosition;
         Eigen::Vector3d vnormal;
@@ -52,11 +53,11 @@ private:
         
         std::vector<MapOFImageAndWorldPoints> reprojectedPoints;
         
-        InputForExponentCalculation(int imageWidth_, int imageHeight_, double lightIntensity_, Eigen::Vector3d lightDirection_,
-                    Eigen::Vector3d lightPosition_, Eigen::Vector3d vnormal_, double cosOfInnerConeAngle_,
+        InputForExponentCalculation(int imageWidth_, int imageHeight_, double lightIntensity_,  Eigen::Vector3d lightDirection_,
+                    Eigen::Vector3d lightPosition_, double gammaCorrection_,Eigen::Vector3d vnormal_, double cosOfInnerConeAngle_,
                     double cosOfOuterConeAngle_, double materialAlbedo_, std::vector<MapOFImageAndWorldPoints> reprojectedPoints_):
-                    imageWidth(imageWidth_), imageHeight(imageHeight_), lightIntensity(lightIntensity_),
-                    lightDirection(lightDirection_), lightPosition(lightPosition_), vnormal(vnormal_),
+                    imageWidth(imageWidth_), imageHeight(imageHeight_), lightIntensity(lightIntensity_),lightDirection
+                    (lightDirection_), lightPosition(lightPosition_), gammaCorrection(gammaCorrection_),vnormal(vnormal_),
                     cosOfInnerConeAngle(cosOfInnerConeAngle_), cosOfOuterConeAngle(cosOfOuterConeAngle_),
                     materialAlbedo(materialAlbedo_), reprojectedPoints(reprojectedPoints_){};
         
@@ -70,6 +71,9 @@ private:
     LightSystemClass& _lightSystem;
     GeometrySystemClass& _geometrySystem;
     
+    int _imageWidth;
+    int _imageHeight;
+    
     std::vector<std::pair<int,double>> exponentOfCoreRegion;
     std::vector<std::pair<int,double>> exponentOfFallOffRegion;
     
@@ -80,6 +84,10 @@ private:
     InputForExponentCalculation* SpotLightExponentInputParameters();
     void CalculateExponentFromReprojectedPoints(InputForExponentCalculation* input, double averagePixelIntensityValue);
     void WriteExponentValueToImage(double maxExpValue, double minExpValue);
+    void WriteExponentValueToImage();
+    Rgba* GetImagePixelsToWrite();
+    void WriteToImage(Rgba* outputPixels,const std::string& fileName);
+
     
     // Test
     void CalculatePixelValue();

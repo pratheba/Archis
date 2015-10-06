@@ -60,8 +60,9 @@ void Parser::ParseLuxRenderScene(const std::string& luxRenderFileName, CameraSys
     lightEntity->SetLightGain(100);
     lightEntity->SetLightPower(0);
     lightEntity->SetLightEfficacy(0);
-    lightEntity->SetSpotLightInnerConeAngle(0);
+    lightEntity->SetGammaCorrection(1);
     lightEntity->SetSpotLightOuterConeAngle(22.5);
+    lightEntity->SetSpotLightInnerConeAngle(0);
     Eigen::Matrix4d lightTransMatrix ;
     
     lightTransMatrix.col(0) = Eigen::Vector4d(0.006568121723831, 0.002261585788801, -0.007193399593234, 0.000000000000000);

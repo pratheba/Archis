@@ -60,4 +60,12 @@ void LightEntityClass::SetLightEfficacy(const double& lightEfficacy) {
     _lightEfficacy = lightEfficacy;
 }
 
+double LightEntityClass::GetGammaCorrection() const {
+    return _gammaCorrection;
+}
+
+void LightEntityClass::SetGammaCorrection(const double& gammaCorrection) {
+    _gammaCorrection = gammaCorrection;
+}
+
 

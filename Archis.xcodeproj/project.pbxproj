@@ -52,6 +52,22 @@
 		D6B03E931BB8DB830059B286 /* lena.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = lena.exr; sourceTree = "<group>"; };
 		D6B03E941BB8F40E0059B286 /* bedroomLight.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = bedroomLight.exr; sourceTree = "<group>"; };
 		D6B03E951BB8F40E0059B286 /* extendedWall.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = extendedWall.exr; sourceTree = "<group>"; };
+		D6B03E9A1BC0F41E0059B286 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6B03E9B1BC0F41E0059B286 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6B03E9C1BC0F41E0059B286 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6B03E9D1BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend0.blend"; sourceTree = "<group>"; };
+		D6B03E9F1BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-gray-intensity100-gamma1-blend0.lxs"; sourceTree = "<group>"; };
+		D6B03EA01BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "light-gray-intensity100-gamma1-blend0.py"; sourceTree = "<group>"; };
+		D6B03EA51BC0F4270059B286 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6B03EA61BC0F4270059B286 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6B03EA71BC0F4270059B286 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6B03EA81BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend1.blend"; sourceTree = "<group>"; };
+		D6B03EA91BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.blend1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend1.blend1"; sourceTree = "<group>"; };
+		D6B03EAB1BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-gray-intensity100-gamma1-blend1.lxs"; sourceTree = "<group>"; };
+		D6B03EAC1BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "light-gray-intensity100-gamma1-blend1.py"; sourceTree = "<group>"; };
+		D6B03EAD1BC201930059B286 /* light-gray-intensity100-gamma1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.exr"; sourceTree = "<group>"; };
+		D6B03EAE1BC201A40059B286 /* light-gray-intensity100-gamma1-blend1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend1.exr"; sourceTree = "<group>"; };
+		D6B03EAF1BC2181D0059B286 /* light-gray-intensity100-gamma1-blend0.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend0.exr"; sourceTree = "<group>"; };
 		D6F178901BAE7663000A1F5E /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
 		D6F1789C1BAE76AD000A1F5E /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReprojectionClass.h; sourceTree = "<group>"; };
@@ -77,7 +93,6 @@
 		D6F178BA1BAE76AD000A1F5E /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
 		D6F178BB1BAE76AD000A1F5E /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
 		D6F178BC1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.blend"; sourceTree = "<group>"; };
-		D6F178BD1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.exr"; sourceTree = "<group>"; };
 		D6F178BE1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.flm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.flm"; sourceTree = "<group>"; };
 		D6F178BF1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "light-gray-intensity100-gamma1.lxs"; sourceTree = "<group>"; };
 		D6F178C01BAE76AD000A1F5E /* light-gray-intensity100-gamma1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-gray-intensity100-gamma1.png"; sourceTree = "<group>"; };
@@ -149,6 +164,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6B03E961BC0F41E0059B286 /* Light-gray-intensity100-gamma1-blend0 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03EAF1BC2181D0059B286 /* light-gray-intensity100-gamma1-blend0.exr */,
+				D6B03E971BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0 */,
+				D6B03E9D1BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.blend */,
+				D6B03E9F1BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.lxs */,
+				D6B03EA01BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0.py */,
+			);
+			path = "Light-gray-intensity100-gamma1-blend0";
+			sourceTree = "<group>";
+		};
+		D6B03E971BC0F41E0059B286 /* light-gray-intensity100-gamma1-blend0 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03E981BC0F41E0059B286 /* Scene */,
+			);
+			path = "light-gray-intensity100-gamma1-blend0";
+			sourceTree = "<group>";
+		};
+		D6B03E981BC0F41E0059B286 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03E991BC0F41E0059B286 /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6B03E991BC0F41E0059B286 /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03E9A1BC0F41E0059B286 /* LuxRender-Geometry.lxo */,
+				D6B03E9B1BC0F41E0059B286 /* LuxRender-Materials.lxm */,
+				D6B03E9C1BC0F41E0059B286 /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
+			sourceTree = "<group>";
+		};
+		D6B03EA11BC0F4270059B286 /* Light-gray-intensity100-gamma1-blend1 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03EAE1BC201A40059B286 /* light-gray-intensity100-gamma1-blend1.exr */,
+				D6B03EA21BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1 */,
+				D6B03EA81BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.blend */,
+				D6B03EA91BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.blend1 */,
+				D6B03EAB1BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.lxs */,
+				D6B03EAC1BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1.py */,
+			);
+			path = "Light-gray-intensity100-gamma1-blend1";
+			sourceTree = "<group>";
+		};
+		D6B03EA21BC0F4270059B286 /* light-gray-intensity100-gamma1-blend1 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03EA31BC0F4270059B286 /* Scene */,
+			);
+			path = "light-gray-intensity100-gamma1-blend1";
+			sourceTree = "<group>";
+		};
+		D6B03EA31BC0F4270059B286 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03EA41BC0F4270059B286 /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6B03EA41BC0F4270059B286 /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6B03EA51BC0F4270059B286 /* LuxRender-Geometry.lxo */,
+				D6B03EA61BC0F4270059B286 /* LuxRender-Materials.lxm */,
+				D6B03EA71BC0F4270059B286 /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
+			sourceTree = "<group>";
+		};
 		D6F178871BAE7663000A1F5E = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +293,8 @@
 		D6F178A81BAE76AD000A1F5E /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				D6B03EA11BC0F4270059B286 /* Light-gray-intensity100-gamma1-blend1 */,
+				D6B03E961BC0F41E0059B286 /* Light-gray-intensity100-gamma1-blend0 */,
 				D6F179141BB25EAB000A1F5E /* light.exr */,
 				D6F1790D1BB0F470000A1F5E /* images */,
 				D6F178A91BAE76AD000A1F5E /* Light-gray-intensity100-gamma0 */,
@@ -253,9 +347,9 @@
 		D6F178B51BAE76AD000A1F5E /* Light-gray-intensity100-gamma1 */ = {
 			isa = PBXGroup;
 			children = (
+				D6B03EAD1BC201930059B286 /* light-gray-intensity100-gamma1.exr */,
 				D6F178B61BAE76AD000A1F5E /* light-gray-intensity100-gamma1 */,
 				D6F178BC1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.blend */,
-				D6F178BD1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.exr */,
 				D6F178BE1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.flm */,
 				D6F178BF1BAE76AD000A1F5E /* light-gray-intensity100-gamma1.lxs */,
 				D6F178C01BAE76AD000A1F5E /* light-gray-intensity100-gamma1.png */,
