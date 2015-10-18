@@ -1,0 +1,6 @@
+#NumberOfFilesToRead
+NumberOfFiles = 1
+
+Radius60Distance3Gain100.txt
+Gain200Distance3.txt
+Gain200Distance5.txt

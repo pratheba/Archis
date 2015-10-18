@@ -8,20 +8,11 @@
 
 #include <iostream>
 #include <fstream>
-#include "LightParameters/SpotLightParameterEstimationClass.h"
+#include "InitializerClass.hpp"
 
 int main(int argc, const char * argv[]) {
-    //    if (argc < 2) {
-    //        std::cout << "No input arguments. Returning ... " << std::endl;
-    //        return -1;
-    // }
-    
-    INPUTPARAM inputParameters("imageFile","luxfile","plyfile");
-    //std::string fileName = "../../Input/Light-gray-intensity100-gamma1/light-gray-intensity100-gamma1.exr";
-    std::string fileName = "../../Input/Light-gray-intensity100-gamma1-blend0/light-gray-intensity100-gamma1-blend0.exr";
-    
-    SpotLightParameterEstimationClass& spotLightParamEstClass = SpotLightParameterEstimationClass::GetInstance(fileName);
-    spotLightParamEstClass.GetSpotLightExponentFromImage(inputParameters);
+    InitializerClass* initClass = new InitializerClass();
+    initClass->ParseResouceFileAndRunSpotLightParameterEstimation("Resource.txt");
     
     return 0;
     

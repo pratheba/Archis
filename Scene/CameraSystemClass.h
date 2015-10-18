@@ -20,6 +20,10 @@ public:
     const CameraEntityClass& GetCurrentCamera()const;
     void SetCurrentCamera(const CameraEntityClass& currentCamera) const;
     
+    CameraSystemClass& operator=(const CameraSystemClass& cameraSystemClass) {
+        return *this;
+    }
+    
     Eigen::Matrix3d GetCurrentCameraIntrinsicMatrix();
     Eigen::Matrix3Xd GetCurrentCameraExtrinsicMatrix();
     

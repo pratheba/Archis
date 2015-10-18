@@ -38,7 +38,7 @@ Film "fleximage"
 	"float colorspace_red" [0.630000000000000 0.340000000000000]
 	"float colorspace_green" [0.310000000000000 0.595000000000000]
 	"float colorspace_blue" [0.155000000000000 0.070000000000000]
-	"string filename" ["light-gray-intensity100-gamma1.Scene.00250"]
+	"string filename" ["light-gray-intensity100-gamma1-blend1.Scene.00250"]
 	"bool write_resume_flm" ["false"]
 	"bool restart_resume_flm" ["false"]
 	"bool write_flm_direct" ["false"]
@@ -64,9 +64,9 @@ Film "fleximage"
 
 WorldBegin
 
-Include "light-gray-intensity100-gamma1/Scene/00250/LuxRender-Materials.lxm"
+Include "light-gray-intensity100-gamma1-blend1/Scene/00250/LuxRender-Materials.lxm"
 
-Include "light-gray-intensity100-gamma1/Scene/00250/LuxRender-Geometry.lxo"
+Include "light-gray-intensity100-gamma1-blend1/Scene/00250/LuxRender-Geometry.lxo"
 
 TransformBegin #  "Spot"
 

@@ -10,27 +10,23 @@
 #define __Archis__SpotLightParameterEstimationClass__
 
 #include <iostream>
+#include "InitializerClass.hpp"
 #include "../Utility/Parser.h"
 #include "../Algorithm/ReprojectionClass.h"
+#include "../Utility/SystemClass.hpp"
 
 
-struct INPUTPARAM {
-    std::string _inputImageFileName;
-    std::string _inputLuxFileName;
-    std::string _inputPLYFileName;
-    
-    INPUTPARAM(const std::string& imageFile, const std::string& luxFile, const std::string& plyFile):_inputImageFileName(imageFile),
-    _inputLuxFileName(luxFile),_inputPLYFileName(plyFile){};
-};
-
+class AttenuationClass;
 
 class SpotLightParameterEstimationClass {
+    //friend class AttenuationClass;
 public:
-    static SpotLightParameterEstimationClass& GetInstance(const std::string& inputImageFileName);
+    
+    static SpotLightParameterEstimationClass& GetInstance();
     static void Release();
     
-    void Initialize(const INPUTPARAM& inputParameters);
-    void GetSpotLightExponentFromImage(const INPUTPARAM& inputParameters);
+    void SetSystemClasses(const SystemClass& systemClass);
+    void GetSpotLightExponentFromImage();
     
     std::vector<double>& GetExponentOfCoreRegion();
     std::vector<double>& GetExponentOfFallOffRegion();
@@ -66,10 +62,12 @@ private:
     
     static SpotLightParameterEstimationClass* _spotLightParamClass;
     
-    ImageSystemClass& _imageSystem;
-    CameraSystemClass& _cameraSystem;
-    LightSystemClass& _lightSystem;
-    GeometrySystemClass& _geometrySystem;
+    SystemClass* _systemClass;
+    ImageSystemClass* _imageSystem;
+    CameraSystemClass* _cameraSystem;
+    LightSystemClass* _lightSystem;
+    GeometrySystemClass* _geometrySystem;
+    static InputForExponentCalculation* input;
     
     int _imageWidth;
     int _imageHeight;
@@ -77,8 +75,8 @@ private:
     std::vector<std::pair<int,double>> exponentOfCoreRegion;
     std::vector<std::pair<int,double>> exponentOfFallOffRegion;
     
-    SpotLightParameterEstimationClass(const std::string& inputImageFileName);
-    ~SpotLightParameterEstimationClass();
+    SpotLightParameterEstimationClass();
+    //~SpotLightParameterEstimationClass();
     
     void CalculateExponentParameter();
     InputForExponentCalculation* SpotLightExponentInputParameters();

@@ -35,7 +35,6 @@ Point2D<double> CameraEntityClass::GetFocalLengthInPixels() const{
     return _focal_lengthInPixels;
 }
 
-
 Point2D<double> CameraEntityClass::GetFocalLength() const{
     return _focal_length;
 }
@@ -75,6 +74,13 @@ void CameraEntityClass::SetPrincipalPoint(const Point2D<double>& principalPoint)
     ConvertFocalLengthToPixels();
 }
 
+CameraEntityClass::EntityLookAtVector CameraEntityClass::GetCamEntityLookAtVector() const {
+    return _camEntityLookAtVector;
+}
+
+void CameraEntityClass::SetCamEntityLookAtVector(const EntityLookAtVector& camEntityLookAtVector) {
+    _camEntityLookAtVector = camEntityLookAtVector;
+}
 
 void CameraEntityClass::ConvertFocalLengthToPixels()  {
     

@@ -1,0 +1,33 @@
+Module = "Image"
+path = ""/Users/prathebaselvaraju/4-Projects/Archis/Input/SpericalRadius-DiffR-SameI/Radius60-Distance5.exr""
+#endModule
+
+Module = "Camera"
+eyeVector = "1.460001, 1.980000, 5.657866"
+directionVector = "1.414863, 1.671967, 4.707562"
+upVector = "0.063852, 0.948439, -0.310461"
+FieldOfView = "49.134342"
+pixelWidth = "1"
+pixelHeight = "1"
+rotationEuler = "0.0, -0.0, 0.0"
+
+Module = "Light"
+gain = "200"
+Power = "0"
+Efficacy = "0"
+Gamma = "1"
+OuterConeAngle = "30"
+InnerConeAngle = "0"
+#Column order
+lightTransMatrix = "1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,5,1"
+
+Module = "Geometry"
+Type = "PLANE"
+NumberOfVertices = "4"
+vertices = "-5,-5,0, 5,-5,0, 5,5,0, -5,5,0"
+normals = "0,0,1, 0,0,1, 0,0,1, 0,0,1"
+
+
+
+
+

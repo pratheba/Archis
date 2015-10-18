@@ -7,6 +7,7 @@
 //
 
 #include "GeometryEntityClass.h"
+#include <boost/algorithm/string.hpp>
 
 GeometryEntityClass::GeometryEntityClass() {
     _geometryType = NONE;
@@ -25,6 +26,19 @@ void GeometryEntityClass::SetGeometryType(const GEOMETRYTYPE& geometryType) {
     _geometryType = geometryType;
 }
 
+void GeometryEntityClass::SetGeometryType(const std::string& geometryType) {
+    if(boost::algorithm::iequals(geometryType, "Plane"))
+        _geometryType = GEOMETRYTYPE::PLANE;
+    else if(boost::algorithm::iequals(geometryType, "Cube"))
+        _geometryType = GEOMETRYTYPE::CUBE;
+    else
+        _geometryType = GEOMETRYTYPE::NONE;
+}
+
+void GeometryEntityClass::SetNumberOfVertices(const int& numberOfVertices) {
+    _numOfVertices = numberOfVertices;
+}
+
 
 std::vector<Point3D<double>> GeometryEntityClass::GetVertices() const {
     return _vertices;
@@ -39,6 +53,10 @@ std::vector<Eigen::Vector3d> GeometryEntityClass::GetVertexNormals() const {
 }
 void GeometryEntityClass::SetVertexNormal(const std::vector<Eigen::Vector3d>& vertexNormals) {
     _vertexNormals = vertexNormals;
+}
+
+Point3D<double> GeometryEntityClass::GetAVertex() const {
+    return _vertices[0];
 }
 
 MaxMinCoord GeometryEntityClass::GetMaxMinOfGeometry() const{

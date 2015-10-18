@@ -19,7 +19,7 @@ public:
     static void ReleaseInstance();
     
     const Image2DClass& GetCurrentImage()const;
-    void const SetCurrentImage(const Image2DClass& currentImage);
+    void SetCurrentImage(const Image2DClass& currentImage) const;
     
     const long GetCurrentImageWidth() const;
     const long GetCurrentImageHeight() const;

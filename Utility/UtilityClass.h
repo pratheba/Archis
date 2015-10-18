@@ -68,6 +68,14 @@ struct Point3D {
     Point3D() { x=0.0; y=0.0; z=0.0;}
     Point3D(const Type& x_, const Type& y_, const Type& z_):x(x_), y(y_), z(z_){}
     Point3D(const Point3D<Type>& point_):x(point_.x),y(point_.y),z(point_.z){}
+    Point3D(const std::vector<double>& vectorPoints){
+        if (vectorPoints.size() == 3) {
+            x = vectorPoints[0];
+            y = vectorPoints[1];
+            z = vectorPoints[2];
+        }
+    }
+    
     
     Point3D& operator=(const Point3D<Type>& inPoint) {
         if(this == &inPoint) return *this;

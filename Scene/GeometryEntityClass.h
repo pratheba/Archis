@@ -38,6 +38,9 @@ public:
     
     GEOMETRYTYPE GetGeometryType() const;
     void SetGeometryType(const GEOMETRYTYPE& geometryType);
+    void SetGeometryType(const std::string& geometryType);
+    
+    void SetNumberOfVertices(const int& numberOfVertices);
     
     std::vector<Point3D<double>> GetVertices() const;
     void SetVertices(const std::vector<Point3D<double>>& vertices);
@@ -45,10 +48,13 @@ public:
     std::vector<Eigen::Vector3d> GetVertexNormals() const;
     void SetVertexNormal(const std::vector<Eigen::Vector3d>& vertexNormals);
     
+    Point3D<double> GetAVertex() const;
+    
     MaxMinCoord GetMaxMinOfGeometry()const;
     
 private:
     GEOMETRYTYPE _geometryType;
+    int _numOfVertices;
     std::vector<Point3D<double>> _vertices;
     std::vector<Eigen::Vector3d> _vertexNormals;
     std::vector<Eigen::Vector3d> _faceNormals;

@@ -35,6 +35,9 @@ public:
     Point2D<double> GetPrincipalPoint()const;
     void SetPrincipalPoint(const Point2D<double>& principalPoint);
     
+    EntityLookAtVector GetCamEntityLookAtVector() const;
+    void SetCamEntityLookAtVector(const EntityLookAtVector& camentityLookAtVector);
+    
 private:
    
     double              _fieldOfView;
@@ -43,6 +46,7 @@ private:
     Point2D<double>     _focal_length;
     Point2D<double>     _focal_lengthInPixels;
     Point2D<double>     _principalPoint;
+    EntityLookAtVector  _camEntityLookAtVector;
    
     void ConvertFocalLengthToPixels();
 };

@@ -20,6 +20,7 @@ public:
     //     Pixel Width         = Image Sensor Width/ ImagePixelWidth;
     //     Pixel Height        = Image Sensor Height / ImagePixelHeight;
     
+    // This focal length is in meters/world unit
     PixelToWorldCoord(const double& FOV, const double& focal_length, const double& imageWidth, const double& imageHeight) {
          _SensorWidth = tan(FOV * 0.5 * M_PI/180) * focal_length * 2;
          _SensorHeight = _SensorWidth * imageHeight / imageWidth;

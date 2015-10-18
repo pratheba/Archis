@@ -23,8 +23,8 @@ public:
     Image2DClass();
     Image2DClass(const std::string& inputFileName);
     
+    void Initialize(const std::string& inputFileName);
     const Array2D<Rgba>& GetImage2DArrayPixels()const;
-    
     
 private:
     Array2D<Rgba> imagePixels;

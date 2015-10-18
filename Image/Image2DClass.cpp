@@ -14,7 +14,10 @@ Image2DClass::Image2DClass() {
 }
 
 Image2DClass::Image2DClass(const std::string& inputFileName) {
+    Initialize(inputFileName);
+}
 
+void Image2DClass::Initialize(const std::string& inputFileName) {
     try {
         RgbaInputFile file(inputFileName.c_str());
         Imath_2_2::Box2i dataWindow = file.dataWindow();

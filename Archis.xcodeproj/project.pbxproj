@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
 		D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
+		D6DA22D91BCAD867003EF160 /* AttenuationClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */; settings = {ASSET_TAGS = (); }; };
+		D6DA231D1BD17E54003EF160 /* InitializerClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231B1BD17E54003EF160 /* InitializerClass.cpp */; settings = {ASSET_TAGS = (); }; };
+		D6DA23211BD318B1003EF160 /* SystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231F1BD318B1003EF160 /* SystemClass.cpp */; settings = {ASSET_TAGS = (); }; };
 		D6F178FB1BAE76AD000A1F5E /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */; };
 		D6F178FC1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789D1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp */; };
 		D6F178FD1BAE76AD000A1F5E /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178A01BAE76AD000A1F5E /* DBSCAN_Class.cpp */; };
@@ -68,6 +71,61 @@
 		D6B03EAD1BC201930059B286 /* light-gray-intensity100-gamma1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.exr"; sourceTree = "<group>"; };
 		D6B03EAE1BC201A40059B286 /* light-gray-intensity100-gamma1-blend1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend1.exr"; sourceTree = "<group>"; };
 		D6B03EAF1BC2181D0059B286 /* light-gray-intensity100-gamma1-blend0.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend0.exr"; sourceTree = "<group>"; };
+		D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttenuationClass.cpp; sourceTree = "<group>"; };
+		D6DA22D81BCAD867003EF160 /* AttenuationClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AttenuationClass.hpp; sourceTree = "<group>"; };
+		D6DA22DB1BCAFFFA003EF160 /* Radius20-Distance3.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius20-Distance3.exr"; sourceTree = "<group>"; };
+		D6DA22DC1BCAFFFA003EF160 /* Radius20-Distance3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius20-Distance3.png"; sourceTree = "<group>"; };
+		D6DA22DD1BCAFFFA003EF160 /* Radius20-Distance5.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius20-Distance5.exr"; sourceTree = "<group>"; };
+		D6DA22DE1BCAFFFA003EF160 /* Radius20-Distance5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius20-Distance5.png"; sourceTree = "<group>"; };
+		D6DA22DF1BCAFFFA003EF160 /* Radius20-Distance6.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius20-Distance6.exr"; sourceTree = "<group>"; };
+		D6DA22E01BCAFFFA003EF160 /* Radius20-Distance6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius20-Distance6.png"; sourceTree = "<group>"; };
+		D6DA22E11BCAFFFA003EF160 /* Radius30-Distance3.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius30-Distance3.exr"; sourceTree = "<group>"; };
+		D6DA22E21BCAFFFA003EF160 /* Radius30-Distance3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius30-Distance3.png"; sourceTree = "<group>"; };
+		D6DA22E31BCAFFFA003EF160 /* Radius30-Distance5.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius30-Distance5.exr"; sourceTree = "<group>"; };
+		D6DA22E41BCAFFFA003EF160 /* Radius30-Distance5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius30-Distance5.png"; sourceTree = "<group>"; };
+		D6DA22E51BCAFFFA003EF160 /* Radius30-Distance6.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius30-Distance6.exr"; sourceTree = "<group>"; };
+		D6DA22E61BCAFFFA003EF160 /* Radius30-Distance6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius30-Distance6.png"; sourceTree = "<group>"; };
+		D6DA22E71BCAFFFA003EF160 /* Radius45-Distance3.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius45-Distance3.exr"; sourceTree = "<group>"; };
+		D6DA22E81BCAFFFA003EF160 /* Radius45-Distance3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius45-Distance3.png"; sourceTree = "<group>"; };
+		D6DA22E91BCAFFFA003EF160 /* Radius45-Distance5.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius45-Distance5.exr"; sourceTree = "<group>"; };
+		D6DA22EA1BCAFFFA003EF160 /* Radius45-Distance5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius45-Distance5.png"; sourceTree = "<group>"; };
+		D6DA22EB1BCAFFFA003EF160 /* Radius45-Distance6.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius45-Distance6.exr"; sourceTree = "<group>"; };
+		D6DA22EC1BCAFFFA003EF160 /* Radius45-Distance6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius45-Distance6.png"; sourceTree = "<group>"; };
+		D6DA22ED1BCAFFFA003EF160 /* Radius60-Distance3.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius60-Distance3.exr"; sourceTree = "<group>"; };
+		D6DA22EE1BCAFFFA003EF160 /* Radius60-Distance3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius60-Distance3.png"; sourceTree = "<group>"; };
+		D6DA22EF1BCAFFFA003EF160 /* Radius60-Distance5.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius60-Distance5.exr"; sourceTree = "<group>"; };
+		D6DA22F01BCAFFFA003EF160 /* Radius60-Distance5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius60-Distance5.png"; sourceTree = "<group>"; };
+		D6DA22F11BCAFFFA003EF160 /* Radius60-Distance6.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius60-Distance6.exr"; sourceTree = "<group>"; };
+		D6DA22F21BCAFFFA003EF160 /* Radius60-Distance6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius60-Distance6.png"; sourceTree = "<group>"; };
+		D6DA22F61BCAFFFA003EF160 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6DA22F71BCAFFFA003EF160 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6DA22F81BCAFFFA003EF160 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6DA22F91BCAFFFA003EF160 /* SpericalRadius-DiffR.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpericalRadius-DiffR.blend"; sourceTree = "<group>"; };
+		D6DA22FA1BCAFFFA003EF160 /* SpericalRadius-DiffR.blend1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpericalRadius-DiffR.blend1"; sourceTree = "<group>"; };
+		D6DA22FB1BCAFFFA003EF160 /* SpericalRadius-DiffR.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SpericalRadius-DiffR.lxs"; sourceTree = "<group>"; };
+		D6DA22FC1BCAFFFA003EF160 /* SpericalRadius-DiffR.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "SpericalRadius-DiffR.py"; sourceTree = "<group>"; };
+		D6DA22FE1BCB2954003EF160 /* Gain-100.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gain-100.exr"; sourceTree = "<group>"; };
+		D6DA22FF1BCB2954003EF160 /* Gain-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gain-100.png"; sourceTree = "<group>"; };
+		D6DA23001BCB2954003EF160 /* Gain-200.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gain-200.exr"; sourceTree = "<group>"; };
+		D6DA23011BCB2954003EF160 /* Gain-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gain-200.png"; sourceTree = "<group>"; };
+		D6DA23021BCB2954003EF160 /* Gain-50.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gain-50.exr"; sourceTree = "<group>"; };
+		D6DA23031BCB2954003EF160 /* Gain-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gain-50.png"; sourceTree = "<group>"; };
+		D6DA23071BCB2954003EF160 /* LuxRender-Geometry.lxo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Geometry.lxo"; sourceTree = "<group>"; };
+		D6DA23081BCB2954003EF160 /* LuxRender-Materials.lxm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LuxRender-Materials.lxm"; sourceTree = "<group>"; };
+		D6DA23091BCB2954003EF160 /* Plane_0000_m000.ply */ = {isa = PBXFileReference; lastKnownFileType = file; path = Plane_0000_m000.ply; sourceTree = "<group>"; };
+		D6DA230A1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.blend */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SameR-DiffI-SameP-SameC-100.blend"; sourceTree = "<group>"; };
+		D6DA230B1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.blend1 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SameR-DiffI-SameP-SameC-100.blend1"; sourceTree = "<group>"; };
+		D6DA230C1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.lxs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SameR-DiffI-SameP-SameC-100.lxs"; sourceTree = "<group>"; };
+		D6DA230D1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.ply */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SameR-DiffI-SameP-SameC-100.ply"; sourceTree = "<group>"; };
+		D6DA230E1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "SameR-DiffI-SameP-SameC-100.py"; sourceTree = "<group>"; };
+		D6DA23151BCE0519003EF160 /* Resource.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Resource.txt; sourceTree = "<group>"; };
+		D6DA23161BCE05B9003EF160 /* Gain200Distance3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gain200Distance3.txt; sourceTree = "<group>"; };
+		D6DA23171BCE05F1003EF160 /* Gain200Distance5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gain200Distance5.txt; sourceTree = "<group>"; };
+		D6DA231B1BD17E54003EF160 /* InitializerClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitializerClass.cpp; sourceTree = "<group>"; };
+		D6DA231C1BD17E54003EF160 /* InitializerClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InitializerClass.hpp; sourceTree = "<group>"; };
+		D6DA231E1BD1CDE1003EF160 /* Radius60Distance3Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius60Distance3Gain100.txt; sourceTree = "<group>"; };
+		D6DA231F1BD318B1003EF160 /* SystemClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemClass.cpp; sourceTree = "<group>"; };
+		D6DA23201BD318B1003EF160 /* SystemClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SystemClass.hpp; sourceTree = "<group>"; };
 		D6F178901BAE7663000A1F5E /* Archis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Archis; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReprojectionClass.cpp; sourceTree = "<group>"; };
 		D6F1789C1BAE76AD000A1F5E /* ReprojectionClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReprojectionClass.h; sourceTree = "<group>"; };
@@ -241,14 +299,145 @@
 			path = 00250;
 			sourceTree = "<group>";
 		};
+		D6DA22D61BCAD867003EF160 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */,
+				D6DA22D81BCAD867003EF160 /* AttenuationClass.hpp */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		D6DA22DA1BCAFFFA003EF160 /* SpericalRadius-DiffR-SameI */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22DB1BCAFFFA003EF160 /* Radius20-Distance3.exr */,
+				D6DA22DC1BCAFFFA003EF160 /* Radius20-Distance3.png */,
+				D6DA22DD1BCAFFFA003EF160 /* Radius20-Distance5.exr */,
+				D6DA22DE1BCAFFFA003EF160 /* Radius20-Distance5.png */,
+				D6DA22DF1BCAFFFA003EF160 /* Radius20-Distance6.exr */,
+				D6DA22E01BCAFFFA003EF160 /* Radius20-Distance6.png */,
+				D6DA22E11BCAFFFA003EF160 /* Radius30-Distance3.exr */,
+				D6DA22E21BCAFFFA003EF160 /* Radius30-Distance3.png */,
+				D6DA22E31BCAFFFA003EF160 /* Radius30-Distance5.exr */,
+				D6DA22E41BCAFFFA003EF160 /* Radius30-Distance5.png */,
+				D6DA22E51BCAFFFA003EF160 /* Radius30-Distance6.exr */,
+				D6DA22E61BCAFFFA003EF160 /* Radius30-Distance6.png */,
+				D6DA22E71BCAFFFA003EF160 /* Radius45-Distance3.exr */,
+				D6DA22E81BCAFFFA003EF160 /* Radius45-Distance3.png */,
+				D6DA22E91BCAFFFA003EF160 /* Radius45-Distance5.exr */,
+				D6DA22EA1BCAFFFA003EF160 /* Radius45-Distance5.png */,
+				D6DA22EB1BCAFFFA003EF160 /* Radius45-Distance6.exr */,
+				D6DA22EC1BCAFFFA003EF160 /* Radius45-Distance6.png */,
+				D6DA22ED1BCAFFFA003EF160 /* Radius60-Distance3.exr */,
+				D6DA22EE1BCAFFFA003EF160 /* Radius60-Distance3.png */,
+				D6DA22EF1BCAFFFA003EF160 /* Radius60-Distance5.exr */,
+				D6DA22F01BCAFFFA003EF160 /* Radius60-Distance5.png */,
+				D6DA22F11BCAFFFA003EF160 /* Radius60-Distance6.exr */,
+				D6DA22F21BCAFFFA003EF160 /* Radius60-Distance6.png */,
+				D6DA22F31BCAFFFA003EF160 /* SpericalRadius-DiffR */,
+				D6DA22F91BCAFFFA003EF160 /* SpericalRadius-DiffR.blend */,
+				D6DA22FA1BCAFFFA003EF160 /* SpericalRadius-DiffR.blend1 */,
+				D6DA22FB1BCAFFFA003EF160 /* SpericalRadius-DiffR.lxs */,
+				D6DA22FC1BCAFFFA003EF160 /* SpericalRadius-DiffR.py */,
+			);
+			path = "SpericalRadius-DiffR-SameI";
+			sourceTree = "<group>";
+		};
+		D6DA22F31BCAFFFA003EF160 /* SpericalRadius-DiffR */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22F41BCAFFFA003EF160 /* Scene */,
+			);
+			path = "SpericalRadius-DiffR";
+			sourceTree = "<group>";
+		};
+		D6DA22F41BCAFFFA003EF160 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22F51BCAFFFA003EF160 /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6DA22F51BCAFFFA003EF160 /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22F61BCAFFFA003EF160 /* LuxRender-Geometry.lxo */,
+				D6DA22F71BCAFFFA003EF160 /* LuxRender-Materials.lxm */,
+				D6DA22F81BCAFFFA003EF160 /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
+			sourceTree = "<group>";
+		};
+		D6DA22FD1BCB2954003EF160 /* SameR-DiffI-SameP-SameC */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA22FE1BCB2954003EF160 /* Gain-100.exr */,
+				D6DA22FF1BCB2954003EF160 /* Gain-100.png */,
+				D6DA23001BCB2954003EF160 /* Gain-200.exr */,
+				D6DA23011BCB2954003EF160 /* Gain-200.png */,
+				D6DA23021BCB2954003EF160 /* Gain-50.exr */,
+				D6DA23031BCB2954003EF160 /* Gain-50.png */,
+				D6DA23041BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100 */,
+				D6DA230A1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.blend */,
+				D6DA230B1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.blend1 */,
+				D6DA230C1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.lxs */,
+				D6DA230D1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.ply */,
+				D6DA230E1BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100.py */,
+			);
+			path = "SameR-DiffI-SameP-SameC";
+			sourceTree = "<group>";
+		};
+		D6DA23041BCB2954003EF160 /* SameR-DiffI-SameP-SameC-100 */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA23051BCB2954003EF160 /* Scene */,
+			);
+			path = "SameR-DiffI-SameP-SameC-100";
+			sourceTree = "<group>";
+		};
+		D6DA23051BCB2954003EF160 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA23061BCB2954003EF160 /* 00250 */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D6DA23061BCB2954003EF160 /* 00250 */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA23071BCB2954003EF160 /* LuxRender-Geometry.lxo */,
+				D6DA23081BCB2954003EF160 /* LuxRender-Materials.lxm */,
+				D6DA23091BCB2954003EF160 /* Plane_0000_m000.ply */,
+			);
+			path = 00250;
+			sourceTree = "<group>";
+		};
+		D6DA23141BCE0519003EF160 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D6DA23151BCE0519003EF160 /* Resource.txt */,
+				D6DA23161BCE05B9003EF160 /* Gain200Distance3.txt */,
+				D6DA23171BCE05F1003EF160 /* Gain200Distance5.txt */,
+				D6DA231E1BD1CDE1003EF160 /* Radius60Distance3Gain100.txt */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		D6F178871BAE7663000A1F5E = {
 			isa = PBXGroup;
 			children = (
 				D6F178E61BAE76AD000A1F5E /* main.cpp */,
+				D6DA231B1BD17E54003EF160 /* InitializerClass.cpp */,
+				D6DA231C1BD17E54003EF160 /* InitializerClass.hpp */,
+				D6F178A81BAE76AD000A1F5E /* Input */,
+				D6DA23141BCE0519003EF160 /* Resource */,
+				D6DA22D61BCAD867003EF160 /* Test */,
 				D6F179181BB76AA9000A1F5E /* ImageFilter */,
 				D6F1789A1BAE76AD000A1F5E /* Algorithm */,
 				D6F1789F1BAE76AD000A1F5E /* Image */,
-				D6F178A81BAE76AD000A1F5E /* Input */,
 				D6F178E11BAE76AD000A1F5E /* LightParameters */,
 				D6F178E71BAE76AD000A1F5E /* Scene */,
 				D6F178F61BAE76AD000A1F5E /* Utility */,
@@ -293,6 +482,8 @@
 		D6F178A81BAE76AD000A1F5E /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				D6DA22FD1BCB2954003EF160 /* SameR-DiffI-SameP-SameC */,
+				D6DA22DA1BCAFFFA003EF160 /* SpericalRadius-DiffR-SameI */,
 				D6B03EA11BC0F4270059B286 /* Light-gray-intensity100-gamma1-blend1 */,
 				D6B03E961BC0F41E0059B286 /* Light-gray-intensity100-gamma1-blend0 */,
 				D6F179141BB25EAB000A1F5E /* light.exr */,
@@ -522,6 +713,8 @@
 				D6F178F81BAE76AD000A1F5E /* Parser.h */,
 				D6F178F91BAE76AD000A1F5E /* UtilityClass.cpp */,
 				D6F178FA1BAE76AD000A1F5E /* UtilityClass.h */,
+				D6DA231F1BD318B1003EF160 /* SystemClass.cpp */,
+				D6DA23201BD318B1003EF160 /* SystemClass.hpp */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -612,6 +805,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6DA231D1BD17E54003EF160 /* InitializerClass.cpp in Sources */,
 				D6F1791B1BB76AA9000A1F5E /* GaussianFilterClass.cpp in Sources */,
 				D6F179041BAE76AD000A1F5E /* CameraEntityClass.cpp in Sources */,
 				D6F179021BAE76AD000A1F5E /* SpotLightParameterEstimationClass.cpp in Sources */,
@@ -620,6 +814,7 @@
 				D6F178FC1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp in Sources */,
 				D6F178FE1BAE76AD000A1F5E /* HistogramOfImageClass.cpp in Sources */,
 				D6F1790B1BAE76AD000A1F5E /* Parser.cpp in Sources */,
+				D6DA23211BD318B1003EF160 /* SystemClass.cpp in Sources */,
 				D6F179051BAE76AD000A1F5E /* CameraSystemClass.cpp in Sources */,
 				D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */,
 				D6F179001BAE76AD000A1F5E /* ImageSystemClass.cpp in Sources */,
@@ -635,6 +830,7 @@
 				D6F179081BAE76AD000A1F5E /* GeometrySystemClass.cpp in Sources */,
 				D6F179061BAE76AD000A1F5E /* EntityClass.cpp in Sources */,
 				D6F179071BAE76AD000A1F5E /* GeometryEntityClass.cpp in Sources */,
+				D6DA22D91BCAD867003EF160 /* AttenuationClass.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,9 +872,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lboost_filesystem",
+					"-lboost_system",
+				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -712,8 +914,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lboost_filesystem",
+					"-lboost_system",
+				);
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -730,6 +938,8 @@
 				OTHER_LDFLAGS = (
 					"-lIlmImf",
 					"-lHalf",
+					"-lboost_system",
+					"-lboost_filesystem",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -748,6 +958,8 @@
 				OTHER_LDFLAGS = (
 					"-lIlmImf",
 					"-lHalf",
+					"-lboost_system",
+					"-lboost_filesystem",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

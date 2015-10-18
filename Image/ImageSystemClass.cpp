@@ -62,6 +62,7 @@ const Image2DClass& ImageSystemClass::GetCurrentImage() const{
     return *_currentImage;
 }
 
+
 const long  ImageSystemClass::GetCurrentImageWidth() const{
     if (_currentImage != nullptr) {
         return (_currentImage->GetImage2DArrayPixels()).width();

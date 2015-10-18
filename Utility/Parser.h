@@ -13,21 +13,25 @@
 #include <vector>
 
 #include "UtilityClass.h"
-#include "../Image/ImageSystemClass.h"
-#include "../Scene/CameraSystemClass.h"
-#include "../Scene/LightSystemClass.h"
-#include "../Scene/GeometrySystemClass.h"
+#include "SystemClass.hpp"
+
 
 class Parser {
 public:
    Parser();
-    void ParseLuxRenderScene(const std::string& luxRenderFileName,  CameraSystemClass& cameraSystemClass,  LightSystemClass& lightSystemClass);
-    void ParsePLYFile(const std::string& plyFileName,  GeometrySystemClass& geometrySystemClass);
-    void ParseImageFile(const std::string& imageFileName,  ImageSystemClass& imageSystemClass);
+   
+    void ParseResourceFile(const std::string& resourceFileName,  SystemClass& systemClass);
+    std::vector<std::string> ParseResourceFileAndFilesToBeProcessed(const std::string& resourceFileName);
     
 private:
     
-    static std::vector<std::string> SceneComponents;
+    void ParseSceneFile(const std::string& fileName,SystemClass& systemClass);
+    bool CheckIfEndOfModule(std::string& line);
+    
+    void ParseImageModule(std::ifstream& sceneFileName,ImageSystemClass& imageSystemClass);
+    void ParseCameraModule(std::ifstream& sceneFileName,CameraSystemClass& cameraSystemClass);
+    void ParseLightModule(std::ifstream& sceneFileName,LightSystemClass& lightSystemClass);
+    void ParseGeometryModule(std::ifstream& sceneFileName,GeometrySystemClass& geometrySystemClass);
         
 };
 

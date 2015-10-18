@@ -61,11 +61,13 @@ void LightEntityClass::SetLightEfficacy(const double& lightEfficacy) {
 }
 
 double LightEntityClass::GetGammaCorrection() const {
+    std::cout << "asking for gamma correction = " << _gammaCorrection << std::endl;
     return _gammaCorrection;
 }
 
 void LightEntityClass::SetGammaCorrection(const double& gammaCorrection) {
     _gammaCorrection = gammaCorrection;
+    std::cout << "setting for gamma correction = " << _gammaCorrection << std::endl;
 }
 
 
