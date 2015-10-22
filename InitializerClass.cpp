@@ -10,6 +10,7 @@
 #include "Parser.h"
 #include "LightParameters/SpotLightParameterEstimationClass.h"
 #include "Utility/SystemClass.hpp"
+#include "Test/AttenuationClass.hpp"
 
 InitializerClass::InitializerClass() {
 }
@@ -27,7 +28,12 @@ void InitializerClass::ParseResouceFileAndRunSpotLightParameterEstimation(const 
         SystemClass* systemClass = new SystemClass();
         parser->ParseResourceFile(resourceFiles[file], *systemClass);
         spotLightParamEstClass.SetSystemClasses(*systemClass);
-        spotLightParamEstClass.GetSpotLightExponentFromImage();
+        //spotLightParamEstClass.GetSpotLightExponentFromImage();
+        spotLightParamEstClass.SetTheInputParameters();
+        
+        AttenuationClass* attClass = new AttenuationClass(spotLightParamEstClass);
+        attClass->GetPixelCoordFromWorldPoints();
+        
         delete systemClass;
     }
     delete parser;

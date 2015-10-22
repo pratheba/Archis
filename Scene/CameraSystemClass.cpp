@@ -55,6 +55,8 @@ void CameraSystemClass::SetCurrentCamera(const CameraEntityClass& currentCamera)
 Eigen::Matrix3d CameraSystemClass::GetCurrentCameraIntrinsicMatrix() {
     
     Eigen::Matrix3d intrinsicMatrix(Eigen::Matrix3d::Zero(3, 3));
+    // why should the focal length be in pixel units?
+    
     Point2D<double> focalLength     = _currentCamera->GetFocalLengthInPixels();
     Point2D<double> principalPoint  = _currentCamera->GetPrincipalPoint();
     intrinsicMatrix(0,0) = focalLength.y;
@@ -66,22 +68,29 @@ Eigen::Matrix3d CameraSystemClass::GetCurrentCameraIntrinsicMatrix() {
     return intrinsicMatrix;
 }
 
-Eigen::Matrix3Xd CameraSystemClass::GetCurrentCameraExtrinsicMatrix() {
+Eigen::MatrixXd CameraSystemClass::GetCurrentCameraExtrinsicMatrix() {
     
     return GetCurrentCameraExtrinsicMatrixByLookAtVector();
     
 }
 
-Eigen::Matrix3Xd CameraSystemClass::GetCurrentCameraExtrinsicMatrixByLookAtVector() {
-    Eigen::Matrix3Xd extrinsicMatrix(Eigen::Matrix3Xd::Zero(3, 4));
+Eigen::MatrixXd CameraSystemClass::GetCurrentCameraExtrinsicMatrixByLookAtVector() {
+    Eigen::MatrixXd extrinsicMatrix(Eigen::MatrixXd::Zero(4, 4));
     CameraEntityClass::TransformationCOORD localCoord = _currentCamera->GetEntityCoordinateAxesFromLookAtVector();
     
-    extrinsicMatrix.col(0) = localCoord._xVec;
-    extrinsicMatrix.col(1) = localCoord._yVec;
-    extrinsicMatrix.col(2) = localCoord._zVec;
-    extrinsicMatrix.col(3) = Eigen::Vector3d(-1*(_currentCamera->GetPosition()).dot(localCoord._xVec),
+    // The X axis of camera is given by row 1 of the rotation Matrix in world coordinate system
+    // So the X axis of the world is give by the column 1 of the roation matric in camera coordinate system
+    // This in the extrinsic matrix we give the column the value of the rotation Matrix X axis since we
+    // move everything with respect to camera coordinate
+    
+  
+    extrinsicMatrix.col(0) << localCoord._xVec , 0;
+    extrinsicMatrix.col(1) << localCoord._yVec , 0;
+    extrinsicMatrix.col(2) << localCoord._zVec , 0;
+    extrinsicMatrix.col(3) = Eigen::Vector4d(-1*(_currentCamera->GetPosition()).dot(localCoord._xVec),
                                              -1*(_currentCamera->GetPosition()).dot(localCoord._yVec),
-                                             -1*(_currentCamera->GetPosition()).dot(localCoord._zVec));
+                                             -1*(_currentCamera->GetPosition()).dot(localCoord._zVec),
+                                             1);
     
     return extrinsicMatrix;
 }

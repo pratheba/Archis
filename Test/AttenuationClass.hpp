@@ -20,6 +20,8 @@ public:
     
     void GetOriginalPixelValues();
     void GetReprojectedPixelValues();
+    void GetPointsAndIntensityToCalculateAttenuationFactor();
+    void GetPixelCoordFromWorldPoints();
 
 private:
     struct circleMetaData {
@@ -30,7 +32,24 @@ private:
         circleMetaData():center(Eigen::Vector3d()), radius(0.0),Axis(std::vector<Eigen::Vector3d>()){}
     };
     
+    struct ParametersFromSystemClasses {
+        Eigen::MatrixXd camExtrinsicMatrix;
+        Point2D<double> focalLength ;
+        Point2D<double> principalPoint;
+        double sensorWidth;
+        double sensorHeight;
+        EntityClass::TransformationCOORD camTransCoord ;
+        int imageWidth;
+        int imageHeight;
+        Eigen::Vector3d lightPosition;
+        Eigen::Vector3d normalOfPlane;
+        Point3D<double> vertex;
+        double fallOffAngle;
+    };
+    
     SpotLightParameterEstimationClass& _spotLightParamEstClass;
+    //ParametersFromSystemClasses* input;
+    //circleMetaData* circleData;
     SpotLightParameterEstimationClass::InputForExponentCalculation* input;
     
     void CalculateAttenuationFactor();
@@ -38,7 +57,11 @@ private:
     double GetErrorOforiginalAndReprojectedPixelValues();
     circleMetaData* GetCircleMetaData();
     std::vector<Eigen::Vector3d> GetPointsCircle(const int numOfVertices);
-    void GetPixelCoordFromWorldPoints();
+    //void GetPixelCoordFromWorldPoints();
+    std::vector<Point2D<double>> GetStartPointAndEndPoint();
+    
+    // Testing
+    void WriteToImage(std::vector<Point2D<double>>& outputPoints);
     
   };
 

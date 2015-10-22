@@ -93,7 +93,17 @@ struct MapOFImageAndWorldPoints {
     Eigen::Vector3d _worldPoint;
     
     MapOFImageAndWorldPoints(){}
-    MapOFImageAndWorldPoints(const Point2D<int>& imagepixel, const Eigen::Vector3d& worldPoint):_imagepixel(imagepixel), _worldPoint(worldPoint){}
+    MapOFImageAndWorldPoints(const Point2D<int>& imagepixel, const Eigen::Vector3d& worldPoint):
+                            _imagepixel(imagepixel), _worldPoint(worldPoint){}
+};
+
+struct MapOfPixelAndIntensity {
+    Point2D<int> _imagePixel;
+    Rgba _intensity;
+    
+    MapOfPixelAndIntensity() {}
+    MapOfPixelAndIntensity(const Point2D<int>& imagePixel, const Rgba& intensity):
+                            _imagePixel(imagePixel), _intensity(intensity){}
 };
 
 double rad2deg(const double& radian);

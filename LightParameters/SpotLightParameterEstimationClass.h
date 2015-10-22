@@ -19,7 +19,7 @@
 class AttenuationClass;
 
 class SpotLightParameterEstimationClass {
-    //friend class AttenuationClass;
+    friend class AttenuationClass;
 public:
     
     static SpotLightParameterEstimationClass& GetInstance();
@@ -30,6 +30,9 @@ public:
     
     std::vector<double>& GetExponentOfCoreRegion();
     std::vector<double>& GetExponentOfFallOffRegion();
+    
+    // Testing class for calling attenuation class. To be removed.
+    void SetTheInputParameters();
     
 private:
     
@@ -67,7 +70,7 @@ private:
     CameraSystemClass* _cameraSystem;
     LightSystemClass* _lightSystem;
     GeometrySystemClass* _geometrySystem;
-    static InputForExponentCalculation* input;
+    static InputForExponentCalculation* _inputSetter;
     
     int _imageWidth;
     int _imageHeight;
@@ -79,7 +82,7 @@ private:
     //~SpotLightParameterEstimationClass();
     
     void CalculateExponentParameter();
-    InputForExponentCalculation* SpotLightExponentInputParameters();
+    InputForExponentCalculation* GetSpotLightExponentInputParameters();
     void CalculateExponentFromReprojectedPoints(InputForExponentCalculation* input, double averagePixelIntensityValue);
     void WriteExponentValueToImage(double maxExpValue, double minExpValue);
     void WriteExponentValueToImage();

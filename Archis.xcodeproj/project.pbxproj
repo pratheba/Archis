@@ -71,7 +71,7 @@
 		D6B03EAD1BC201930059B286 /* light-gray-intensity100-gamma1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1.exr"; sourceTree = "<group>"; };
 		D6B03EAE1BC201A40059B286 /* light-gray-intensity100-gamma1-blend1.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend1.exr"; sourceTree = "<group>"; };
 		D6B03EAF1BC2181D0059B286 /* light-gray-intensity100-gamma1-blend0.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "light-gray-intensity100-gamma1-blend0.exr"; sourceTree = "<group>"; };
-		D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttenuationClass.cpp; sourceTree = "<group>"; };
+		D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttenuationClass.cpp; sourceTree = "<group>"; wrapsLines = 1; };
 		D6DA22D81BCAD867003EF160 /* AttenuationClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AttenuationClass.hpp; sourceTree = "<group>"; };
 		D6DA22DB1BCAFFFA003EF160 /* Radius20-Distance3.exr */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Radius20-Distance3.exr"; sourceTree = "<group>"; };
 		D6DA22DC1BCAFFFA003EF160 /* Radius20-Distance3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radius20-Distance3.png"; sourceTree = "<group>"; };

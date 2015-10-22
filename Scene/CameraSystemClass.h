@@ -25,7 +25,7 @@ public:
     }
     
     Eigen::Matrix3d GetCurrentCameraIntrinsicMatrix();
-    Eigen::Matrix3Xd GetCurrentCameraExtrinsicMatrix();
+    Eigen::MatrixXd GetCurrentCameraExtrinsicMatrix();
     
 private:
     CameraSystemClass();
@@ -37,7 +37,7 @@ private:
     std::vector<CameraEntityClass*> _cameras;
     
     Eigen::Matrix3Xd GetCurrentCameraExtrinsicMatrixByEulerAngle();
-    Eigen::Matrix3Xd GetCurrentCameraExtrinsicMatrixByLookAtVector();
+    Eigen::MatrixXd GetCurrentCameraExtrinsicMatrixByLookAtVector();
 
     
 };
