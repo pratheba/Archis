@@ -32,7 +32,8 @@ void InitializerClass::ParseResouceFileAndRunSpotLightParameterEstimation(const 
         spotLightParamEstClass.SetTheInputParameters();
         
         AttenuationClass* attClass = new AttenuationClass(spotLightParamEstClass);
-        attClass->GetPixelCoordFromWorldPoints();
+        attClass->GetPointsAndIntensityToCalculateAttenuationFactor();
+        //attClass->GetPixelCoordFromWorldPoints();
         
         delete systemClass;
     }

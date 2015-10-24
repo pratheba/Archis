@@ -48,9 +48,9 @@ private:
     };
     
     SpotLightParameterEstimationClass& _spotLightParamEstClass;
-    //ParametersFromSystemClasses* input;
-    //circleMetaData* circleData;
-    SpotLightParameterEstimationClass::InputForExponentCalculation* input;
+    ParametersFromSystemClasses* input;
+    circleMetaData* circleData;
+    //SpotLightParameterEstimationClass::InputForExponentCalculation* input;
     
     void CalculateAttenuationFactor();
     
@@ -59,6 +59,7 @@ private:
     std::vector<Eigen::Vector3d> GetPointsCircle(const int numOfVertices);
     //void GetPixelCoordFromWorldPoints();
     std::vector<Point2D<double>> GetStartPointAndEndPoint();
+    void GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints);
     
     // Testing
     void WriteToImage(std::vector<Point2D<double>>& outputPoints);
