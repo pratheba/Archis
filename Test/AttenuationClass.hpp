@@ -59,7 +59,8 @@ private:
     std::vector<Eigen::Vector3d> GetPointsCircle(const int numOfVertices);
     //void GetPixelCoordFromWorldPoints();
     std::vector<Point2D<double>> GetStartPointAndEndPoint();
-    void GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints);
+    std::vector<Point2D<double>> GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints);
+    void GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<double>& endPoint);
     
     // Testing
     void WriteToImage(std::vector<Point2D<double>>& outputPoints);

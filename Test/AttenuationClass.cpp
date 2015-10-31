@@ -7,6 +7,8 @@
 //
 
 #include "AttenuationClass.hpp"
+#include <iostream>
+#include <sstream>
 
 AttenuationClass::AttenuationClass(SpotLightParameterEstimationClass& spotLightParamEstClass):_spotLightParamEstClass(spotLightParamEstClass),circleData(nullptr) {
     //input =  _spotLightParamEstClass.GetSpotLightExponentInputParameters();
@@ -141,7 +143,7 @@ std::vector<Eigen::Vector3d> AttenuationClass::GetPointsCircle(const int numOfVe
 std::vector<Point2D<double>> AttenuationClass::GetStartPointAndEndPoint() {
     std::vector<Eigen::Vector3d> points = GetPointsCircle(2);
     
-    std::vector<Point2D<double>> outputPoints(2);
+    std::vector<Point2D<double>> outputPoints;
     Eigen::Vector4d point;
     Point2D<int> ScreenCoordFromWorldToPixelUnits;
     
@@ -163,6 +165,7 @@ std::vector<Point2D<double>> AttenuationClass::GetStartPointAndEndPoint() {
                                               (ScreenCoordFromWorldToPixelUnits.x + input->principalPoint.x ));
         
         std::cout << screenToPixel.y << "::" << screenToPixel.x << std::endl;
+        outputPoints.push_back(Point2D<double>(screenToPixel.y, screenToPixel.x));
         
     }
     
@@ -181,10 +184,11 @@ void AttenuationClass::GetPointsAndIntensityToCalculateAttenuationFactor() {
     // Getting the 2 points means we will get it on opposite ends
     
     std::vector<Point2D<double>> outputPoints = GetStartPointAndEndPoint();
-    
-    double radius = circleData->radius;
+    std::vector<Point2D<double>> pixelsOnLine = GetIntensityOfPoints(outputPoints);
     // convert to pixel units
     // check if the returned points are
+    
+    WriteToImage(pixelsOnLine);
     
 }
 
@@ -205,45 +209,62 @@ void AttenuationClass::GetPointsAndIntensityToCalculateAttenuationFactor() {
 //            |               | (x0 < x1 && y0 > y1)
 /*******************************************************/
 // We deal with images and start (0,0) is from top left.
-void AttenuationClass::GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints) {
-    double deltaX = (outputPoints[1].x - outputPoints[0].x);
-    double deltaY = (outputPoints[1].y - outputPoints[0].y);
-
-    double slope = 0;
-    if (deltaX > 0) {
-        slope = deltaY / deltaX;
-    }
-  
-    if (slope > 0) {
-        if (std::abs(slope) <= 1) { // increment X
-            if (outputPoints[0].x > outputPoints[1].x)
-                std::swap(outputPoints[0], outputPoints[1]);
-            
-            // start with increment along X
-        }
-        else if(std::abs(slope) > 1) { // increment Y
-            if (outputPoints[0].y > outputPoints[1].y)
-                std::swap(outputPoints[0], outputPoints[1]);
-            
-            // start with increment along Y
-        }
-    }
-    else if(slope < 0) {
-        if (std::abs(slope) <= 1) { // increment X
-            if (outputPoints[0].x > outputPoints[1].x)
-                std::swap(outputPoints[0], outputPoints[1]);
-            
-            // start with increment along X
-        }
-        else if(std::abs(slope) > 1) { // increment Y
-            if (outputPoints[0].y > outputPoints[1].y)
-                std::swap(outputPoints[0], outputPoints[1]);
-            
-            // start with increment along Y
-        }
-        
+std::vector<Point2D<double>> AttenuationClass::GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints) {
+    
+    std::vector<Point2D<double>> pixelsOnLine;
+    
+    Point2D<double> start(outputPoints[0]);
+    Point2D<double> end(outputPoints[1]);
+    
+    double deltaX = std::abs(end.x - start.x);
+    double deltaY = std::abs(end.y - start.y);
+    
+    bool isYTobeIncremented = false;
+    if (deltaY > deltaX) {
+        isYTobeIncremented = true;
+        std::swap(start.x, start.y);
+        std::swap(end.x, end.y);
     }
     
+    if (start.x > end.x) {
+        std::swap(start, end);
+    }
+    
+    const int ystep = (start.y < end.y) ? 1 : -1;
+    int yindex = start.y;
+    double error = deltaX/2.0;
+
+    for (int xindex = start.x; xindex <= end.x; ++xindex) {
+        if (isYTobeIncremented)
+            pixelsOnLine.push_back(Point2D<double>(xindex, yindex));
+        else
+            pixelsOnLine.push_back(Point2D<double>(yindex, xindex));
+        
+        error = error - deltaY;
+        if (error < 0) {
+            yindex = yindex + ystep;
+            error = error + deltaX;
+        }
+    }
+    
+    return pixelsOnLine;
+}
+
+void AttenuationClass::GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<double>& endPoint) {
+    double deltaX = endPoint.x - startPoint.x;
+    double deltaY = endPoint.y - startPoint.y;
+    double slope = deltaY / deltaX;
+    
+    double error = 0;
+    int y = startPoint.y;
+    
+    for(int index = startPoint.x; startPoint.x <= endPoint.x; ++index) {
+        error = error + slope;
+        while (error >= 0.5) {
+            y = y + (endPoint.y - startPoint.y);
+            error = error - 1.0;
+        }
+    }
 }
 
 void AttenuationClass::GetPixelCoordFromWorldPoints() {
@@ -278,10 +299,20 @@ void AttenuationClass::GetPixelCoordFromWorldPoints() {
          
         outputPoints[index] = Point2D<double>(screenToPixel.y, screenToPixel.x);
     }
-    WriteToImage(outputPoints);
+   // WriteToImage(outputPoints);
 }
 
 void AttenuationClass::WriteToImage(std::vector<Point2D<double>>& outputPoints) {
+    
+    // Test
+    static int fileNumber = 1;
+    string Result;
+    std::ostringstream convert;
+    convert << fileNumber;
+    Result = convert.str();
+    
+    ///////
+    
     UtilityClass* util = new UtilityClass();
     Rgba* outputPixels = util->GetImagePixelsToWrite(_spotLightParamEstClass._imageWidth, _spotLightParamEstClass._imageHeight);
     
@@ -298,10 +329,11 @@ void AttenuationClass::WriteToImage(std::vector<Point2D<double>>& outputPoints) 
         outputPixels[i] = Rgba(1,0,0);
     }
     
-    std::string outputfileName = "../../Output/circlepoints.exr";
+    std::string outputfileName = "../../Output/circlepoints"+ Result + ".exr";
     util->WriteImage2DArrayPixels(outputfileName, outputPixels, input->imageWidth, input->imageHeight);
     delete util;
     delete [] outputPixels;
+    fileNumber++;
 }
 
 

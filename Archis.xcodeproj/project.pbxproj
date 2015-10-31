@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
-		D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */; settings = {ASSET_TAGS = (); }; };
-		D6DA22D91BCAD867003EF160 /* AttenuationClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */; settings = {ASSET_TAGS = (); }; };
-		D6DA231D1BD17E54003EF160 /* InitializerClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231B1BD17E54003EF160 /* InitializerClass.cpp */; settings = {ASSET_TAGS = (); }; };
-		D6DA23211BD318B1003EF160 /* SystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231F1BD318B1003EF160 /* SystemClass.cpp */; settings = {ASSET_TAGS = (); }; };
+		D6B03E8F1BB893A30059B286 /* CannyFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */; };
+		D6B03E921BB89AFE0059B286 /* SobelFilterClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */; };
+		D6DA22D91BCAD867003EF160 /* AttenuationClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA22D71BCAD867003EF160 /* AttenuationClass.cpp */; };
+		D6DA231D1BD17E54003EF160 /* InitializerClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231B1BD17E54003EF160 /* InitializerClass.cpp */; };
+		D6DA23211BD318B1003EF160 /* SystemClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6DA231F1BD318B1003EF160 /* SystemClass.cpp */; };
 		D6F178FB1BAE76AD000A1F5E /* ReprojectionClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789B1BAE76AD000A1F5E /* ReprojectionClass.cpp */; };
 		D6F178FC1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F1789D1BAE76AD000A1F5E /* SpotLightFallOFFIntensityCalculator.cpp */; };
 		D6F178FD1BAE76AD000A1F5E /* DBSCAN_Class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D6F178A01BAE76AD000A1F5E /* DBSCAN_Class.cpp */; };
@@ -48,6 +48,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D69D0FC11BE52C21005F941F /* Radius60Distance5Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius60Distance5Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC21BE52C4D005F941F /* Radius60Distance6Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius60Distance6Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC31BE52C73005F941F /* Radius45Distance3Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius45Distance3Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC41BE52CC1005F941F /* Radius45Distance5Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius45Distance5Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC51BE52CD2005F941F /* Radius45Distance6Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius45Distance6Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC61BE52CE8005F941F /* Radius30Distance3Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius30Distance3Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC71BE52D01005F941F /* Radius30Distance5Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius30Distance5Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC81BE52D13005F941F /* Radius30Distance6Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius30Distance6Gain100.txt; sourceTree = "<group>"; };
+		D69D0FC91BE52D28005F941F /* Radius20Distance3Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius20Distance3Gain100.txt; sourceTree = "<group>"; };
+		D69D0FCA1BE52D3F005F941F /* Radius20Distance5Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius20Distance5Gain100.txt; sourceTree = "<group>"; };
+		D69D0FCB1BE52D50005F941F /* Radius20Distance6Gain100.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Radius20Distance6Gain100.txt; sourceTree = "<group>"; };
 		D6B03E8D1BB893A30059B286 /* CannyFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CannyFilterClass.cpp; sourceTree = "<group>"; };
 		D6B03E8E1BB893A30059B286 /* CannyFilterClass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CannyFilterClass.hpp; sourceTree = "<group>"; };
 		D6B03E901BB89AFE0059B286 /* SobelFilterClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SobelFilterClass.cpp; sourceTree = "<group>"; };
@@ -422,6 +433,17 @@
 				D6DA23161BCE05B9003EF160 /* Gain200Distance3.txt */,
 				D6DA23171BCE05F1003EF160 /* Gain200Distance5.txt */,
 				D6DA231E1BD1CDE1003EF160 /* Radius60Distance3Gain100.txt */,
+				D69D0FC11BE52C21005F941F /* Radius60Distance5Gain100.txt */,
+				D69D0FC21BE52C4D005F941F /* Radius60Distance6Gain100.txt */,
+				D69D0FC31BE52C73005F941F /* Radius45Distance3Gain100.txt */,
+				D69D0FC41BE52CC1005F941F /* Radius45Distance5Gain100.txt */,
+				D69D0FC51BE52CD2005F941F /* Radius45Distance6Gain100.txt */,
+				D69D0FC61BE52CE8005F941F /* Radius30Distance3Gain100.txt */,
+				D69D0FC71BE52D01005F941F /* Radius30Distance5Gain100.txt */,
+				D69D0FC81BE52D13005F941F /* Radius30Distance6Gain100.txt */,
+				D69D0FC91BE52D28005F941F /* Radius20Distance3Gain100.txt */,
+				D69D0FCA1BE52D3F005F941F /* Radius20Distance5Gain100.txt */,
+				D69D0FCB1BE52D50005F941F /* Radius20Distance6Gain100.txt */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
