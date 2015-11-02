@@ -107,7 +107,9 @@ SpotLightParameterEstimationClass::InputForExponentCalculation* SpotLightParamet
     
     ReprojectionClass* reprojectionClass = new ReprojectionClass();
     std::vector<MapOFImageAndWorldPoints>reprojectedPoints;
-    reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry((_imageSystem->GetCurrentImage()).GetImage2DArrayPixels());
+    // Uncomment this if we are going to pass in Array<RGBA> of the pixels that we obtained from the circumference of the illumination
+    //reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry((_imageSystem->GetCurrentImage()).GetImage2DArrayPixels());
+    reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry();
     
     _inputSetter = new InputForExponentCalculation(_imageWidth, _imageHeight, lightIntensity, lightDirection, lightPosition, gammaCorrection,vnormal, cosOfInnerConeAngle, cosOfOuterConeAngle, materialAlbedo, reprojectedPoints);
     
@@ -131,7 +133,7 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
     double maxExponentValue = DBL_MIN;
     double minExponentValue = DBL_MAX;
     
-    double r = _inputSetter->vnormal.dot(Eigen::Vector3d(-4,-4,2) - _inputSetter->lightPosition);
+    //double r = _inputSetter->vnormal.dot(Eigen::Vector3d(-4,-4,2) - _inputSetter->lightPosition);
     
     std::vector<Point2D<int>> spotLightCoreExponentVectorPosition;
     for (int index = 0; index < reprojectedPoints.size(); ++index) {
@@ -284,7 +286,7 @@ void SpotLightParameterEstimationClass::WriteExponentValueToImage() {
     delete util;
 }
 
-// No scaling
+// scaling
 void SpotLightParameterEstimationClass::WriteExponentValueToImage(double maxExpValue, double minExpValue) {
     UtilityClass* util = new UtilityClass();
     Rgba* outputPixels = util->GetImagePixelsToWrite(_imageWidth,_imageHeight);

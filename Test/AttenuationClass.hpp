@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include "../LightParameters/SpotLightParameterEstimationClass.h"
+#include <opencv2/highgui/highgui.hpp>
 
 class AttenuationClass {
 public:
@@ -19,9 +20,10 @@ public:
     ~AttenuationClass();
     
     void GetOriginalPixelValues();
-    void GetReprojectedPixelValues();
-    void GetPointsAndIntensityToCalculateAttenuationFactor();
+    
+   
     void GetPixelCoordFromWorldPoints();
+    void CalculateAttenuationFactor(cv::Mat& backgroundImage);
 
 private:
     struct circleMetaData {
@@ -42,17 +44,21 @@ private:
         int imageWidth;
         int imageHeight;
         Eigen::Vector3d lightPosition;
+        Eigen::Vector3d lightDirection;
         Eigen::Vector3d normalOfPlane;
+        double cosOfOuterConeAngle;
+        double cosOfInnerConeAngle;
         Point3D<double> vertex;
         double fallOffAngle;
     };
     
-    SpotLightParameterEstimationClass& _spotLightParamEstClass;
-    ParametersFromSystemClasses* input;
-    circleMetaData* circleData;
-    //SpotLightParameterEstimationClass::InputForExponentCalculation* input;
+    SpotLightParameterEstimationClass&  _spotLightParamEstClass;
+    ParametersFromSystemClasses*        _input;
+    circleMetaData*                     _circleData;
+    std::vector<MapOfPixelAndIntensity> _pixelIntensityAlongDiameter;
+    double                              _maxIntensity, _minIntensity;
     
-    void CalculateAttenuationFactor();
+    void GetPointsAndIntensityToCalculateAttenuationFactor();
     
     double GetErrorOforiginalAndReprojectedPixelValues();
     circleMetaData* GetCircleMetaData();
@@ -61,10 +67,14 @@ private:
     std::vector<Point2D<double>> GetStartPointAndEndPoint();
     std::vector<Point2D<double>> GetIntensityOfPoints(std::vector<Point2D<double>>& outputPoints);
     void GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<double>& endPoint);
+    std::vector<MapOFImageAndWorldPoints> GetReprojectedPixelValues();
+    
+    
     
     // Testing
     void WriteToImage(std::vector<Point2D<double>>& outputPoints);
-    
+    void TestIfReprojectedPixelsMatchedTheImagePixel(const std::vector<MapOFImageAndWorldPoints>& reprojectedPoints);
+    void DrawPixelVsIntensityScaled(cv::Mat& backgroundImage);
   };
 
 #endif /* AttenuationClass_hpp */

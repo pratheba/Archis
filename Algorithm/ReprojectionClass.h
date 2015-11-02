@@ -19,8 +19,8 @@ class ReprojectionClass {
 public:
     ReprojectionClass();
     ~ReprojectionClass();
-    
-    std::vector<MapOFImageAndWorldPoints> ReprojectImagePixelsTo3DGeometry(const Array2D<Rgba>& imagePixels);
+    std::vector<MapOFImageAndWorldPoints> ReprojectImagePixelsTo3DGeometry(const std::vector<Point2D<double>>& imagePixels);//const Array2D<Rgba>& imagePixels);
+    std::vector<MapOFImageAndWorldPoints> ReprojectImagePixelsTo3DGeometry();
 
 private:
     const GeometrySystemClass& geometryClass;

@@ -6,42 +6,49 @@
 //  Copyright © 2015 Pratheba Selvaraju. All rights reserved.
 //
 
-#include "AttenuationClass.hpp"
 #include <iostream>
 #include <sstream>
+#include "AttenuationClass.hpp"
+#include "../Utility/ExtLibraryUtil/GraphUtils.h"
 
-AttenuationClass::AttenuationClass(SpotLightParameterEstimationClass& spotLightParamEstClass):_spotLightParamEstClass(spotLightParamEstClass),circleData(nullptr) {
-    //input =  _spotLightParamEstClass.GetSpotLightExponentInputParameters();
+AttenuationClass::AttenuationClass(SpotLightParameterEstimationClass& spotLightParamEstClass):_spotLightParamEstClass(spotLightParamEstClass),_circleData(nullptr) {
     
-    input = new ParametersFromSystemClasses();
-    input->camExtrinsicMatrix   = _spotLightParamEstClass._cameraSystem->GetCurrentCameraExtrinsicMatrix();
-    input->focalLength          = (_spotLightParamEstClass._cameraSystem->GetCurrentCamera()).GetFocalLength();
-    input->principalPoint       = (_spotLightParamEstClass._cameraSystem->GetCurrentCamera()).GetPrincipalPoint();
-    input->sensorWidth          = tan((_spotLightParamEstClass._cameraSystem->GetCurrentCamera()).GetFieldOfView() \
-                                      * 0.5 * M_PI/180) * ((_spotLightParamEstClass._cameraSystem->GetCurrentCamera()) \
-                                                           .GetFocalLength()).x * 2;
-    input->sensorHeight         = input->sensorWidth * _spotLightParamEstClass._imageHeight / _spotLightParamEstClass._imageWidth;
-    input->camTransCoord        = (_spotLightParamEstClass._cameraSystem->GetCurrentCamera()).GetTransformationCoord();
+     const CameraEntityClass& camEntity = _spotLightParamEstClass._cameraSystem->GetCurrentCamera();
+    const LightEntityClass& lightEntity = _spotLightParamEstClass._lightSystem->GetCurrentLight();
+    _input = new ParametersFromSystemClasses();
+    _input->camExtrinsicMatrix   = _spotLightParamEstClass._cameraSystem->GetCurrentCameraExtrinsicMatrix();
+    _input->focalLength          = camEntity.GetFocalLength();
+    _input->principalPoint       = camEntity.GetPrincipalPoint();
+    _input->sensorWidth          = tan(camEntity.GetFieldOfView() * 0.5 * M_PI/180) * (camEntity.GetFocalLength()).x * 2;
+    _input->sensorHeight         = _input->sensorWidth * _spotLightParamEstClass._imageHeight / _spotLightParamEstClass._imageWidth;
+    _input->camTransCoord        = camEntity.GetTransformationCoord();
     
-    input->imageWidth           = (_spotLightParamEstClass._imageWidth);
-    input->imageHeight          = (_spotLightParamEstClass._imageHeight);
-    input->fallOffAngle         = (_spotLightParamEstClass._lightSystem->GetCurrentLight()).GetSpotLightOuterConeAngle() * M_PI/
-                                    180;
-    input->lightPosition        = (_spotLightParamEstClass._lightSystem->GetCurrentLight()).GetPosition();
-    input->vertex               = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetAVertex();
-    input->normalOfPlane        = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetVertexNormals()[0];
-    (input->normalOfPlane).normalize();
+    _input->imageWidth           = (_spotLightParamEstClass._imageWidth);
+    _input->imageHeight          = (_spotLightParamEstClass._imageHeight);
+    
+    _input->fallOffAngle         = lightEntity.GetSpotLightOuterConeAngle() * M_PI/180;
+    _input->lightPosition        = lightEntity.GetPosition();
+    _input->lightDirection       = -lightEntity.GetDirectionVector();
+    _input->cosOfOuterConeAngle  = cos(lightEntity.GetSpotLightOuterConeAngle()* M_PI / 180);
+    _input->cosOfInnerConeAngle  = cos(lightEntity.GetSpotLightInnerConeAngle()* M_PI / 180);
+    
+    _input->vertex               = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetAVertex();
+    _input->normalOfPlane        = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetVertexNormals()[0];
+    (_input->normalOfPlane).normalize();
+    _pixelIntensityAlongDiameter.clear();
+    _maxIntensity = DBL_MIN;
+    _minIntensity = DBL_MAX;
 }
 
 AttenuationClass::~AttenuationClass() {
-    if (input != nullptr) {
-        delete input;
-        input = nullptr;
+    if (_input != nullptr) {
+        delete _input;
+        _input = nullptr;
     }
     
-    if (circleData != nullptr) {
-        delete circleData;
-        circleData = nullptr;
+    if (_circleData != nullptr) {
+        delete _circleData;
+        _circleData = nullptr;
     }
 }
 
@@ -74,7 +81,7 @@ double AttenuationClass::GetErrorOforiginalAndReprojectedPixelValues() {
 //    std::ofstream outputReprojValue;
 //    outputReprojValue.open("../../Output/outputReprojectedValue.txt");
 //
-//    std::vector<MapOFImageAndWorldPoints>reprojectedPoints = input->reprojectedPoints;
+//    std::vector<MapOFImageAndWorldPoints>reprojectedPoints = _input->reprojectedPoints;
 //    for (int index = 0; index < reprojectedPoints.size(); ++index) {
 //        Rgba p = (_spotLightParamEstClass._imageSystem.GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.y][reprojectedPoints[index]._imagepixel.x];
 //        outputReprojValue << "["<<reprojectedPoints[index]._imagepixel.y<<"]["<<reprojectedPoints[index]._imagepixel.x<<"]"<<"="<<p.r << "\t" << p.g << "\t" << p.b << std::endl;
@@ -89,56 +96,55 @@ double AttenuationClass::GetErrorOforiginalAndReprojectedPixelValues() {
 
 // Assumption light direction perpendicular to plane
 // Plane is XY
-void AttenuationClass::CalculateAttenuationFactor() {
-    
-}
 
 AttenuationClass::circleMetaData* AttenuationClass::GetCircleMetaData() {
-    if (circleData != nullptr) {
-        return circleData;
+    if (_circleData != nullptr) {
+        return _circleData;
     }
     
-    circleData = new circleMetaData();
+    _circleData = new circleMetaData();
     
-    Eigen::Vector3d pointOnThePlane = Eigen::Vector3d(input->vertex.x,input->vertex.y,input->vertex.z);
+    Eigen::Vector3d pointOnThePlane = Eigen::Vector3d(_input->vertex.x,_input->vertex.y,_input->vertex.z);
     
     // Project the vector from lightposition to pointonplane onto the normal of plane to get the
     // perpendicular distance between the lightsurface and the plane
-    double distanceToPlane = (input->lightPosition - pointOnThePlane).dot(input->normalOfPlane);
+    double distanceToPlane = (_input->lightPosition - pointOnThePlane).dot(_input->normalOfPlane);
     // Since light's normal direction is opposite to that of normal of the plane if we want to
     // illuminate the plane
-    Eigen::Vector3d centerOfProjection = input->lightPosition + distanceToPlane*(-1)*input->normalOfPlane;
+    Eigen::Vector3d centerOfProjection = _input->lightPosition + distanceToPlane*(-1)*_input->normalOfPlane;
     
     // Get the 3 Axis with normal of plane as an axis
-    Eigen::Vector3d axisZ = input->normalOfPlane;
+    Eigen::Vector3d axisZ = _input->normalOfPlane;
     Eigen::Vector3d axizX = (centerOfProjection - pointOnThePlane);
     axizX.normalize();
     Eigen::Vector3d axisY = axisZ.cross(axizX);
     axisY.normalize();
     
-    double radiusOfCircle = tan(input->fallOffAngle)*distanceToPlane;
+    double radiusOfCircle = tan(_input->fallOffAngle)*distanceToPlane;
     
-    circleData->center = centerOfProjection;
-    circleData->radius = radiusOfCircle;
-    circleData->Axis.push_back(axizX);
-    circleData->Axis.push_back(axisY);
-    circleData->Axis.push_back(axisZ);
+    _circleData->center = centerOfProjection;
+    _circleData->radius = radiusOfCircle;
+    _circleData->Axis.push_back(axizX);
+    _circleData->Axis.push_back(axisY);
+    _circleData->Axis.push_back(axisZ);
     
-    return circleData;
+    return _circleData;
 }
+
 
 std::vector<Eigen::Vector3d> AttenuationClass::GetPointsCircle(const int numOfVertices)
 {
-    circleData = GetCircleMetaData();
+    _circleData = GetCircleMetaData();
     std::vector<Eigen::Vector3d> vertex = std::vector<Eigen::Vector3d>(numOfVertices);
     
     for (int step=0;step<numOfVertices;++step)
     {
         float angle=step*M_PI*2/numOfVertices;
-        vertex[step]= circleData->center + circleData->radius*cos(angle)*circleData->Axis[0] + circleData->radius*sin(angle)*circleData->Axis[1];
+        vertex[step]= _circleData->center + _circleData->radius*cos(angle)*_circleData->Axis[0] + _circleData->radius*sin(angle)*_circleData->Axis[1];
     }
     return vertex;
 }
+
 
 std::vector<Point2D<double>> AttenuationClass::GetStartPointAndEndPoint() {
     std::vector<Eigen::Vector3d> points = GetPointsCircle(2);
@@ -149,20 +155,20 @@ std::vector<Point2D<double>> AttenuationClass::GetStartPointAndEndPoint() {
     
     for (int index = 0; index < points.size(); ++index) {
         point << points[index] , 1;
-        Eigen::Vector4d worldtoCam = input->camExtrinsicMatrix * point;
+        Eigen::Vector4d worldtoCam = _input->camExtrinsicMatrix * point;
         Point2D<double> camToScreenCoord = Point2D<double>
-        (input->focalLength.x * (double)(worldtoCam[0]/worldtoCam[2]), \
-         input->focalLength.x  *(double)(worldtoCam[1]/worldtoCam[2]));
+        (_input->focalLength.x * (double)(worldtoCam[0]/worldtoCam[2]), \
+         _input->focalLength.x  *(double)(worldtoCam[1]/worldtoCam[2]));
         
         // convert camToScreenCoord in pixel Units
         
         ScreenCoordFromWorldToPixelUnits.y = camToScreenCoord.y *
-        (_spotLightParamEstClass._imageWidth) / (input->sensorWidth);
+        (_spotLightParamEstClass._imageWidth) / (_input->sensorWidth);
         ScreenCoordFromWorldToPixelUnits.x = camToScreenCoord.x *
-        (_spotLightParamEstClass._imageHeight) / (input->sensorHeight);
+        (_spotLightParamEstClass._imageHeight) / (_input->sensorHeight);
         
-         Point2D<double> screenToPixel  = Point2D<double>(-(ScreenCoordFromWorldToPixelUnits.y - input->principalPoint.y) ,
-                                              (ScreenCoordFromWorldToPixelUnits.x + input->principalPoint.x ));
+         Point2D<double> screenToPixel  = Point2D<double>(-(ScreenCoordFromWorldToPixelUnits.y - _input->principalPoint.y) ,
+                                              (ScreenCoordFromWorldToPixelUnits.x + _input->principalPoint.x ));
         
         std::cout << screenToPixel.y << "::" << screenToPixel.x << std::endl;
         outputPoints.push_back(Point2D<double>(screenToPixel.y, screenToPixel.x));
@@ -171,6 +177,7 @@ std::vector<Point2D<double>> AttenuationClass::GetStartPointAndEndPoint() {
     
     return outputPoints;
 }
+
 
 void AttenuationClass::GetPointsAndIntensityToCalculateAttenuationFactor() {
     /*
@@ -185,11 +192,9 @@ void AttenuationClass::GetPointsAndIntensityToCalculateAttenuationFactor() {
     
     std::vector<Point2D<double>> outputPoints = GetStartPointAndEndPoint();
     std::vector<Point2D<double>> pixelsOnLine = GetIntensityOfPoints(outputPoints);
-    // convert to pixel units
-    // check if the returned points are
     
     WriteToImage(pixelsOnLine);
-    
+    //CalculateAttenuationFactor();
 }
 
 // Bresenham's method
@@ -234,11 +239,31 @@ std::vector<Point2D<double>> AttenuationClass::GetIntensityOfPoints(std::vector<
     int yindex = start.y;
     double error = deltaX/2.0;
 
+    Rgba intensity;
+    double averageIntensity;
     for (int xindex = start.x; xindex <= end.x; ++xindex) {
-        if (isYTobeIncremented)
+        if (isYTobeIncremented) {
             pixelsOnLine.push_back(Point2D<double>(xindex, yindex));
-        else
+            intensity = ((_spotLightParamEstClass._imageSystem)->GetCurrentImage().GetImage2DArrayPixels())[xindex][yindex];
+            averageIntensity = (intensity.r + intensity.g + intensity.b)/3;
+            //std::cout << "[" << xindex << "," << yindex << "]" << " = " << averageIntensity << std::endl;
+            _pixelIntensityAlongDiameter.push_back(MapOfPixelAndIntensity(Point2D<double>(xindex, yindex),averageIntensity));
+
+        }
+        else {
             pixelsOnLine.push_back(Point2D<double>(yindex, xindex));
+            intensity = ((_spotLightParamEstClass._imageSystem)->GetCurrentImage().GetImage2DArrayPixels())[yindex][xindex];
+            averageIntensity = (intensity.r + intensity.g + intensity.b)/3;
+            //std::cout << "[" << yindex << "," << xindex << "]" << " = " << averageIntensity << std::endl;
+            _pixelIntensityAlongDiameter.push_back(MapOfPixelAndIntensity(Point2D<double>(yindex, xindex),averageIntensity));
+        }
+        
+        if (_maxIntensity < averageIntensity) {
+            _maxIntensity = averageIntensity;
+        }
+        if (_minIntensity > averageIntensity) {
+            _minIntensity = averageIntensity;
+        }
         
         error = error - deltaY;
         if (error < 0) {
@@ -249,6 +274,7 @@ std::vector<Point2D<double>> AttenuationClass::GetIntensityOfPoints(std::vector<
     
     return pixelsOnLine;
 }
+
 
 void AttenuationClass::GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<double>& endPoint) {
     double deltaX = endPoint.x - startPoint.x;
@@ -267,40 +293,86 @@ void AttenuationClass::GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<d
     }
 }
 
-void AttenuationClass::GetPixelCoordFromWorldPoints() {
+
+void AttenuationClass::CalculateAttenuationFactor(cv::Mat& backgroundImage) {
     
+    GetPointsAndIntensityToCalculateAttenuationFactor();
+    std::vector<MapOFImageAndWorldPoints> reprojectedPoints = GetReprojectedPixelValues();
+    // Reprojected 3D points
+   
+    double gamma = ((_spotLightParamEstClass._lightSystem)->GetCurrentLight()).GetGammaCorrection();
+    double cosOfInner_minus_OuterConeAngle  =   _input->cosOfInnerConeAngle - _input->cosOfOuterConeAngle;
+    if(cosOfInner_minus_OuterConeAngle == 0)
+        cosOfInner_minus_OuterConeAngle = 0.000001;
+    
+    std::vector<Point2D<int>> spotLightCoreExponentVectorPosition;
+    for (int index = 0; index < reprojectedPoints.size(); ++index) {
+        
+        Rgba pixelIntensityValue =(_spotLightParamEstClass._imageSystem->GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.y][reprojectedPoints[index]._imagepixel.x];
+        double averagePixelIntensityValue   =  (powl(pixelIntensityValue.r,gamma) + powl(pixelIntensityValue.g,gamma) + powl(pixelIntensityValue.b,gamma))/3;
+        
+        Eigen::Vector3d lightToPointDirectionVector =  reprojectedPoints[index]._worldPoint - _input->lightPosition;
+        double distance = std::sqrt(lightToPointDirectionVector.dot(lightToPointDirectionVector));
+        lightToPointDirectionVector.normalize();
+        float lambertTerm = (-lightToPointDirectionVector).dot(_input->normalOfPlane);
+       
+        if (lambertTerm <= 0) {
+            continue;
+        }
+        double cosOfCurrAngle                   = _input->lightDirection.dot(lightToPointDirectionVector);
+        double IntensityFactorWithoutExponent = (double)((cosOfCurrAngle - _input->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
+        
+        std::cout << "Distance = " << distance << " = ";
+        for (int alpha=1; alpha <=10; ++alpha) {
+            double attenuationFactor = averagePixelIntensityValue / (100 * 0.5 * lambertTerm * pow(IntensityFactorWithoutExponent, alpha));
+            std::cout << attenuationFactor << ",";
+        }
+        std::cout << std::endl;
+    }
+    //DrawPixelVsIntensityScaled(backgroundImage);
+}
+
+
+std::vector<MapOFImageAndWorldPoints> AttenuationClass::GetReprojectedPixelValues() {
+    ReprojectionClass* reprojectionClass = new ReprojectionClass();
+    std::vector<MapOFImageAndWorldPoints>reprojectedPoints;
+    
+    std::vector<Point2D<double>> reprojectPixelsAlongDiameter;
+    for (int index =0; index < _pixelIntensityAlongDiameter.size(); ++index)
+        reprojectPixelsAlongDiameter.push_back(_pixelIntensityAlongDiameter[index]._imagePixel);
+    
+    reprojectedPoints = reprojectionClass->ReprojectImagePixelsTo3DGeometry(reprojectPixelsAlongDiameter);
+    //TestIfReprojectedPixelsMatchedTheImagePixel(reprojectedPoints);
+    
+    delete reprojectionClass;
+    return reprojectedPoints;
+}
+
+
+void AttenuationClass::DrawPixelVsIntensityScaled(cv::Mat& backgroundImage) {
+    GetPointsAndIntensityToCalculateAttenuationFactor();
+    if (_pixelIntensityAlongDiameter.empty()) {
+        std::cout << "No pixels to calculate attenuation" << std::endl;
+        return;
+    }
     /*
-     1. First get the extrinsic matrix
-     2. Multiply the circle points by the extrinsic matrix to get the points in camera coordinate system
-     3. Divide the X and Y by Z and multiple by focal lenth - all in world units
-     4. Now we have U = X*f/Z and V = Y*f/Z which is in the screen coordinate system
-     5. Now convert this into pixel coordinate by 
-     
-     Get the 00 of the pixel coordinate and then + U*(uVec) + V*(-vVec) gives the pixel point
-     
+     1. Get the pixel count
+     2. Get the pixel intensity in an array
+     3. start graphing
      */
     
-    std::vector<Eigen::Vector3d> points = GetPointsCircle(60);
-    Eigen::Vector4d point;
-    std::vector<Point2D<double>> outputPoints(60, Point2D<double>());
-    for (int index = 0; index < points.size(); ++index) {
-        point << points[index] , 1;
-        Eigen::Vector4d worldtoCam = input->camExtrinsicMatrix * point;
-        Point2D<double> camToScreenCoord = Point2D<double>(
-                                                           input->focalLength.x*(double)(worldtoCam[0]/worldtoCam[2]),
-                                                           input->focalLength.x*(double)(worldtoCam[1]/worldtoCam[2]));
-        
-        // convert camToScreenCoord in pixel Units
-        Point2D<int> ScreenCoordFromWorldToPixelUnits;
-        ScreenCoordFromWorldToPixelUnits.y = camToScreenCoord.y * (input->imageHeight) / (input->sensorHeight);
-        ScreenCoordFromWorldToPixelUnits.x = camToScreenCoord.x * (input->imageWidth) / (input->sensorWidth);
-        
-        Point2D<double> screenToPixel = Point2D<double>(-(ScreenCoordFromWorldToPixelUnits.y - input->principalPoint.y) ,(ScreenCoordFromWorldToPixelUnits.x + input->principalPoint.x ));
-         
-        outputPoints[index] = Point2D<double>(screenToPixel.y, screenToPixel.x);
-    }
-   // WriteToImage(outputPoints);
+    // Convert to scale of 0 to 255
+    double diffMaxMin = _maxIntensity - _minIntensity;
+    std::vector<double> scaledPixelIntensity = std::vector<double>(_pixelIntensityAlongDiameter.size(), 0);
+    for (int index = 0; index < _pixelIntensityAlongDiameter.size(); ++index)
+        scaledPixelIntensity[index] = ((_pixelIntensityAlongDiameter[index]._intensityAverage - _minIntensity)/(diffMaxMin))*(255);
+  
+    int height = backgroundImage.rows;
+    drawGraph(&scaledPixelIntensity[0], (int)scaledPixelIntensity.size(), DATATYPE::DOUBLE, backgroundImage, (double)0, (double)255, (int)scaledPixelIntensity.size() , height , "Yaw (in degrees)");
+    //showImage(backgroundImage, 0, "Rotation Angle");
+    cv::imwrite("finalImage.jpg", backgroundImage);
 }
+
 
 void AttenuationClass::WriteToImage(std::vector<Point2D<double>>& outputPoints) {
     
@@ -319,34 +391,67 @@ void AttenuationClass::WriteToImage(std::vector<Point2D<double>>& outputPoints) 
     for(int row = 0; row < _spotLightParamEstClass._imageHeight; ++row) {
         for (int col = 0; col < _spotLightParamEstClass._imageWidth; ++col) {
             Rgba p = (_spotLightParamEstClass._imageSystem->GetCurrentImage().GetImage2DArrayPixels())[row][col];
-            int i = row * input->imageWidth + col;
+            int i = row * _input->imageWidth + col;
             outputPixels[i] = p;
         }
     }
     
     for (int index = 0; index < outputPoints.size(); ++index) {
-        int i = outputPoints[index].y * input->imageWidth + outputPoints[index].x;
+        int i = outputPoints[index].y * _input->imageWidth + outputPoints[index].x;
         outputPixels[i] = Rgba(1,0,0);
     }
     
     std::string outputfileName = "../../Output/circlepoints"+ Result + ".exr";
-    util->WriteImage2DArrayPixels(outputfileName, outputPixels, input->imageWidth, input->imageHeight);
+    util->WriteImage2DArrayPixels(outputfileName, outputPixels, _input->imageWidth, _input->imageHeight);
     delete util;
     delete [] outputPixels;
     fileNumber++;
 }
 
 
-//void AttenuationClass::CalculateAttenuationFactor() {
-//    
-//    for (int alpha = 1; alpha < 20; ++alpha) {
-//        int perpDistance[3] = {3,5,6};
-//        
-//        double fallOffAngle = GetFallOffAngle();
-//        for (int theta=0; theta < fallOffAngle; ++theta) {
-//            
-//        }
-//    }
-//    
-//}
+void AttenuationClass::TestIfReprojectedPixelsMatchedTheImagePixel(const std::vector<MapOFImageAndWorldPoints>& reprojectedPoints ) {
+    for (int index = 0; index < reprojectedPoints.size(); ++index) {
+        Rgba pixelIntensityValue =(_spotLightParamEstClass._imageSystem->GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.y][reprojectedPoints[index]._imagepixel.x];
+        double averagePixelIntensityValue   =  (pixelIntensityValue.r + pixelIntensityValue.g + pixelIntensityValue.b)/3;
+         std::cout << reprojectedPoints[index]._imagepixel.x << "," << reprojectedPoints[index]._imagepixel.y << "=" <<  averagePixelIntensityValue << std::endl;
+    }
+    std::cout << "****************************************" << std::endl;
+    for (int index =0; index < _pixelIntensityAlongDiameter.size(); ++index) {
+        std::cout << _pixelIntensityAlongDiameter[index]._imagePixel.x << "," << _pixelIntensityAlongDiameter[index]._imagePixel.y << "=" <<  _pixelIntensityAlongDiameter[index]._intensityAverage << std::endl;
+    }
+}
 
+
+void AttenuationClass::GetPixelCoordFromWorldPoints() {
+    
+    /*
+     1. First get the extrinsic matrix
+     2. Multiply the circle points by the extrinsic matrix to get the points in camera coordinate system
+     3. Divide the X and Y by Z and multiple by focal lenth - all in world units
+     4. Now we have U = X*f/Z and V = Y*f/Z which is in the screen coordinate system
+     5. Now convert this into pixel coordinate by
+     
+     Get the 00 of the pixel coordinate and then + U*(uVec) + V*(-vVec) gives the pixel point
+     
+     */
+    
+    std::vector<Eigen::Vector3d> points = GetPointsCircle(60);
+    Eigen::Vector4d point;
+    std::vector<Point2D<double>> outputPoints(60, Point2D<double>());
+    for (int index = 0; index < points.size(); ++index) {
+        point << points[index] , 1;
+        Eigen::Vector4d worldtoCam = _input->camExtrinsicMatrix * point;
+        Point2D<double> camToScreenCoord = Point2D<double>(
+                                                           _input->focalLength.x*(double)(worldtoCam[0]/worldtoCam[2]),
+                                                           _input->focalLength.x*(double)(worldtoCam[1]/worldtoCam[2]));
+        
+        // convert camToScreenCoord in pixel Units
+        Point2D<int> ScreenCoordFromWorldToPixelUnits;
+        ScreenCoordFromWorldToPixelUnits.y = camToScreenCoord.y * (_input->imageHeight) / (_input->sensorHeight);
+        ScreenCoordFromWorldToPixelUnits.x = camToScreenCoord.x * (_input->imageWidth) / (_input->sensorWidth);
+        
+        Point2D<double> screenToPixel = Point2D<double>(-(ScreenCoordFromWorldToPixelUnits.y - _input->principalPoint.y) ,(ScreenCoordFromWorldToPixelUnits.x + _input->principalPoint.x ));
+        
+        outputPoints[index] = Point2D<double>(screenToPixel.y, screenToPixel.x);
+    }
+}

@@ -92,7 +92,7 @@ ReprojectionClass::~ReprojectionClass() {
 
 // Refactor this
 
-std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3DGeometry(const Array2D<Rgba>& imagePixels) {
+std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3DGeometry(const std::vector<Point2D<double>>& imagePixels) {
     std::vector<MapOFImageAndWorldPoints> reprojectedPoints;
     
     /**** Geometry Data ****/
@@ -131,6 +131,68 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
     double numerator = (Eigen::Vector3d(vertex.x,vertex.y,vertex.z) - camTransCoord._posVec).dot(vnormal);
     double denom = 0;
     
+    for(int index = 0; index < imagePixels.size(); ++index) {
+        Eigen::Vector3d pixel = centerOfPixel00 + imagePixels[index].x* PixelWidth* camTransCoord._xVec - imagePixels[index].y* PixelHeight*camTransCoord._yVec;
+        Eigen::Vector3d ray = pixel - camTransCoord._posVec;
+        ray.normalize();
+        denom = ray.dot(vnormal);
+        
+        if (denom != 0)
+        {
+            double t = numerator/denom;
+            if (t > 0)
+            {
+                Eigen::Vector3d intersectionPoint = camTransCoord._posVec + t*(ray);
+                if ((intersectionPoint.x() >= maxminCoord._minX && intersectionPoint.x() <= maxminCoord._maxX)
+                    &&(intersectionPoint.y() >= maxminCoord._minY && intersectionPoint.y() <= maxminCoord._maxY))
+                {
+                    reprojectedPoints.push_back(MapOFImageAndWorldPoints(Point2D<int>(imagePixels[index].y,imagePixels[index].x),intersectionPoint));
+                }
+            }
+        }
+    }
+    return reprojectedPoints;
+}
+
+std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3DGeometry() {
+    std::vector<MapOFImageAndWorldPoints> reprojectedPoints;
+    
+    /**** Geometry Data ****/
+    std::vector<Point3D<double>> vertices;
+    std::vector<Eigen::Vector3d> vertexnormals;
+    Point3D<double> vertex;
+    Eigen::Vector3d vnormal;
+    
+    GEOMETRYTYPE geometryType = geometryEntity.GetGeometryType();
+    if (geometryType == PLANE) {
+        vertex = (geometryEntity.GetVertices()).at(0);
+        vnormal = (geometryEntity.GetVertexNormals()).at(0);
+        vnormal.normalize();
+    }
+    else {
+        vertices       = geometryEntity.GetVertices();
+        vertexnormals  = geometryEntity.GetVertexNormals();
+    }
+    MaxMinCoord maxminCoord = geometryEntity.GetMaxMinOfGeometry();
+    
+    /**** Camera Data ****/
+    EntityClass::TransformationCOORD camTransCoord = camEntity.GetTransformationCoord();
+    
+    /**** Image Data ****/
+    Eigen::Vector3d centerOfPixel00 = GetCenterOfStartOfDataImagePixelsInWorldCoord();
+    int imageWidth = (int)(imageEntity.GetImage2DArrayPixels()).width();
+    int imageHeight = (int)(imageEntity.GetImage2DArrayPixels()).height();
+    
+    PixelToWorldCoord PixelToWorld(camEntity.GetFieldOfView(), (camEntity.GetFocalLength()).x, imageWidth, imageHeight);
+    double PixelWidth = PixelToWorld.GetPixelWidth();
+    double PixelHeight = PixelToWorld.GetPixelHeight();
+    
+    /***** Implementation ****/
+    //    double d = -(Eigen::Vector3d(vertex.x,vertex.y,vertex.z).dot(vnormal));
+    //    double numerator =  -(d + camTransCoord._posVec.dot(vnormal));
+    double numerator = (Eigen::Vector3d(vertex.x,vertex.y,vertex.z) - camTransCoord._posVec).dot(vnormal);
+    double denom = 0;
+    
     for (int row = 0; row < imageHeight; ++row) {
         for (int col = 0; col < imageWidth; ++col) {
             
@@ -154,7 +216,6 @@ std::vector<MapOFImageAndWorldPoints> ReprojectionClass::ReprojectImagePixelsTo3
             }
         }
     }
-    
     return reprojectedPoints;
 }
 

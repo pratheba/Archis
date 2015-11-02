@@ -98,12 +98,15 @@ struct MapOFImageAndWorldPoints {
 };
 
 struct MapOfPixelAndIntensity {
-    Point2D<int> _imagePixel;
-    Rgba _intensity;
+    Point2D<double> _imagePixel;
+    Rgba _intensityRGBA;
+    double _intensityAverage;
     
     MapOfPixelAndIntensity() {}
-    MapOfPixelAndIntensity(const Point2D<int>& imagePixel, const Rgba& intensity):
-                            _imagePixel(imagePixel), _intensity(intensity){}
+    MapOfPixelAndIntensity(const Point2D<double>& imagePixel, const Rgba& intensityRGBA):
+                            _imagePixel(imagePixel), _intensityRGBA(intensityRGBA){}
+    MapOfPixelAndIntensity(const Point2D<double>& imagePixel, const double& intensityAverage):
+    _imagePixel(imagePixel), _intensityAverage(intensityAverage){}
 };
 
 double rad2deg(const double& radian);

@@ -28,10 +28,10 @@ void SpotLightFallOFFIntensityCalculator::Initialize(const Array2D<Rgba>& inputI
 int SpotLightFallOFFIntensityCalculator::GetNumberOfRadiusSegments(const Array2D<Rgba>& inputImage_, const Point2D<int>& corePoint_) {
     
     //Get Max distance from core point to all points in image
-    int max1 = std::sqrt(std::pow(corePoint_.x, 2) + std::pow(corePoint_.y, 2));
-    int max2 = std::sqrt(std::pow(corePoint_.x - inputImage_.width(), 2) + std::pow(corePoint_.y - inputImage_.height(), 2));
-    int max3 = std::sqrt(std::pow(corePoint_.x - inputImage_.width(), 2) + std::pow(corePoint_.y, 2));
-    int max4 = std::sqrt(std::pow(corePoint_.x, 2) + std::pow(corePoint_.y - inputImage_.height(), 2));
+    int max1 = std::sqrt(powf(corePoint_.x, 2) + powf(corePoint_.y, 2));
+    int max2 = std::sqrt(powf(corePoint_.x - inputImage_.width(), 2) + powf(corePoint_.y - inputImage_.height(), 2));
+    int max3 = std::sqrt(powf(corePoint_.x - inputImage_.width(), 2) + powf(corePoint_.y, 2));
+    int max4 = std::sqrt(powf(corePoint_.x, 2) + powf(corePoint_.y - inputImage_.height(), 2));
     
     int max = std::max(std::max(std::max(max1, max2), max3), max4);
     return (int)(max/BLOCKSIZE);
@@ -173,7 +173,7 @@ void SpotLightFallOFFIntensityCalculator::GetLightFallOffPointsfromCorePoints_Us
  
             Point2D<int> currPixel = Point2D<int>((row - corePoint_.y),(col - corePoint_.x));
             
-            double distance = std::sqrt(std::pow(currPixel.x, 2) + std::pow(currPixel.y, 2));
+            double distance = std::sqrt(powf(currPixel.x, 2) + powf(currPixel.y, 2));
             int theta = (int)rad2deg(atan2(-currPixel.y, currPixel.x));
             int block = (distance - 1) / (BLOCKSIZE );
             
