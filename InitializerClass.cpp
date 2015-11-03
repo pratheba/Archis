@@ -26,6 +26,9 @@ void InitializerClass::ParseResouceFileAndRunSpotLightParameterEstimation(const 
     std::string inputFileName = "/Users/prathebaselvaraju/4-Projects/Archis/Input/BackGroundImage.jpg";
     cv::Mat inputFile = cv::imread(inputFileName);
     
+    
+    std::vector<std::vector<std::vector<Point2D<double>>>> attenuationVsDistance;
+    AttenuationClass* attClass = nullptr;
     for (int file = 0; file < resourceFiles.size(); ++file) {
         SystemClass* systemClass = new SystemClass();
         parser->ParseResourceFile(resourceFiles[file], *systemClass);
@@ -33,15 +36,23 @@ void InitializerClass::ParseResouceFileAndRunSpotLightParameterEstimation(const 
         //spotLightParamEstClass.GetSpotLightExponentFromImage();
         spotLightParamEstClass.SetTheInputParameters();
         
-        AttenuationClass* attClass = new AttenuationClass(spotLightParamEstClass);
+        if (attClass == nullptr) {
+            attClass = new AttenuationClass(spotLightParamEstClass);
+            attClass->SetNumberOfInputFilesForCalculatingAttenuationFactor((int)resourceFiles.size());
+        } else {
+            attClass->Reinitialize(spotLightParamEstClass);
+        }
         
-        attClass->CalculateAttenuationFactor(inputFile);
+        attClass->CalculateAttenuationFactor(file);
+        //attClass->DrawGraph(inputFile);
         //attClass->GetPixelCoordFromWorldPoints();
         
         delete systemClass;
-        delete attClass;
+     //   delete attClass;
     }
+    attClass->DrawGraph(inputFile);
     delete parser;
+    delete attClass;
     spotLightParamEstClass.Release();
 }
 

@@ -19,11 +19,12 @@ public:
     AttenuationClass(SpotLightParameterEstimationClass& spotLightParamEstClass);
     ~AttenuationClass();
     
-    void GetOriginalPixelValues();
-    
    
-    void GetPixelCoordFromWorldPoints();
-    void CalculateAttenuationFactor(cv::Mat& backgroundImage);
+    void CalculateAttenuationFactor(int fileIndex);
+    void Reinitialize(SpotLightParameterEstimationClass& spotLightParamEstClass);
+    void DrawGraph(cv::Mat& outputGraph);
+    
+    void SetNumberOfInputFilesForCalculatingAttenuationFactor(int numOfFiles);
 
 private:
     struct circleMetaData {
@@ -57,7 +58,9 @@ private:
     circleMetaData*                     _circleData;
     std::vector<MapOfPixelAndIntensity> _pixelIntensityAlongDiameter;
     double                              _maxIntensity, _minIntensity;
+    double                              _minXValue, _maxXValue, _minYValue, _maxYValue;
     
+    std::vector<std::vector<std::vector<Point2D<double>>>> _attenuationFactorAndDistance;
     void GetPointsAndIntensityToCalculateAttenuationFactor();
     
     double GetErrorOforiginalAndReprojectedPixelValues();
@@ -69,9 +72,12 @@ private:
     void GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<double>& endPoint);
     std::vector<MapOFImageAndWorldPoints> GetReprojectedPixelValues();
     
-    
+    std::vector<Point2D<double>> _attenFactorVsDistance;
+    void DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage);
+
     
     // Testing
+    void GetPixelCoordFromWorldPoints();
     void WriteToImage(std::vector<Point2D<double>>& outputPoints);
     void TestIfReprojectedPixelsMatchedTheImagePixel(const std::vector<MapOFImageAndWorldPoints>& reprojectedPoints);
     void DrawPixelVsIntensityScaled(cv::Mat& backgroundImage);

@@ -1,4 +1,4 @@
-//
+
 //  AttenuationClass.cpp
 //  Archis
 //
@@ -28,7 +28,7 @@ AttenuationClass::AttenuationClass(SpotLightParameterEstimationClass& spotLightP
     
     _input->fallOffAngle         = lightEntity.GetSpotLightOuterConeAngle() * M_PI/180;
     _input->lightPosition        = lightEntity.GetPosition();
-    _input->lightDirection       = -lightEntity.GetDirectionVector();
+    _input->lightDirection       = -lightEntity.GetDirectionVector(); // since we get -Zvec which is opposite of lookat direction
     _input->cosOfOuterConeAngle  = cos(lightEntity.GetSpotLightOuterConeAngle()* M_PI / 180);
     _input->cosOfInnerConeAngle  = cos(lightEntity.GetSpotLightInnerConeAngle()* M_PI / 180);
     
@@ -36,8 +36,14 @@ AttenuationClass::AttenuationClass(SpotLightParameterEstimationClass& spotLightP
     _input->normalOfPlane        = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetVertexNormals()[0];
     (_input->normalOfPlane).normalize();
     _pixelIntensityAlongDiameter.clear();
+    _attenuationFactorAndDistance.clear();
     _maxIntensity = DBL_MIN;
     _minIntensity = DBL_MAX;
+    
+    _minXValue = DBL_MAX;
+    _maxXValue = DBL_MIN;
+    _minYValue = DBL_MAX;
+    _maxYValue = DBL_MIN;
 }
 
 AttenuationClass::~AttenuationClass() {
@@ -50,6 +56,46 @@ AttenuationClass::~AttenuationClass() {
         delete _circleData;
         _circleData = nullptr;
     }
+}
+
+void AttenuationClass::Reinitialize(SpotLightParameterEstimationClass &spotLightParamEstClass) {
+    if (_input != nullptr) {
+        delete _input;
+        _input = nullptr;
+    }
+    
+    if (_circleData != nullptr) {
+        delete _circleData;
+        _circleData = nullptr;
+    }
+    
+    const CameraEntityClass& camEntity = _spotLightParamEstClass._cameraSystem->GetCurrentCamera();
+    const LightEntityClass& lightEntity = _spotLightParamEstClass._lightSystem->GetCurrentLight();
+    _input = new ParametersFromSystemClasses();
+    _input->camExtrinsicMatrix   = _spotLightParamEstClass._cameraSystem->GetCurrentCameraExtrinsicMatrix();
+    _input->focalLength          = camEntity.GetFocalLength();
+    _input->principalPoint       = camEntity.GetPrincipalPoint();
+    _input->sensorWidth          = tan(camEntity.GetFieldOfView() * 0.5 * M_PI/180) * (camEntity.GetFocalLength()).x * 2;
+    _input->sensorHeight         = _input->sensorWidth * _spotLightParamEstClass._imageHeight / _spotLightParamEstClass._imageWidth;
+    _input->camTransCoord        = camEntity.GetTransformationCoord();
+    
+    _input->imageWidth           = (_spotLightParamEstClass._imageWidth);
+    _input->imageHeight          = (_spotLightParamEstClass._imageHeight);
+    
+    _input->fallOffAngle         = lightEntity.GetSpotLightOuterConeAngle() * M_PI/180;
+    _input->lightPosition        = lightEntity.GetPosition();
+    _input->lightDirection       = -lightEntity.GetDirectionVector();
+    _input->cosOfOuterConeAngle  = cos(lightEntity.GetSpotLightOuterConeAngle()* M_PI / 180);
+    _input->cosOfInnerConeAngle  = cos(lightEntity.GetSpotLightInnerConeAngle()* M_PI / 180);
+    
+    _input->vertex               = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetAVertex();
+    _input->normalOfPlane        = (_spotLightParamEstClass._geometrySystem->GetCurrentGeometry()).GetVertexNormals()[0];
+    (_input->normalOfPlane).normalize();
+    _pixelIntensityAlongDiameter.clear();
+}
+
+void AttenuationClass::SetNumberOfInputFilesForCalculatingAttenuationFactor(int numOfFiles) {
+    _attenuationFactorAndDistance = std::vector<std::vector<std::vector<Point2D<double>>>>(numOfFiles);
 }
 
 // Private Functions
@@ -294,7 +340,7 @@ void AttenuationClass::GetPointsOnTheLine(Point2D<double>& startPoint, Point2D<d
 }
 
 
-void AttenuationClass::CalculateAttenuationFactor(cv::Mat& backgroundImage) {
+void AttenuationClass::CalculateAttenuationFactor(int fileIndex) {
     
     GetPointsAndIntensityToCalculateAttenuationFactor();
     std::vector<MapOFImageAndWorldPoints> reprojectedPoints = GetReprojectedPixelValues();
@@ -305,7 +351,7 @@ void AttenuationClass::CalculateAttenuationFactor(cv::Mat& backgroundImage) {
     if(cosOfInner_minus_OuterConeAngle == 0)
         cosOfInner_minus_OuterConeAngle = 0.000001;
     
-    std::vector<Point2D<int>> spotLightCoreExponentVectorPosition;
+_attenuationFactorAndDistance[fileIndex] = std::vector<std::vector<Point2D<double>>>((int)reprojectedPoints.size(),std::vector<Point2D<double>>(10));
     for (int index = 0; index < reprojectedPoints.size(); ++index) {
         
         Rgba pixelIntensityValue =(_spotLightParamEstClass._imageSystem->GetCurrentImage().GetImage2DArrayPixels())[reprojectedPoints[index]._imagepixel.y][reprojectedPoints[index]._imagepixel.x];
@@ -320,18 +366,47 @@ void AttenuationClass::CalculateAttenuationFactor(cv::Mat& backgroundImage) {
             continue;
         }
         double cosOfCurrAngle                   = _input->lightDirection.dot(lightToPointDirectionVector);
-        double IntensityFactorWithoutExponent = (double)((cosOfCurrAngle - _input->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
+        double IntensityFactorWithoutExponent = cosOfCurrAngle;//(double)((cosOfCurrAngle - _input->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
         
-        std::cout << "Distance = " << distance << " = ";
-        for (int alpha=1; alpha <=10; ++alpha) {
+        //std::cout << "Distance = " << distance << " = ";
+        for (int alpha=1; alpha <=1; ++alpha) {
             double attenuationFactor = averagePixelIntensityValue / (100 * 0.5 * lambertTerm * pow(IntensityFactorWithoutExponent, alpha));
-            std::cout << attenuationFactor << ",";
+            //std::cout << attenuationFactor << ",";
+            _attenuationFactorAndDistance[fileIndex][index][alpha] = Point2D<double>(attenuationFactor, distance);
+            if (_minXValue > distance) {
+                _minXValue = distance;
+            }
+            if (_minYValue > attenuationFactor) {
+                _minYValue = attenuationFactor;
+            }
+            if (_maxYValue < attenuationFactor) {
+                _maxYValue = attenuationFactor;
+            }
+            if (_maxXValue < distance) {
+                _maxXValue = distance;
+            }
+            
         }
         std::cout << std::endl;
     }
-    //DrawPixelVsIntensityScaled(backgroundImage);
+    
+    std::cout << _minXValue << "," << _maxXValue << "," << _minYValue << "," << _maxYValue << std::endl;
 }
 
+void AttenuationClass::DrawGraph(cv::Mat& outputGraph) {
+    
+    for (int fileIndex = 0; fileIndex < _attenuationFactorAndDistance.size(); ++fileIndex) {
+        std::cout << "Drawing graph for fileIndex = " << fileIndex << std::endl;
+        for (int alpha = 1; alpha < 2; ++alpha) {
+            _attenFactorVsDistance.clear();
+            _attenFactorVsDistance = std::vector<Point2D<double>>((int)_attenuationFactorAndDistance[fileIndex].size());
+            for (int index = 0; index < (int)_attenuationFactorAndDistance[fileIndex].size(); ++index) {
+                _attenFactorVsDistance[index] = (_attenuationFactorAndDistance[fileIndex][index][alpha]);
+            }
+            DrawAttenuationFactorVsDistanceFromLight(outputGraph);
+        }
+    }
+}
 
 std::vector<MapOFImageAndWorldPoints> AttenuationClass::GetReprojectedPixelValues() {
     ReprojectionClass* reprojectionClass = new ReprojectionClass();
@@ -348,6 +423,22 @@ std::vector<MapOFImageAndWorldPoints> AttenuationClass::GetReprojectedPixelValue
     return reprojectedPoints;
 }
 
+void AttenuationClass::DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage) {
+    if (_attenFactorVsDistance.empty()) {
+        return;
+    }
+    
+    //InitializeGraphPlotting(retainValues, _minXValue, _minYValue, _maxXValue, _maxYValue);
+    //cv::Mat outputGraph = cv::Mat(1000,1000, CV_8UC3, cv::Scalar::all(0));
+    //cv::Mat& graphAddress = outputGraph;
+    drawGraph(_attenFactorVsDistance, backgroundImage, _minXValue, _maxXValue, _minYValue, _maxYValue, "Distance", "AttenuationFactor");
+    //cv::namedWindow("Attenuation factor", CV_WINDOW_AUTOSIZE);
+    //cv::imshow("Attenuation factor", backgroundImage);
+    //cv::waitKey(0);
+    
+    //showImage(outputGraph, 0, "Rotation Angle");
+    cv::imwrite("finalImage.jpg", backgroundImage);
+}
 
 void AttenuationClass::DrawPixelVsIntensityScaled(cv::Mat& backgroundImage) {
     GetPointsAndIntensityToCalculateAttenuationFactor();
@@ -363,13 +454,15 @@ void AttenuationClass::DrawPixelVsIntensityScaled(cv::Mat& backgroundImage) {
     
     // Convert to scale of 0 to 255
     double diffMaxMin = _maxIntensity - _minIntensity;
-    std::vector<double> scaledPixelIntensity = std::vector<double>(_pixelIntensityAlongDiameter.size(), 0);
+    //std::vector<double> scaledPixelIntensity = std::vector<double>(_pixelIntensityAlongDiameter.size(), 0);
+    std::vector<Point2D<double>> scaledPixelIntensity = std::vector<Point2D<double>>(_pixelIntensityAlongDiameter.size());
     for (int index = 0; index < _pixelIntensityAlongDiameter.size(); ++index)
-        scaledPixelIntensity[index] = ((_pixelIntensityAlongDiameter[index]._intensityAverage - _minIntensity)/(diffMaxMin))*(255);
+        scaledPixelIntensity[index] = Point2D<double>((((_pixelIntensityAlongDiameter[index]._intensityAverage - _minIntensity)/(diffMaxMin))*255), index);
   
+    int width = backgroundImage.cols;
     int height = backgroundImage.rows;
-    drawGraph(&scaledPixelIntensity[0], (int)scaledPixelIntensity.size(), DATATYPE::DOUBLE, backgroundImage, (double)0, (double)255, (int)scaledPixelIntensity.size() , height , "Yaw (in degrees)");
-    //showImage(backgroundImage, 0, "Rotation Angle");
+    drawGraph(scaledPixelIntensity, DATATYPE::DOUBLE, backgroundImage, (double)0, (double)255, width , height , "Intensity");
+    showImage(backgroundImage, 0, "Rotation Angle");
     cv::imwrite("finalImage.jpg", backgroundImage);
 }
 

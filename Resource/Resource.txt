@@ -1,5 +1,10 @@
 #NumberOfFilesToRead
-NumberOfFiles = 12
+NumberOfFiles = 4
+
+Radius60Distance6Gain100.txt
+Radius45Distance6Gain100.txt
+Radius30Distance6Gain100.txt
+Radius20Distance6Gain100.txt
 
 Radius60Distance3Gain100.txt
 Radius60Distance5Gain100.txt
