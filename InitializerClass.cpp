@@ -44,13 +44,13 @@ void InitializerClass::ParseResouceFileAndRunSpotLightParameterEstimation(const 
         }
         
         attClass->CalculateAttenuationFactor(file);
-        //attClass->DrawGraph(inputFile);
-        //attClass->GetPixelCoordFromWorldPoints();
-        
         delete systemClass;
-     //   delete attClass;
     }
-    attClass->DrawGraph(inputFile);
+    for (int alpha = 4; alpha <= 4; ++alpha) {
+        std::string outputFileName = "finalImageForAlpha"+ std::to_string(alpha) + ".jpg";
+        attClass->DrawGraphForAlpha(inputFile, alpha, outputFileName);
+    }
+   // attClass->DrawGraph(inputFile);
     delete parser;
     delete attClass;
     spotLightParamEstClass.Release();

@@ -23,7 +23,7 @@ public:
     void CalculateAttenuationFactor(int fileIndex);
     void Reinitialize(SpotLightParameterEstimationClass& spotLightParamEstClass);
     void DrawGraph(cv::Mat& outputGraph);
-    
+    void DrawGraphForAlpha(cv::Mat& outputGraph, int alpha, std::string& outputFileName);
     void SetNumberOfInputFilesForCalculatingAttenuationFactor(int numOfFiles);
 
 private:
@@ -73,7 +73,7 @@ private:
     std::vector<MapOFImageAndWorldPoints> GetReprojectedPixelValues();
     
     std::vector<Point2D<double>> _attenFactorVsDistance;
-    void DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage);
+    void DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage, std::string& outputFileName);
 
     
     // Testing

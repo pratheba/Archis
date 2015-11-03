@@ -369,7 +369,7 @@ _attenuationFactorAndDistance[fileIndex] = std::vector<std::vector<Point2D<doubl
         double IntensityFactorWithoutExponent = cosOfCurrAngle;//(double)((cosOfCurrAngle - _input->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
         
         //std::cout << "Distance = " << distance << " = ";
-        for (int alpha=1; alpha <=1; ++alpha) {
+        for (int alpha=1; alpha <=6; ++alpha) {
             double attenuationFactor = averagePixelIntensityValue / (100 * 0.5 * lambertTerm * pow(IntensityFactorWithoutExponent, alpha));
             //std::cout << attenuationFactor << ",";
             _attenuationFactorAndDistance[fileIndex][index][alpha] = Point2D<double>(attenuationFactor, distance);
@@ -387,7 +387,7 @@ _attenuationFactorAndDistance[fileIndex] = std::vector<std::vector<Point2D<doubl
             }
             
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
     
     std::cout << _minXValue << "," << _maxXValue << "," << _minYValue << "," << _maxYValue << std::endl;
@@ -395,16 +395,31 @@ _attenuationFactorAndDistance[fileIndex] = std::vector<std::vector<Point2D<doubl
 
 void AttenuationClass::DrawGraph(cv::Mat& outputGraph) {
     
+    std::string outputFileName = "finalImage.jpg";
     for (int fileIndex = 0; fileIndex < _attenuationFactorAndDistance.size(); ++fileIndex) {
         std::cout << "Drawing graph for fileIndex = " << fileIndex << std::endl;
-        for (int alpha = 1; alpha < 2; ++alpha) {
+        for (int alpha = 1; alpha <=10; ++alpha) {
             _attenFactorVsDistance.clear();
             _attenFactorVsDistance = std::vector<Point2D<double>>((int)_attenuationFactorAndDistance[fileIndex].size());
             for (int index = 0; index < (int)_attenuationFactorAndDistance[fileIndex].size(); ++index) {
                 _attenFactorVsDistance[index] = (_attenuationFactorAndDistance[fileIndex][index][alpha]);
             }
-            DrawAttenuationFactorVsDistanceFromLight(outputGraph);
+            DrawAttenuationFactorVsDistanceFromLight(outputGraph, outputFileName);
         }
+    }
+}
+
+void AttenuationClass::DrawGraphForAlpha(cv::Mat& outputGraph, int alpha, std::string& outputFileName) {
+    for (int fileIndex = 0; fileIndex < _attenuationFactorAndDistance.size(); ++fileIndex) {
+        std::cout << "Drawing graph for fileIndex = " << fileIndex << std::endl;
+        _attenFactorVsDistance.clear();
+        _attenFactorVsDistance = std::vector<Point2D<double>>((int)_attenuationFactorAndDistance[fileIndex].size());
+        
+        for (int index = 0; index < (int)_attenuationFactorAndDistance[fileIndex].size(); ++index)
+            _attenFactorVsDistance[index] = (_attenuationFactorAndDistance[fileIndex][index][alpha]);
+           
+        DrawAttenuationFactorVsDistanceFromLight(outputGraph, outputFileName);
+        
     }
 }
 
@@ -423,21 +438,15 @@ std::vector<MapOFImageAndWorldPoints> AttenuationClass::GetReprojectedPixelValue
     return reprojectedPoints;
 }
 
-void AttenuationClass::DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage) {
+void AttenuationClass::DrawAttenuationFactorVsDistanceFromLight(cv::Mat& backgroundImage, std::string& outputFileName) {
     if (_attenFactorVsDistance.empty()) {
         return;
     }
     
-    //InitializeGraphPlotting(retainValues, _minXValue, _minYValue, _maxXValue, _maxYValue);
-    //cv::Mat outputGraph = cv::Mat(1000,1000, CV_8UC3, cv::Scalar::all(0));
-    //cv::Mat& graphAddress = outputGraph;
     drawGraph(_attenFactorVsDistance, backgroundImage, _minXValue, _maxXValue, _minYValue, _maxYValue, "Distance", "AttenuationFactor");
-    //cv::namedWindow("Attenuation factor", CV_WINDOW_AUTOSIZE);
-    //cv::imshow("Attenuation factor", backgroundImage);
-    //cv::waitKey(0);
     
     //showImage(outputGraph, 0, "Rotation Angle");
-    cv::imwrite("finalImage.jpg", backgroundImage);
+    cv::imwrite(outputFileName, backgroundImage);
 }
 
 void AttenuationClass::DrawPixelVsIntensityScaled(cv::Mat& backgroundImage) {

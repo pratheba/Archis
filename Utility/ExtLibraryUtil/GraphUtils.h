@@ -82,7 +82,7 @@ void setCustomGraphColor(int R, int B, int G)
 }
 
 template <class T>
-cv::Mat drawGraph(std::vector<Point2D<T>>& graphSource, cv::Mat outputGraph, T minXValue=0.0, T maxXValue=0.0, T minYValue=0.0, T maxYValue=0.0, std::string graphXLabel="XAxis",std::string graphYLabel="YAxis", bool showScale=true) {
+cv::Mat drawGraph(std::vector<Point2D<T>>& graphSource, cv::Mat inputGraph, T minXValue=0.0, T maxXValue=0.0, T minYValue=0.0, T maxYValue=0.0, std::string graphXLabel="XAxis",std::string graphYLabel="YAxis", bool showScale=true) {
     
     int numValue = (int)graphSource.size();
     if (numValue <= 0) {
@@ -107,32 +107,17 @@ cv::Mat drawGraph(std::vector<Point2D<T>>& graphSource, cv::Mat outputGraph, T m
     else
         yDiff = maxYValue - minYValue;
     
-    //cv::Mat outputGraph;
-    //outputGraph = imageGraph;
-    
-    //double Yscale = (double)(imageHeight - border*2) / (double)yDiff;
-    //double Xscale = (double)(imageWidth - border*2) / (double) xDiff;
+    cv::Mat outputGraph;
+    outputGraph = inputGraph;
     
     // scale the values to fit the graph
     std::vector<Point2D<double>> scaledGraphSource(numValue);
-    //if (!shouldRetainValues) {
         for(int index = 0; index < numValue; ++ index) {
             scaledGraphSource[index].x = ((((graphSource[index].x - minXValue)/ xDiff)* (double)980)+ border);
             scaledGraphSource[index].y = ((((graphSource[index].y - minYValue)/ yDiff)* (double)980)+ border);
             std::cout << scaledGraphSource[index].y << std::endl;
         }
-//        _minXValue = minXValue;
-//        _minYValue = minYValue;
-//        _xDiff = xDiff;
-//        _yDiff = yDiff;
-//    }
-//    else {
-//        for(int index = 0; index < numValue; ++ index) {
-//            scaledGraphSource[index].x = ((((graphSource[index].x - _minXValue)/ _xDiff)* (double)980)+ border);
-//            scaledGraphSource[index].y = ((((graphSource[index].y - _minYValue)/ _yDiff)* (double)980)+ border);
-//            std::cout << scaledGraphSource[index].y << std::endl;
-//        }
-//    }
+
     cv::Scalar colorGraph = getGraphColor();
     // Draw the horizontal & vertical axis
     int initY = cvRound(minYValue*((double)(imageHeight - border*2) / (double)yDiff));
@@ -141,13 +126,14 @@ cv::Mat drawGraph(std::vector<Point2D<T>>& graphSource, cv::Mat outputGraph, T m
     
     char textValue[25];
     cv::Point2d ptPrev = cv::Point2d(border,imageHeight-(border-initY));
-    for (int index = 0; index < numValue; index++) {
+    for (int index = 0; index < (numValue/2); index++) {
         cv::Point2d ptNew = cv::Point2d(scaledGraphSource[index].x, imageHeight- scaledGraphSource[index].y);
         cv::line(outputGraph, ptPrev, ptNew, colorGraph, 1, CV_AA);	// Draw a line from the previous point to the new point
         
-        //snprintf(textValue, sizeof(textValue)-1, "%.2f, %.2f", scaledGraphSource[index].x, scaledGraphSource[index].y);
-        //TextValue = scaledGraphSource[index].x + "," + scaledGraphSource[index].y;
-        //cv::putText(outputGraph, textValue, ptNew, CV_FONT_HERSHEY_PLAIN, 0.5, WHITE);
+        if (index%15 == 0) {
+            snprintf(textValue, sizeof(textValue)-1, "%.5f, %.5f", graphSource[index].x, graphSource[index].y);
+            cv::putText(outputGraph, textValue, ptNew, CV_FONT_HERSHEY_PLAIN, 0.7, WHITE);
+        }
         ptPrev = ptNew;
     }
     

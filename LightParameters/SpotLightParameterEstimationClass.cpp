@@ -161,7 +161,7 @@ void SpotLightParameterEstimationClass::CalculateExponentParameter() {
         // Clamp the value of the curr between 0 and 1
         //double IntensityFactorWithoutExponent =  cosOfCurrAngle * std::min(std::max((double)((cosOfCurrAngle - input->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle)),0.0),1.0);
 
-        double IntensityFactorWithoutExponent = (double)((cosOfCurrAngle - _inputSetter->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
+        double IntensityFactorWithoutExponent = cosOfCurrAngle;// (double)((cosOfCurrAngle - _inputSetter->cosOfOuterConeAngle) / (cosOfInner_minus_OuterConeAngle));
        
         if ((cosOfCurrAngle > _inputSetter->cosOfOuterConeAngle) )
         {
